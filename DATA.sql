@@ -282,7 +282,6 @@ IF OBJECT_ID('KHACHHANG') IS NOT NULL
 CREATE TABLE KHACHHANG
 (
 	ID BIGINT IDENTITY (1,1) NOT NULL,
-	IdNV BIGINT NOT NULL,
 	MaKhachHang VARCHAR(20) NULL,
 	TenKhachHang NVARCHAR(50) NULL,
 	SDT VARCHAR(15) NOT NULL,
@@ -295,25 +294,23 @@ CREATE TABLE KHACHHANG
 	NgayTao DATE DEFAULT GETDATE(),
 	TrangThai BIT DEFAULT 1 , --- 1 CÒN HOẠT ĐỘNG 0 DỪNG HOẠT ĐỌNG
 	CONSTRAINT PK_KHACHHANG PRIMARY KEY (ID) ,
-	CONSTRAINT FK_KHACHHANG_NHANVIEN FOREIGN KEY (IdNV) REFERENCES NHANVIEN (ID)
 )
 
-select * from NHANVIEN
 --- THEM KHACH HANG
 -- Thêm 10 khách hàng giả mạo vào bảng KHACHHANG
-INSERT INTO KHACHHANG (IdNV, MaKhachHang, TenKhachHang, SDT, NgaySinh, Email, GioiTinh, DiaChi, Diem, CapBac, NgayTao, TrangThai)
+INSERT INTO KHACHHANG ( MaKhachHang, TenKhachHang, SDT, NgaySinh, Email, GioiTinh, DiaChi, Diem, CapBac, NgayTao, TrangThai)
 VALUES 
-(9, 'KH000', N'Khách bán lẻ', '....', '1990-05-20', '...', 0, N'....', 0, 3, GETDATE(), 1),
-(10, 'KH001', N'Nguyễn Thị Ánh', '0901234567', '1990-05-20', 'manh@gmail.com', 0, N'123 Đường ABC, Quận XYZ', 100, 2, GETDATE(), 1),
-(11, 'KH002', N'Trần Văn Bình', '0912345678', '1985-08-10', 'manh@gmail.com', 1, N'456 Đường DEF, Quận LMN', 50, 1, GETDATE(), 1),
-(12, 'KH003', N'Phạm Minh Châu', '0923456789', '1992-12-25', 'manh@gmail.com', 1, N'789 Đường GHI, Quận OPQ', 200, 2, GETDATE(), 1),
-(13, 'KH004', N'Lê Thị Dương', '0934567890', '1988-04-30', 'manh@gmail.com', 0, N'101 Đường JKL, Quận RST', 150, 1, GETDATE(), 1),
-(14, 'KH005', N'Ngô Hồng Êm', '0945678901', '1995-07-05', 'manh@gmail.com', 0, N'202 Đường UVW, Quận XYZ', 80, 1, GETDATE(), 1),
-(15, 'KH006', N'Lý Minh Giao', '0956789012', '1980-11-12', 'manh@gmail.com', 1, N'303 Đường LMN, Quận OPQ', 120, 2, GETDATE(), 1),
-(16, 'KH007', N'Nguyễn Thị Hương', '0967890123', '1983-09-18', 'manh@gmail.com', 0, N'404 Đường OPQ, Quận RST', 90, 1, GETDATE(), 1),
-(17, 'KH008', N'Tạ Đình Hòa', '0978901234', '1998-03-08', 'manh@gmail.com', 1, N'505 Đường RST, Quận UVW', 180, 2, GETDATE(), 1),
-(18, 'KH009', N'Trương Hoàng I', '0989012345', '1993-06-22', 'manh@gmail.com', 1, N'606 Đường XYZ, Quận ABC', 60, 1, GETDATE(), 1),
-(18, 'KH010', N'Vũ Thị Kiều', '0990123456', '1996-09-15', 'manh@gmail.com', 0, N'707 Đường ABC, Quận DEF', 130, 2, GETDATE(), 1);
+( 'KH000', N'Khách bán lẻ', '....', '1990-05-20', '...', 0, N'....', 0, 3, GETDATE(), 1),
+( 'KH001', N'Nguyễn Thị Ánh', '0901234567', '1990-05-20', 'manh@gmail.com', 0, N'123 Đường ABC, Quận XYZ', 100, 2, GETDATE(), 1),
+( 'KH002', N'Trần Văn Bình', '0912345678', '1985-08-10', 'manh@gmail.com', 1, N'456 Đường DEF, Quận LMN', 50, 1, GETDATE(), 1),
+( 'KH003', N'Phạm Minh Châu', '0923456789', '1992-12-25', 'manh@gmail.com', 1, N'789 Đường GHI, Quận OPQ', 200, 2, GETDATE(), 1),
+( 'KH004', N'Lê Thị Dương', '0934567890', '1988-04-30', 'manh@gmail.com', 0, N'101 Đường JKL, Quận RST', 150, 1, GETDATE(), 1),
+('KH005', N'Ngô Hồng Êm', '0945678901', '1995-07-05', 'manh@gmail.com', 0, N'202 Đường UVW, Quận XYZ', 80, 1, GETDATE(), 1),
+( 'KH006', N'Lý Minh Giao', '0956789012', '1980-11-12', 'manh@gmail.com', 1, N'303 Đường LMN, Quận OPQ', 120, 2, GETDATE(), 1),
+( 'KH007', N'Nguyễn Thị Hương', '0967890123', '1983-09-18', 'manh@gmail.com', 0, N'404 Đường OPQ, Quận RST', 90, 1, GETDATE(), 1),
+('KH008', N'Tạ Đình Hòa', '0978901234', '1998-03-08', 'manh@gmail.com', 1, N'505 Đường RST, Quận UVW', 180, 2, GETDATE(), 1),
+( 'KH009', N'Trương Hoàng I', '0989012345', '1993-06-22', 'manh@gmail.com', 1, N'606 Đường XYZ, Quận ABC', 60, 1, GETDATE(), 1),
+( 'KH010', N'Vũ Thị Kiều', '0990123456', '1996-09-15', 'manh@gmail.com', 0, N'707 Đường ABC, Quận DEF', 130, 2, GETDATE(), 1);
 
 
 --- PHIEU GIAM GIA
