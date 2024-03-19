@@ -39,14 +39,6 @@ SELECT * FROM THUONGHIEU
 --	 CONSTRAINT PK_NHANHIEU PRIMARY KEY (ID)
 --)
 
---INSERT INTO THUONGHIEU (MaThuongHieu, TenThuongHieu)
---VALUES 
---('NH001', 'Nike'),
---('NH002', 'Adidas'),
---('NH003', 'Converse'),
---('NH004', 'Vans'),
---('NH005', 'Puma');
-
 --- MAU
 IF OBJECT_ID('MAU') IS NOT NULL
 	DROP TABLE MAU
