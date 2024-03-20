@@ -2,11 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package PHIEU_GIAM_GIA;
-
-import SAN_PHAM.*;
-import DANH_SACH_SAN_PHAM.*;
-import QUAN_LY_NHAN_VIEN.*;
+package views;
 
 /**
  *
