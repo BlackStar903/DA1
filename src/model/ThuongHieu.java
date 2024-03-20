@@ -9,8 +9,7 @@ public class ThuongHieu {
     public ThuongHieu() {
     }
 
-    public ThuongHieu(Integer ID, String MaThuongHieu, String TenThuongHieu, Integer trangThai) {
-        this.ID = ID;
+    public ThuongHieu( String MaThuongHieu, String TenThuongHieu, Integer trangThai) {
         this.MaThuongHieu = MaThuongHieu;
         this.TenThuongHieu = TenThuongHieu;
         this.trangThai = trangThai;

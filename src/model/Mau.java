@@ -9,8 +9,7 @@ public class Mau {
     public Mau() {
     }
 
-    public Mau(Integer ID, String MaMau, String TenMau, Integer TrangThai) {
-        this.ID = ID;
+    public Mau( String MaMau, String TenMau, Integer TrangThai) {
         this.MaMau = MaMau;
         this.TenMau = TenMau;
         this.TrangThai = TrangThai;

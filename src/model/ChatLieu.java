@@ -10,8 +10,7 @@ public class ChatLieu {
     public ChatLieu() {
     }
 
-    public ChatLieu(Integer ID, String MaChatLieu, String TenChatLieu, Integer TrangThai) {
-        this.ID = ID;
+    public ChatLieu( String MaChatLieu, String TenChatLieu, Integer TrangThai) {
         this.MaChatLieu = MaChatLieu;
         this.TenChatLieu = TenChatLieu;
         this.TrangThai = TrangThai;

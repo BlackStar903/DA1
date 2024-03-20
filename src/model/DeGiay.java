@@ -10,6 +10,12 @@ public class DeGiay {
     public DeGiay() {
     }
 
+    public DeGiay(String MaDeGiay, String TenDeGiay, Integer TrangThai) {
+        this.MaDeGiay = MaDeGiay;
+        this.TenDeGiay = TenDeGiay;
+        this.TrangThai = TrangThai;
+    }
+
     public DeGiay(Integer ID, String MaDeGiay, String TenDeGiay, Integer TrangThai) {
         this.ID = ID;
         this.MaDeGiay = MaDeGiay;

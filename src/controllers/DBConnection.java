@@ -10,8 +10,8 @@ import java.sql.DriverManager;
 public class DBConnection {
 
     public static String USER = "sa";
-    public static String PASS = "123";
-    public static String URL = "jdbc:sqlserver://localhost;databaseName= SuperSportSneakers ;user=sa ;password=123; encrypt=true;trustServerCertificate=true;";
+    public static String PASS = "12";
+    public static String URL = "jdbc:sqlserver://localhost;databaseName= SuperStarSportSneakers ;user=sa ;password=12; encrypt=true;trustServerCertificate=true;";
 
     static {
         try {

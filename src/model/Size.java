@@ -10,8 +10,7 @@ public class Size {
     public Size() {
     }
 
-    public Size(Integer ID, String MaSize, String TenSize, Integer TrangThai) {
-        this.ID = ID;
+    public Size( String MaSize, String TenSize, Integer TrangThai) {
         this.MaSize = MaSize;
         this.TenSize = TenSize;
         this.TrangThai = TrangThai;
