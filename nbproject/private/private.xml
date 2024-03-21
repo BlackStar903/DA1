@@ -3,13 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/DA1/src/model/DeGiay.java</file>
             <file>file:/D:/DA1/src/views/DSSP_View.java</file>
             <file>file:/D:/DA1/src/controllers/QLSP.java</file>
+            <file>file:/D:/DA1/src/model/NhaCungCap.java</file>
             <file>file:/D:/DA1/src/views/ThuocTinhSanPham_View.java</file>
-            <file>file:/D:/DA1/src/model/ThuongHieu.java</file>
             <file>file:/D:/DA1/src/controllers/QLThuocTinhSP.java</file>
-            <file>file:/D:/DA1/src/views/SanPham_View.java</file>
             <file>file:/D:/DA1/src/model/SanPham.java</file>
         </group>
     </open-files>

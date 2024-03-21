@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import model.ChatLieu;
 import model.DeGiay;
 import model.Mau;
+import model.NhaCungCap;
 import model.SanPham;
 import model.Size;
 import model.ThuongHieu;
@@ -20,7 +21,8 @@ public class QLThuocTinhSP {
     List<Mau> listMau = new ArrayList<>();
     List<ChatLieu> listCl = new ArrayList<>();
     List<ThuongHieu> listTH = new ArrayList<>();
-
+    List<NhaCungCap> listNcc = new ArrayList<>();
+    
     public List<SanPham> fullDBThuocTinh() {
         Connection con = null;
         PreparedStatement ps = null;
@@ -28,8 +30,10 @@ public class QLThuocTinhSP {
             con = DBConnection.getConnect();
             String sqlFullDb = "select dg.MaDeGiay,dg.TenDeGiay,dg.TrangThai,th.MaThuongHieu,th.TenThuongHieu,th.TrangThai"
                     + ",cl.MaChatLieu,cl.TenChatLieu,cl.TrangThai,m.MaMau,m.TenMau,m.TrangThai,s.MaSize,s.TenSize,s.TrangThai"
+                    + ",n.MaNCC,n.TenNCC,n.TrangThai"
                     + " from sanpham sp join degiay dg on sp.iddegiay = dg.id join thuonghieu th on th.id = sp.idthuonghieu "
-                    + "join chatlieu cl on cl.id = sp.idchatlieu join mau m on m.id = sp.idmau join size s on s.id=sp.idsize";
+                    + "join chatlieu cl on cl.id = sp.idchatlieu join mau m on m.id = sp.idmau join size s on s.id=sp.idsize "
+                    + "join NCC n on n.id = sp.IdNcc";
             ps = con.prepareStatement(sqlFullDb);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -37,6 +41,7 @@ public class QLThuocTinhSP {
                         rs.getString("MaThuongHieu"), rs.getString("TenThuongHieu"), rs.getInt("TrangThai"),
                         rs.getString("MaChatLieu"), rs.getString("TenChatLieu"), rs.getInt("TrangThai"),
                         rs.getString("MaMau"), rs.getString("TenMau"), rs.getInt("TrangThai"),
+                        rs.getString("MaSize"), rs.getString("TenSize"), rs.getInt("TrangThai"),
                         rs.getString("MaSize"), rs.getString("TenSize"), rs.getInt("TrangThai")));
             }
         } catch (Exception e) {
@@ -224,6 +229,39 @@ public class QLThuocTinhSP {
             }
         }
         return listTH;
+    }
+    
+       public List<NhaCungCap> fullNCC() {
+        Connection con = null;
+        PreparedStatement ps = null;
+        try {
+            con = DBConnection.getConnect();
+            String sqlFullDb = "select * from NCC";
+            ps = con.prepareStatement(sqlFullDb);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                listNcc.add(new NhaCungCap(rs.getString("MaNCC"), rs.getString("TenNCC"), rs.getInt("TrangThai")));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(QLThuocTinhSP.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(QLThuocTinhSP.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return listNcc;
     }
 
     public List<DeGiay> themDeGiay(DeGiay d) {

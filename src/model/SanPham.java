@@ -27,6 +27,11 @@ public class SanPham {
     private String maSize, tenSize;
     private Integer trangThaiSize; //-- 0 CÒN HÀNG , 1 TẠM HẾT , 2 DỪNG BÁN
 
+    //NCC
+    private Integer idNCC;
+    private String maNCC, tenNCC;
+    private Integer trangThaiNCCs; //-- 0 CÒN HÀNG , 1 TẠM HẾT , 2 DỪNG BÁN
+
     //SanPham
     private Integer id, idSP, soLuongTon;
     private String tenSp;
@@ -47,7 +52,7 @@ public class SanPham {
     public SanPham() {
     }
 
-    public SanPham(String maDG, String tenDG, Integer trangThaiDG, String maTH, String tenTH, Integer trangThaiTH, String maCL, String tenCL, Integer trangThaiCL, String maMau, String tenMau, Integer trangThaiMau, String maSize, String tenSize, Integer trangThaiSize) {
+    public SanPham(String maDG, String tenDG, Integer trangThaiDG, String maTH, String tenTH, Integer trangThaiTH, String maCL, String tenCL, Integer trangThaiCL, String maMau, String tenMau, Integer trangThaiMau, String maSize, String tenSize, Integer trangThaiSize, String maNCC, String tenNCC, Integer trangThaiNCCs) {
         this.maDG = maDG;
         this.tenDG = tenDG;
         this.trangThaiDG = trangThaiDG;
@@ -63,24 +68,39 @@ public class SanPham {
         this.maSize = maSize;
         this.tenSize = tenSize;
         this.trangThaiSize = trangThaiSize;
+        this.maNCC = maNCC;
+        this.tenNCC = tenNCC;
+        this.trangThaiNCCs = trangThaiNCCs;
     }
 
-    public SanPham(Integer idDeGiay, String maDG, String tenDG, Integer idThuongHieu, String maTH, String tenTH, Integer idChatLieu, String maCL, String tenCL, Integer idMau, String maMau, String tenMau, Integer idSize, String maSize, String tenSize, Integer id, Integer idSP, Integer soLuongTon, String tenSp, Double giaNiemYet, Double giaBan, String moTa, String ngayTao, Integer trangThai) {
+  
+
+
+    public SanPham(Integer idDeGiay, String maDG, String tenDG, Integer trangThaiDG, Integer idThuongHieu, String maTH, String tenTH, Integer trangThaiTH, Integer idChatLieu, String maCL, String tenCL, Integer trangThaiCL, Integer idMau, String maMau, String tenMau, Integer trangThaiMau, Integer idSize, String maSize, String tenSize, Integer trangThaiSize, Integer idNCC, String maNCC, String tenNCC, Integer trangThaiNCCs, Integer id, Integer idSP, Integer soLuongTon, String tenSp, Double giaNiemYet, Double giaBan, String moTa, String ngayTao, Integer trangThai, String ma, String loai, String chiTiet) {
         this.idDeGiay = idDeGiay;
         this.maDG = maDG;
         this.tenDG = tenDG;
+        this.trangThaiDG = trangThaiDG;
         this.idThuongHieu = idThuongHieu;
         this.maTH = maTH;
         this.tenTH = tenTH;
+        this.trangThaiTH = trangThaiTH;
         this.idChatLieu = idChatLieu;
         this.maCL = maCL;
         this.tenCL = tenCL;
+        this.trangThaiCL = trangThaiCL;
         this.idMau = idMau;
         this.maMau = maMau;
         this.tenMau = tenMau;
+        this.trangThaiMau = trangThaiMau;
         this.idSize = idSize;
         this.maSize = maSize;
         this.tenSize = tenSize;
+        this.trangThaiSize = trangThaiSize;
+        this.idNCC = idNCC;
+        this.maNCC = maNCC;
+        this.tenNCC = tenNCC;
+        this.trangThaiNCCs = trangThaiNCCs;
         this.id = id;
         this.idSP = idSP;
         this.soLuongTon = soLuongTon;
@@ -90,8 +110,45 @@ public class SanPham {
         this.moTa = moTa;
         this.ngayTao = ngayTao;
         this.trangThai = trangThai;
+        this.ma = ma;
+        this.loai = loai;
+        this.chiTiet = chiTiet;
     }
 
+    public Integer getIdNCC() {
+        return idNCC;
+    }
+
+    public void setIdNCC(Integer idNCC) {
+        this.idNCC = idNCC;
+    }
+
+    public String getMaNCC() {
+        return maNCC;
+    }
+
+    public void setMaNCC(String maNCC) {
+        this.maNCC = maNCC;
+    }
+
+    public String getTenNCC() {
+        return tenNCC;
+    }
+
+    public void setTenNCC(String tenNCC) {
+        this.tenNCC = tenNCC;
+    }
+
+    public Integer getTrangThaiNCCs() {
+        return trangThaiNCCs;
+    }
+
+    public void setTrangThaiNCCs(Integer trangThaiNCCs) {
+        this.trangThaiNCCs = trangThaiNCCs;
+    }
+
+ 
+    
     public Integer getIdDeGiay() {
         return idDeGiay;
     }
