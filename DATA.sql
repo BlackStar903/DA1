@@ -1,436 +1,206 @@
-﻿CREATE  DATABASE SuperStarSportSneakers
-GO
-USE SuperStarSportSneakers
-GO
-select * from NHANVIEN
+ use BanGiay_DA1
 
-IF OBJECT_ID('THUONGHIEU') IS NOT NULL
-	DROP TABLE THUONGHIEU
-CREATE TABLE THUONGHIEU 
+--ThuongHieu
+if object_id('THUONGHIEU') is not null
+drop table THUONGHIEU
+create table THUONGHIEU
 (
-	 ID BIGINT IDENTITY (1,1) NOT NULL,
-	 MaThuongHieu VARCHAR(15)  NOT NULL ,
-	 TenThuongHieu NVARCHAR(50) NOT NULL,
-	 TrangThai INT DEFAULT 0 NOT NULL ,
-	 -- 0 ĐANG HỢP TÁC , 1 NGỪNG HỢP TÁC
-	 CONSTRAINT PK_THUONGHIEU PRIMARY KEY (ID)
+	id_thuongHieu int identity(1,1),
+	tenThuongHieu nvarchar(50),
+	trangThai int, --0 ho?t �?ng, 1 ng?ng 
+	constraint pk_ThuongHieu primary key(id_thuongHieu)
 )
 
--- THEM THUONG HIEU
-INSERT INTO THUONGHIEU (MaThuongHieu, TenThuongHieu)
-VALUES 
-('TH001', 'Nike'),
-('TH002', 'Adidas'),
-('TH003', 'Converse'),
-('TH004', 'Vans'),
-('TH005', 'Puma');
-SELECT * FROM THUONGHIEU
+SET IDENTITY_INSERT [dbo].THUONGHIEU ON 
+INSERT [dbo].THUONGHIEU (id_thuongHieu, tenThuongHieu,trangThai) VALUES (1, N'adidas',0)
+INSERT [dbo].THUONGHIEU (id_thuongHieu, tenThuongHieu,trangThai) VALUES (2, N'puma',0)
+INSERT [dbo].THUONGHIEU (id_thuongHieu, tenThuongHieu,trangThai) VALUES (3, N'poly',0)
+INSERT [dbo].THUONGHIEU (id_thuongHieu, tenThuongHieu,trangThai) VALUES (4, N'nike',0)
+SET IDENTITY_INSERT [dbo].THUONGHIEU OFF
 
---NhanHieu
---IF OBJECT_ID('NHANHIEU') IS NOT NULL
---	DROP TABLE NHANHIEU
---CREATE TABLE NHANHIEU 
---(
---	 ID BIGINT IDENTITY (1,1) NOT NULL,
---	 MaNhanHieu VARCHAR(15)  NOT NULL ,
---	 TenNhanHieu NVARCHAR(50) NOT NULL,
---	 TrangThai INT DEFAULT 0 NOT NULL ,
---	 -- 0 ĐANG HỢP TÁC , 1 NGỪNG HỢP TÁC
---	 CONSTRAINT PK_NHANHIEU PRIMARY KEY (ID)
---)
-
---- MAU
-IF OBJECT_ID('MAU') IS NOT NULL
-	DROP TABLE MAU
-CREATE TABLE MAU 
+--ChatLieu
+if object_id('CHATLIEU') is not null
+drop table CHATLIEU
+create table CHATLIEU
 (
-	 ID BIGINT IDENTITY (1,1) NOT NULL,
-	 MaMau VARCHAR(15)  NOT NULL ,
-	 TenMau NVARCHAR(50) NOT NULL,
-     TrangThai INT DEFAULT 0 NOT NULL , -- 0 CÒN DÙNG , 1 KHÔNG DÙNG
-	 CONSTRAINT PK_MAU PRIMARY KEY (ID)
+	id_chatLieu int identity(1,1),
+	tenChatLieu nvarchar(50),
+	trangThai int, --0 ho?t �?ng, 1 ng?ng 
+	constraint pk_ChatLieu primary key(id_chatLieu)
 )
 
-INSERT INTO MAU (MaMau, TenMau )
-VALUES 
-('MAU0001', N'Đỏ'),
-('MAU0002', N'Xanh'),
-('MAU0003', N'Trắng'),
-('MAU0004', N'Vàng'),
-('MAU0005', N'Đen');
+SET IDENTITY_INSERT [dbo].[chatLieu] ON 
+INSERT [dbo].[chatLieu] ([id_chatLieu], [tenChatLieu],trangThai) VALUES (1, N'v?i',0)
+INSERT [dbo].[chatLieu] ([id_chatLieu], [tenChatLieu],trangThai) VALUES (2, N'da b?',0)
+INSERT [dbo].[chatLieu] ([id_chatLieu], [tenChatLieu],trangThai) VALUES (3, N'cacbon',0)
+INSERT [dbo].[chatLieu] ([id_chatLieu], [tenChatLieu],trangThai) VALUES (4, N'l?a',0)
+INSERT [dbo].[chatLieu] ([id_chatLieu], [tenChatLieu],trangThai) VALUES (5, N'ninon',0)
+SET IDENTITY_INSERT [dbo].[chatLieu] OFF
 
---- SIZE 
-IF OBJECT_ID('SIZE') IS NOT NULL
-	DROP TABLE SIZE
-CREATE TABLE SIZE 
+--NhaCungCap
+if object_id('NHACUNGCAP') is not null
+drop table NHACUNGCAP
+create table NHACUNGCAP
 (
-	ID BIGINT IDENTITY (1,1) NOT NULL,
-	MaSize VARCHAR(15)  NOT NULL ,
-	TenSize DECIMAL(3, 1) NOT NULL,
-    TrangThai INT DEFAULT 0 NOT NULL
-	-- 0 CÒN DÙNG , 1 KHÔNG DÙNG
-	CONSTRAINT PK_SIZE PRIMARY KEY (ID)
+	id_nhaCC int identity(1,1),
+	tennhaCC nvarchar(50),
+	trangThai int, --0 ho?t �?ng, 1 ng?ng 
+	constraint pk_NHACUNGCAP primary key(id_nhaCC)
 )
+SET IDENTITY_INSERT [dbo].NHACUNGCAP ON 
+INSERT [dbo].NHACUNGCAP (id_nhaCC, tennhaCC,trangThai) VALUES (1, N'm?',0)
+INSERT [dbo].NHACUNGCAP (id_nhaCC, tennhaCC,trangThai) VALUES (2, N'anh',0)
+INSERT [dbo].NHACUNGCAP (id_nhaCC, tennhaCC,trangThai) VALUES (3, N'Ph�p',0)
+INSERT [dbo].NHACUNGCAP (id_nhaCC, tennhaCC,trangThai) VALUES (4, N'trung qu?c',0)
+SET IDENTITY_INSERT [dbo].NHACUNGCAP OFF
 
--- them SIZE
-INSERT INTO SIZE (MaSize, TenSize)
-VALUES 
-('KT001', 34.5),
-('KT002', 35),
-('KT003', 35.5),
-('KT004', 36),
-('KT005', 36.5),
-('KT006', 37),
-('KT007', 37.5),
-('KT008', 38),
-('KT009', 38.5),
-('KT010', 39);
-
---- ChatLieu
-IF OBJECT_ID('CHATLIEU') IS NOT NULL
-	DROP TABLE CHATLIEU
-CREATE TABLE CHATLIEU 
+--TheLoai
+if object_id('THELOAI') is not null
+drop table THELOAI
+create table THELOAI
 (
-	 ID BIGINT IDENTITY (1,1) NOT NULL,
-	 MaChatLieu VARCHAR(15)  NOT NULL ,
-	 TenChatLieu NVARCHAR(50) NOT NULL,
-     TrangThai INT DEFAULT 0 NOT NULL , -- 0 CÒN DÙNG , 1 KHÔNG DÙNG
-	 CONSTRAINT PK_CHATLIEU PRIMARY KEY (ID)
+	id_theLoai int identity(1,1),
+	tenTheLoai nvarchar(50),
+	trangThai int, --0 ho?t �?ng, 1 ng?ng 
+	constraint pk_THELOAI primary key(id_theLoai)
 )
+SET IDENTITY_INSERT [dbo].THELOAI ON 
+INSERT [dbo].THELOAI (id_theLoai, tenTheLoai,trangThai) VALUES (1, N'ch?y',0)
+INSERT [dbo].THELOAI (id_theLoai, tenTheLoai,trangThai) VALUES (2, N'ch?y',0)
+INSERT [dbo].THELOAI (id_theLoai, tenTheLoai,trangThai) VALUES (3, N'ch?y',0)
+INSERT [dbo].THELOAI (id_theLoai, tenTheLoai,trangThai) VALUES (4, N'ch?y',0)
+SET IDENTITY_INSERT [dbo].THELOAI OFF
 
-INSERT INTO CHATLIEU (MaChatLieu, TenChatLieu) VALUES 
-('CL001',  N'Da'),
-('CL002',  N'Vải'),
-('CL003',  N'Da'),
-('CL004',  N'Vải'),
-('CL005',  N'Da'),
-('CL006',  N'Vải'),
-('CL007',  N'Da'),
-('CL008',  N'Vải'),
-('CL009',  N'Da'),
-('CL010',  N'Da');
-
---DeGiay
-IF OBJECT_ID('DEGIAY') IS NOT NULL
-	DROP TABLE DEGIAY
-CREATE TABLE DEGIAY 
+--SanPham
+if object_id('SANPHAM') is not null
+drop table SANPHAM
+create table SANPHAM
 (
-	 ID BIGINT IDENTITY (1,1) NOT NULL,
-	 MaDeGiay VARCHAR(15)  NOT NULL ,
-	 TenDeGiay NVARCHAR(50) NOT NULL,
-     TrangThai INT DEFAULT 0 NOT NULL , -- 0 CÒN DÙNG , 1 KHÔNG DÙNG
-	 CONSTRAINT PK_DEGIAY PRIMARY KEY (ID)
+	id_sanPham int identity(1,1),
+	id_theLoai int,
+	id_chatLieu int,
+	id_thuongHieu int,
+	id_nhaCungCap int,
+	tenSanPham nvarchar(50),
+	mau nvarchar(50),
+	gia money,
+	size int,
+	soLuong int,
+	ghiChu nvarchar(250),
+	trangThai int, --0 ho?t �?ng, 1 ng?ng 
+	constraint pk_SanPham primary key(id_sanPham),
+	constraint fk_SanPham_TheLoai foreign key(id_theLoai) references theloai,
+	constraint fk_SanPham_chatLieu foreign key(id_chatLieu) references chatLieu,
+	constraint fk_SanPham_thuongHieu foreign key(id_thuongHieu) references thuongHieu,
+	constraint fk_SanPham_nhaCungCap foreign key(id_nhaCungCap) references nhaCungCap,
 )
+select *  from SANPHAM
+SET IDENTITY_INSERT [dbo].SANPHAM ON 
+INSERT [dbo].SANPHAM (id_sanPham,id_theLoai,id_chatLieu,id_thuongHieu,id_nhaCungCap, tenSanPham,mau,gia,size,soLuong,ghiChu,trangThai) VALUES (1,1,1,1,1, N'Gi�y 1',N'�?',1000,30,30,'',0)
+INSERT [dbo].SANPHAM (id_sanPham,id_theLoai,id_chatLieu,id_thuongHieu,id_nhaCungCap, tenSanPham,mau,gia,size,soLuong,ghiChu,trangThai) VALUES (2,2,2,2,2, N'Gi�y 2',N'V�ng',1000,40,40,'',0)
+INSERT [dbo].SANPHAM (id_sanPham,id_theLoai,id_chatLieu,id_thuongHieu,id_nhaCungCap, tenSanPham,mau,gia,size,soLuong,ghiChu,trangThai) VALUES (3,3,3,3,3, N'Gi�y 3',N'Tr?ng',1000,50,50,'',0)
+INSERT [dbo].SANPHAM (id_sanPham,id_theLoai,id_chatLieu,id_thuongHieu,id_nhaCungCap, tenSanPham,mau,gia,size,soLuong,ghiChu,trangThai) VALUES (4,4,4,4,4, N'Gi�y 4',N'�en',1000,60,60,'',0)
+SET IDENTITY_INSERT [dbo].SANPHAM OFF
 
-INSERT INTO DEGIAY (MaDeGiay, TenDeGiay)
-VALUES 
-('DG001', N'Đế da'),
-('DG002', N'Đế cao su'),
-('DG003', N'Đế da'),
-('DG004', N'Đế cao su'),
-('DG005', N'Đế da'),
-('DG006', N'Đế cao su'),
-('DG007', N'Đế da'),
-('DG008', N'Đế cao su'),
-('DG009', N'Đế da'),
-('DG010', N'Đế da');
-
---Nhà cung cấp
-IF OBJECT_ID('NCC') IS NOT NULL
-	DROP TABLE NCC
-CREATE TABLE NCC 
+--taiKhoan
+if object_id('TAIKHOAN') is not null
+drop table TAIKHOAN
+create table TAIKHOAN
 (
-	 ID BIGINT IDENTITY (1,1) NOT NULL,
-	 MaNCC VARCHAR(15)  NOT NULL ,
-	 TenNCC NVARCHAR(50) NOT NULL,
-     TrangThai INT DEFAULT 0 NOT NULL , -- 0 CÒN HỢP tác , 1 KHÔNG hợp tác
-	 CONSTRAINT PK_NCC PRIMARY KEY (ID)
+	id_taiKhoan int identity(1,1),
+	tenTaiKhoan nvarchar(50),
+	matKhau nvarchar(50),
+	vaiTro bit,
+	trangThai int, --0 ho?t �?ng, 1 ng?ng 
+	constraint pk_TAIKHOAN primary key(id_taiKhoan)
 )
+SET IDENTITY_INSERT [dbo].TAIKHOAN ON 
+INSERT [dbo].TAIKHOAN (id_taiKhoan, tenTaiKhoan,matKhau,vaiTro,trangThai) VALUES (1, N'hoanAdmin','hoan123',0,0)
+INSERT [dbo].TAIKHOAN (id_taiKhoan, tenTaiKhoan,matKhau,vaiTro,trangThai) VALUES (2, N'hoanNhanVien','hoan123',1,0)
+INSERT [dbo].TAIKHOAN (id_taiKhoan, tenTaiKhoan,matKhau,vaiTro,trangThai) VALUES (3, N'hoanTest','hoan123',1,0)
+SET IDENTITY_INSERT [dbo].TAIKHOAN OFF
 
-INSERT INTO NCC (MaNCC, TenNCC)
-VALUES 
-('NCC001', N'Nike'),
-('NCC002', N'Adidas'),
-('NCC003', N'Puma'),
-('NCC004', N'Bitis'),
-('NCC005', N'Thượng đình')
-
-
---- SAN PHAM
-IF OBJECT_ID('SANPHAM') IS NOT NULL
-	DROP TABLE SANPHAM
-CREATE TABLE SANPHAM 
+--NhanVien
+if object_id('NHANVIEN') is not null
+drop table NHANVIEN
+create table NHANVIEN
 (
-	ID BIGINT IDENTITY (1,1) NOT NULL,
-	IdSP BIGINT NOT NULL ,
-	IdThuongHieu BIGINT NOT NULL,
-	IdMau BIGINT NOT NULL,
-	IdSize BIGINT NOT NULL,
-	IdDeGiay BIGINT NOT NULL,
-	IdChatLieu BIGINT NOT NULL,
-	IdNcc BIGINT NOT NULL,
-	--QR VARCHAR(100) NULL,
-	MaCTSP VARCHAR(15) NOT NULL,
-	TenSP varchar(250) not null,
-	SoLuongTon INT NOT NULL ,
-	GiaNiemYet MONEY NOT NULL , 
-	-- ÁNH XẠ JAVA => BigDecimal
-	GiaBan MONEY NOT NULL,
-	MoTa NVARCHAR (250) NOT NULL ,
-	NgayTao DATE DEFAULT GETDATE(),
-	TrangThai INT NOT NULL DEFAULT 0 , -- 0 CÒN HÀNG , 1 TẠM HẾT , 2 DỪNG BÁN
-	CONSTRAINT PK_CHI_TIET_SAN_PHAM PRIMARY KEY (ID),
-	CONSTRAINT FK_CHI_TIET_SAN_PHAM_THUONGHIEU FOREIGN KEY (IdThuongHieu) REFERENCES THUONGHIEU (ID),
-	CONSTRAINT FK_CHI_TIET_SAN_PHAM_MAU FOREIGN KEY (IdMau) REFERENCES MAU (ID),
-	CONSTRAINT FK_CHI_TIET_SAN_PHAM_SIZE FOREIGN KEY (IdSize) REFERENCES SIZE (ID),
-	CONSTRAINT FK_CHI_TIET_SAN_PHAM_DeGiay FOREIGN KEY (IdDeGiay) REFERENCES DeGiay (ID),
-	CONSTRAINT FK_CHI_TIET_SAN_PHAM_NCC FOREIGN KEY (IdNcc) REFERENCES Ncc (ID),
-	CONSTRAINT FK_CHI_TIET_SAN_PHAM_ChatLieu FOREIGN KEY (IdChatLieu) REFERENCES ChatLieu (ID)
+	id_nhanVien int identity(1,1),
+	id_taiKhoan int,
+	hoTen nvarchar(50),
+	gioiTinh bit, --0 NAM 1 N?
+	soDt nvarchar(50),
+	diaChi nvarchar(50),
+	trangThai int, --0 ho?t �?ng, 1 ng?ng 
+	constraint pk_NHANVIEN primary key(id_taiKhoan),
+	constraint fk_NHANVIEN_TAIKHOAN foreign key(id_taiKhoan) references TAIKHOAN
 )
+SET IDENTITY_INSERT [dbo].NHANVIEN ON 
+INSERT [dbo].NHANVIEN (id_nhanVien, id_taiKhoan,hoTen,gioiTinh,soDt,diaChi,trangThai) VALUES (1, 1,N'Ho�n dz',0,'0915836583',N'H� N?I',0)
+INSERT [dbo].NHANVIEN (id_nhanVien, id_taiKhoan,hoTen,gioiTinh,soDt,diaChi,trangThai) VALUES (2, 2,N'Ho�n NH�N VI�N',0,'0915836583',N'H� N?I',0)
+INSERT [dbo].NHANVIEN (id_nhanVien, id_taiKhoan,hoTen,gioiTinh,soDt,diaChi,trangThai) VALUES (3, 3,N'Ho�n test',0,'0915836583',N'H� N?I',0)
+SET IDENTITY_INSERT [dbo].NHANVIEN OFF
 
---- THEM SANPHAM
-SELECT * FROM SANPHAM;
-
-INSERT INTO SANPHAM (IdSP, IdThuongHieu, IdMau, IdSize, IdDeGiay,IdChatLieu,IdNCC,MaCTSP,TenSP, SoLuongTon, GiaNiemYet, GiaBan, MoTa, NgayTao, TrangThai)
-VALUES 
-(1, 1, 1, 1,1,1,1, 'CTSP0001',N'Giày 1', 50, 1200000.00, 1200000.00, N'Mô tả CTSP', GETDATE(), 0),
-(2, 2, 2,2,2, 2,2, 'CTSP0002',N'Giày 2', 30, 1100000.00, 1100000.00, N'Mô tả CTSP', GETDATE(), 0),
-(3, 3, 3, 3,3,3,3, 'CTSP0003',N'Giày 3', 20, 1000000.00, 1000000.00, N'Mô tả CTSP', GETDATE(), 0),
-(4, 4, 4, 4,4,4,4, 'CTSP0004',N'Giày 4', 25, 1050000.00, 1050000.00, N'Mô tả CTSP', GETDATE(), 0),
-(5, 5, 5, 5, 5, 5,5, 'CTSP0005',N'Giày 5', 40, 1150000.00, 1150000.00, N'Mô tả CTSP', GETDATE(), 0),
-(5, 1, 2, 3,3,3,5, 'CTSP0006',N'Giày 6', 55, 1300000.00, 1300000.00, N'Mô tả CTSP', GETDATE(), 0),
-(4, 2, 3, 4, 5,4, 1, 'CTSP0007',N'Giày 7', 35, 1250000.00, 1250000.00, N'Mô tả CTSP', GETDATE(), 0),
-(3, 3, 4, 6, 4, 4,3, 'CTSP0008',N'Giày 8', 40, 1180000.00, 1180000.00, N'Mô tả CTSP', GETDATE(), 0),
-(2, 4, 5, 1, 2,2,2 , 'CTSP0009',N'Giày 9', 30, 1100000.00, 1100000.00, N'Mô tả CTSP', GETDATE(), 0),
-(1, 5, 1, 2, 2, 3,1, 'CTSP0010',N'Giày 10', 25, 1050000.00, 1050000.00, N'Mô tả CTSP', GETDATE(), 0),
-(2, 1, 2, 3, 3, 4,2, 'CTSP0011',N'Giày 11', 60, 1400000.00, 1400000.00, N'Mô tả CTSP', GETDATE(), 0),
-(3, 2, 3, 10,4,1,3, 'CTSP0012',N'Giày 12', 45, 1350000.00, 1350000.00, N'Mô tả CTSP', GETDATE(), 0),
-(4, 3, 4, 8, 3, 4,4, 'CTSP0013',N'Giày 13', 50, 1200000.00, 1200000.00, N'Mô tả CTSP', GETDATE(), 0),
-(5, 4, 5, 7, 2,2,5 , 'CTSP0014',N'Giày 14', 38, 1120000.00, 1120000.00, N'Mô tả CTSP', GETDATE(), 0),
-(1, 5, 1, 2,4,4,4, 'CTSP0015',N'Giày 15', 42, 1150000.00, 1150000.00, N'Mô tả CTSP', GETDATE(), 0),
-(3, 1, 2, 3,2,2,3 , 'CTSP0016',N'Giày 16', 48, 1220000.00, 1220000.00, N'Mô tả CTSP', GETDATE(),   0),
-(4, 2, 3, 9, 4,1,2, 'CTSP0017',N'Giày 17', 32, 1280000.00, 1280000.00, N'Mô tả CTSP', GETDATE(), 0),
-(5, 3, 4, 5, 4,1,1, 'CTSP0018',N'Giày 18', 28, 1150000.00, 1150000.00, N'Mô tả CTSP', GETDATE(), 0),
-(1, 4, 5, 8, 1,5,2, 'CTSP0019',N'Giày 19', 22, 1100000.00, 1100000.00, N'Mô tả CTSP', GETDATE(), 0),
-(2, 5, 1, 6, 4, 5,3, 'CTSP0020',N'Giày 20', 65, 1380000.00, 1380000.00, N'Mô tả CTSP', GETDATE(), 0),
-(2, 1, 2, 3, 2,2 ,5, 'CTSP0021',N'Giày 21', 48, 1220000.00, 1220000.00, N'Mô tả CTSP', GETDATE(), 0),
-(1, 2, 3, 9,5,4,4, 'CTSP0022',N'Giày 22', 32, 1280000.00, 1280000.00, N'Mô tả CTSP', GETDATE(), 0),
-(5, 3, 4, 5, 1, 5,3, 'CTSP0023',N'Giày 23', 28, 1150000.00, 1150000.00, N'Mô tả CTSP', GETDATE(), 0)
-
-SELECT * FROM SANPHAM
-
--- ChucVu
-IF OBJECT_ID('CHUCVU') IS NOT NULL
-	DROP TABLE CHUCVU
-CREATE TABLE CHUCVU 
+--khuyenMai
+if object_id('KHUYENMAI') is not null
+drop table KHUYENMAI
+create table KHUYENMAI
 (
-	 ID BIGINT IDENTITY (1,1) NOT NULL,
-	 ChucVu NVARCHAR(50)  NOT NULL ,
-     TrangThai INT DEFAULT 0 NOT NULL , -- 0 CÒN Làm , 1 KHÔNG làm
-	 CONSTRAINT PK_CHUCVU PRIMARY KEY (ID)
+	id_khuyenMai int identity(1,1),
+	tenKhuyenMai nvarchar(50),
+	loai nvarchar(50),
+	giaTri nvarchar(20),
+	ngayBatDau datetime,
+	ngayKetThuc datetime,
+	trangThai int, --0 ho?t �?ng, 1 ng?ng 
+	constraint pk_KHUYENMAI primary key(id_khuyenMai)
 )
+SET IDENTITY_INSERT [dbo].KHUYENMAI ON 
+INSERT [dbo].KHUYENMAI (id_khuyenMai, tenKhuyenMai,loai,giaTri,ngayBatDau,ngayKetThuc,trangThai) VALUES (1, N'Khuy?n m?i poly','%',20,'2023-10-11','2023-12-09',1)
+INSERT [dbo].KHUYENMAI (id_khuyenMai, tenKhuyenMai,loai,giaTri,ngayBatDau,ngayKetThuc,trangThai) VALUES (2, N'Khuy?n m?i d? �n 1','%',50,'2023-10-13','2023-11-25',0)
+INSERT [dbo].KHUYENMAI (id_khuyenMai, tenKhuyenMai,loai,giaTri,ngayBatDau,ngayKetThuc,trangThai) VALUES (3, N'khuy?n m?i poly2','VN�',90000,'2023-10-10','2023-10-31',1)
+INSERT [dbo].KHUYENMAI (id_khuyenMai, tenKhuyenMai,loai,giaTri,ngayBatDau,ngayKetThuc,trangThai) VALUES (4, N'khuy?n m?i poly99','VN�',11111,'2023-10-10','2023-10-31',1)
+SET IDENTITY_INSERT [dbo].KHUYENMAI OFF
 
-INSERT INTO CHUCVU (ChucVu,TrangThai)
-VALUES 
-	(N'Quản Lý',1),
-	(N'Nhân viên',1),
-	(N'Nhân viên',1),
-	(N'Nhân viên',1),
-	(N'Nhân viên',1),
-	(N'Nhân viên',1),
-	(N'Nhân viên',1),
-	(N'Nhân viên',1),
-	(N'Nhân viên',1),
-	(N'Nhân viên',1)
-
-
---- NHAN VIEN
-IF OBJECT_ID('NHANVIEN') IS NOT NULL
-	DROP TABLE NHANVIEN
-CREATE TABLE NHANVIEN 
+--khachHang
+if object_id('KHACHHANG') is not null
+drop table KHACHHANG
+create table KHACHHANG
 (
-	ID BIGINT IDENTITY (1,1) NOT NULL,
-	IDChucVu BIGINT null,
-	MaNhanVien VARCHAR(10)  NULL,
-	HoVaTen NVARCHAR(50) NULL,
-	MatKhau VARCHAR(10) NULL,
-	NgaySinh DATE NULL,
-	GioiTinh nvarchar(15) null,
-	CCCD VARCHAR(12) NULL ,
-	Email VARCHAR(50) NULL,
-	DiaChi NVARCHAR(100) NULL,
-	SDT VARCHAR(15) NULL,
-	VaiTro BIT  DEFAULT 0 ,
-	--- 0 NHÂN VIÊN , 1 LÀ QUẢN LÍ
-	NgayTao DATE DEFAULT GETDATE(),
-	TrangThai BIT DEFAULT 1 , -- 0 ĐÃ NGHỈ 1 ĐANG LÀM
-	CONSTRAINT PK_NHANVIEN PRIMARY KEY (ID),
-	constraint fk_nhanvien_chucvu foreign key(idchucvu) references chucvu
+	id_khachHang int identity(1,1),
+	hoTen nvarchar(50),
+	gioiTinh bit,
+	diaChi nvarchar(20),
+	soDienThoai nvarchar(15),
+	constraint pk_KHACHHANG primary key(id_khachHang)
 )
+SET IDENTITY_INSERT [dbo].KHACHHANG ON 
+INSERT [dbo].KHACHHANG (id_khachHang,hoTen,gioiTinh,diaChi,soDienThoai) VALUES (1,N'Nguy?n Th? A',1,N'H� N?i',1)
+INSERT [dbo].KHACHHANG (id_khachHang,hoTen,gioiTinh,diaChi,soDienThoai) VALUES (2,N'Nguy?n v�n B',0,N'H� N?i','012345')
+INSERT [dbo].KHACHHANG (id_khachHang,hoTen,gioiTinh,diaChi,soDienThoai) VALUES (3,N'Nguy?n Th? C',1,N'H� N?i','012345')
 
-select * from CHUCVU
---- THEM NHAN VIEN
--- Thêm 10 nhân viên vào NHANVIEN
-INSERT INTO NHANVIEN (IDChucVu,MaNhanVien, HoVaTen, MatKhau, NgaySinh, CCCD, Email, DiaChi, SDT, VaiTro, NgayTao, TrangThai)
-VALUES 
-(1,'NV001', N'Nguyễn Văn A', 'pass123', '1990-01-15', '123456789012', 'nva@example.com', N'123 Đường ABC, Quận XYZ', '0901234567', 0, GETDATE(), 1),
-(2,'NV002', N'Trần Thị B', 'pass456', '1995-05-20', '234567890123', 'ttb@example.com', N'456 Đường DEF, Quận LMN', '0912345678', 0, GETDATE(), 1),
-(3,'NV003', N'Phạm Văn C', 'pass789', '1988-08-10', '345678901234', 'pvc@example.com', N'789 Đường GHI, Quận OPQ', '0923456789', 0, GETDATE(), 1),
-(4,'NV004', N'Lê Thị D', 'passABC', '1992-12-25', '456789012345', 'ltd@example.com', N'101 Đường JKL, Quận RST', '0934567890', 0, GETDATE(), 1),
-(5,'NV005', N'Ngô Văn E', 'passDEF', '1985-04-30', '567890123456', 'nve@example.com', N'202 Đường UVW, Quận XYZ', '0945678901', 0, GETDATE(), 1),
-(6,'NV006', N'Lý Thị F', 'passGHI', '1998-07-05', '678901234567', 'ltf@example.com', N'303 Đường LMN, Quận OPQ', '0956789012', 0, GETDATE(), 1),
-(7,'NV007', N'Nguyễn Văn Mạnh', 'passLMN', '1980-11-12', '789012345678', 'hvm@example.com', N'404 Đường OPQ, Quận RST', '0967890123', 1, GETDATE(), 1),
-(8,'NV008', N'Tạ Bá Hòa', 'passOPQ', '1983-09-18', '890123456789', 'tbh@example.com', N'505 Đường RST, Quận UVW', '0978901234', 1, GETDATE(), 1),
-(9,'NV009', N'Trương Văn I', 'passRST', '1993-03-08', '901234567890', 'tvi@example.com', N'606 Đường XYZ, Quận ABC', '0989012345', 0, GETDATE(), 1),
-(10,'NV010', N'Vũ Thị K', 'passUVW', '1996-06-22', '012345678901', 'vtk@example.com', N'707 Đường ABC, Quận DEF', '0990123456', 0, GETDATE(), 1);
-
-
-IF OBJECT_ID('KHACHHANG') IS NOT NULL
-	DROP TABLE KHACHHANG
-CREATE TABLE KHACHHANG
+--HoaDon
+if object_id('HOADON') is not null
+drop table HOADON
+create table HOADON
 (
-	ID BIGINT IDENTITY (1,1) NOT NULL,
-	MaKhachHang VARCHAR(20) NULL,
-	TenKhachHang NVARCHAR(50) NULL,
-	SDT VARCHAR(15) NOT NULL,
-	NgaySinh DATE NULL,
-	GioiTinh BIT NULL , --- 0  NU , 1 NAM
-	Email VARCHAR(50) NULL,
-	DiaChi NVARCHAR(100) NULL,
-	Diem INT DEFAULT 0 ,
-	CapBac INT DEFAULT 0 , -- O DONG 1 BAC 2 VANG 
-	NgayTao DATE DEFAULT GETDATE(),
-	TrangThai BIT DEFAULT 1 , --- 1 CÒN HOẠT ĐỘNG 0 DỪNG HOẠT ĐỌNG
-	CONSTRAINT PK_KHACHHANG PRIMARY KEY (ID) ,
+	id_hoaDon int identity(1,1),
+	id_sanPham int,
+	id_khachHang int,
+	id_khuyenMai int,
+	soLuong int,
+	donGia float,
+	ngayTao datetime,
+	constraint pk_HOADON primary key(id_hoaDon),
+	constraint fk_HOADON_SanPham foreign key(id_sanPham) references sanpham,
+	constraint fk_HOADON_khachHang foreign key(id_khachHang) references khachHang,
+	constraint fk_HOADON_khuyenMai foreign key(id_khuyenMai) references khuyenMai
 )
-
---- THEM KHACH HANG
--- Thêm 10 khách hàng giả mạo vào bảng KHACHHANG
-INSERT INTO KHACHHANG ( MaKhachHang, TenKhachHang, SDT, NgaySinh, Email, GioiTinh, DiaChi, Diem, CapBac, NgayTao, TrangThai)
-VALUES 
-( 'KH000', N'Khách bán lẻ', '....', '1990-05-20', '...', 0, N'....', 0, 3, GETDATE(), 1),
-( 'KH001', N'Nguyễn Thị Ánh', '0901234567', '1990-05-20', 'manh@gmail.com', 0, N'123 Đường ABC, Quận XYZ', 100, 2, GETDATE(), 1),
-( 'KH002', N'Trần Văn Bình', '0912345678', '1985-08-10', 'manh@gmail.com', 1, N'456 Đường DEF, Quận LMN', 50, 1, GETDATE(), 1),
-( 'KH003', N'Phạm Minh Châu', '0923456789', '1992-12-25', 'manh@gmail.com', 1, N'789 Đường GHI, Quận OPQ', 200, 2, GETDATE(), 1),
-( 'KH004', N'Lê Thị Dương', '0934567890', '1988-04-30', 'manh@gmail.com', 0, N'101 Đường JKL, Quận RST', 150, 1, GETDATE(), 1),
-('KH005', N'Ngô Hồng Êm', '0945678901', '1995-07-05', 'manh@gmail.com', 0, N'202 Đường UVW, Quận XYZ', 80, 1, GETDATE(), 1),
-( 'KH006', N'Lý Minh Giao', '0956789012', '1980-11-12', 'manh@gmail.com', 1, N'303 Đường LMN, Quận OPQ', 120, 2, GETDATE(), 1),
-( 'KH007', N'Nguyễn Thị Hương', '0967890123', '1983-09-18', 'manh@gmail.com', 0, N'404 Đường OPQ, Quận RST', 90, 1, GETDATE(), 1),
-('KH008', N'Tạ Đình Hòa', '0978901234', '1998-03-08', 'manh@gmail.com', 1, N'505 Đường RST, Quận UVW', 180, 2, GETDATE(), 1),
-( 'KH009', N'Trương Hoàng I', '0989012345', '1993-06-22', 'manh@gmail.com', 1, N'606 Đường XYZ, Quận ABC', 60, 1, GETDATE(), 1),
-( 'KH010', N'Vũ Thị Kiều', '0990123456', '1996-09-15', 'manh@gmail.com', 0, N'707 Đường ABC, Quận DEF', 130, 2, GETDATE(), 1);
-
-
---- PHIEU GIAM GIA
-IF OBJECT_ID('PHIEU_GIAM_GIA') IS NOT NULL
-	DROP TABLE PHIEU_GIAM_GIA
-CREATE TABLE PHIEU_GIAM_GIA 
-(
-	ID BIGINT IDENTITY (1,1) NOT NULL,
-	IdNV BIGINT NOT NULL,
-	MaPhieu NVARCHAR(20) NULL ,
-	TenPhieu NVARCHAR(100) NULL,
-	LoaiPhieu BIT NULL , -- 0 LÀ % , 1 VND
-	GiaTri FLOAT NULL ,-- ++=> sửa lại thành FLoat
-	SoLuongPhieu INT NULL,
-	DonToiThieu FLOAT NULL , --- ÁNH XẠ JAVA => BigDecimal
-	NgayBatDau DATETIME NULL,
-	NgayKetThuc DATETIME NULL,
-	NgayTao DATE DEFAULT GETDATE(),
-	MoTa NVARCHAR(250) NULL,
-	TrangThai INT DEFAULT 0 NULL ,
-	-- 0 SẮP ĐẾN , 1 ĐANG DIỄN RA , 2 ĐÃ KẾT THÚC , 
-	CONSTRAINT PK_PHIEU_GIAM_GIA PRIMARY KEY (ID),
-	CONSTRAINT FK_PHIEU_GIAM_GIA_NHANVIEN FOREIGN KEY (IdNV) REFERENCES NHANVIEN (ID)
-)
-
-
--- Thêm 10 phiếu giảm giá giả mạo vào bảng PHIEU_GIAM_GIA
-INSERT INTO PHIEU_GIAM_GIA (IdNV, MaPhieu, TenPhieu, LoaiPhieu, GiaTri, SoLuongPhieu, DonToiThieu, NgayBatDau, NgayKetThuc, MoTa, TrangThai)
-VALUES 
-(9, 'PGG001', N'Phiếu giảm giá mùa hè', 0, 20, 100, 500000, '2023-07-15T00:00:00', '2023-08-15T23:59:59', N'Áp dụng cho mùa hè 2023 20% hóa đơn', 2),
-(18, 'PGG002', N'Phiếu giảm giá tháng 8', 1, 50000, 50, 1000000, '2023-08-01T00:00:00', '2023-08-31T23:59:59', N'Ưu đãi đặc biệt trong tháng 8 50000k / hóa đơn', 2),
-(11, 'PGG003', N'Phiếu khuyến mãi năm mới', 0, 15, 200, 2000000, '2024-01-01T00:00:00', '2024-01-15T23:59:59', N'Chào đón năm mới 2024 15% /hóa đơn', 3),
-(12, 'PGG004', N'Phiếu giảm giá Big Sale', 1, 100000, 30, 1500000, '2023-09-01T00:00:00', '2023-09-30T23:59:59', N'Ưu đãi lớn trong chương trình Big Sale 100000k / hóa đơn', 2),
-(13, 'PGG005', N'Phiếu giảm giá Halloween', 0, 25, 20, 800000, '2023-10-15T00:00:00', '2023-10-31T23:59:59', N'Giảm giá đặc biệt cho Halloween 25% / hóa đơn', 2),
-(14, 'PGG006', N'Phiếu khuyến mãi Black Friday', 1, 150000, 10, 2000000, '2023-11-25T00:00:00', '2023-11-30T23:59:59', N'Chương trình khuyến mãi Black Friday 150000k / hóa đơn', 0),
-(15, 'PGG007', N'Phiếu giảm giá Cyber Monday', 0, 30, 15, 3000000, '2023-11-30T00:00:00', '2023-12-15T23:59:59', N'Giảm giá trong sự kiện Cyber Monday 30% / hóa đơn', 0),
-(16, 'PGG008', N'Phiếu giảm giá Year-End Sale', 1, 200000, 5, 500000, '2023-11-12T00:00:00', '2023-12-31T23:59:59', N'Ưu đãi cuối năm 200000k / hóa đơn', 1),
-(17, 'PGG009', N'Phiếu giảm giá Tết Nguyên Đán', 0, 10, 25, 1000000, '2024-01-15T00:00:00', '2024-02-15T23:59:59', N'Giảm giá dịp Tết Nguyên Đán 10 % / hóa đơn', 3),
-(10, 'PGG010', N'Phiếu giảm giá Valentine', 1, 75000, 40, 1200000, '2024-02-01T00:00:00', '2024-02-14T23:59:59', N'Ưu đãi đặc biệt cho Valentine 75000k / hóa đơn', 3);
-
-SELECT * FROM PHIEU_GIAM_GIA
-
-
-IF OBJECT_ID('HOADON') IS NOT NULL
-	DROP TABLE HOADON
-CREATE TABLE HOADON
-(
-	ID BIGINT IDENTITY (1,1) NOT NULL,
-	IdPGG BIGINT  NULL,
-	IdNV BIGINT NOT NULL,
-	IdKH BIGINT NOT NULL,
-	MaHoaDon VARCHAR(20) NOT NULL,
-	TenNguoiNhan nvarchar(250) not null,
-	SdtNguoiNhan nvarchar(15) not null,
-	DiaChi nvarchar(250) not null,
-	TongTienSP MONEY DEFAULT 0.00, -- Thêm mói
-	TienPhieuGiam FLOAT DEFAULT 0 ,-- TIỀN GIẢM THEO PHIẾU VND
-	TienShip money not null, 
-	TienKhDua FLOAT DEFAULT 0,
-	TienThua FLOAT DEFAULT 0,
-	HinhThucMua BIT DEFAULT 0,-- 0 tại quầy 1 ship
-	NgayTao DATETIME DEFAULT GETDATE(),
-	NgayShip DATETIME Null,
-	NgayThanhToan DATETIME NULL,
-	GhiChu nvarchar(250) null,
-	TrangThai INT  DEFAULT 0, -- 0 CHƯA THANH TOÁN , 1 ĐÃ THANH TOÁN , 2 ĐANG GIAO , 3 THANH TOÁN TRƯỚC , 4 hủy 
-	CONSTRAINT PK_HOADON PRIMARY KEY (ID),
-	CONSTRAINT FK_HOADON_PHIEU_GIAM_GIA FOREIGN KEY (IdPGG) REFERENCES PHIEU_GIAM_GIA(ID) ,
-	CONSTRAINT FK_HOADON_NHANVIEN FOREIGN KEY (IdNV) REFERENCES NHANVIEN (ID),
-	CONSTRAINT FK_HOADON_KHACHHANG FOREIGN KEY (IdKH) REFERENCES KHACHHANG (ID)
-)
-
-SELECT *FROM KHACHHANG
-INSERT INTO HOADON (IdPGG, IdNV, IdKH, MaHoaDon, TenNguoiNhan, SdtNguoiNhan, DiaChi, TongTienSP, TienPhieuGiam, TienShip, TienKhDua,  TienThua, NgayThanhToan, TrangThai)
-VALUES 
-(NULL, 9, 2, 'HD001' , N'Trần Văn A', '0123456789', 'abc', 130000, 10000, 10000, 130000,0, '2023-11-1', 1),
-(NULL, 10, 2, 'HD002' , N'Trần Văn A', '0222456789', 'abc', 130000, 10000, 10000, 130000,0, '2023-12-1', 1),
-(NULL, 11, 3, 'HD003' , N'Trần Văn A', '0333456789', 'abc', 130000, 10000, 10000, 130000,0, '2024-1-1', 1),
-(NULL, 12, 4, 'HD004' , N'Trần Văn A', '0444456789', 'abc', 130000, 10000, 10000, 130000,0, '2024-1-1', 1),
-(NULL, 13, 5, 'HD005' , N'Trần Văn A', '0555556789', 'abc', 130000, 10000, 10000, 130000,0, '2024-1-2', 1),
-(NULL, 14, 3, 'HD006' , N'Trần Văn A', '0432156789', 'abc', 130000, 10000, 10000, 130000,0, '2024-1-2', 1)
-
-
---- HÓA ĐƠN CHI TIẾT
-IF OBJECT_ID('HOADONCHITIET') IS NOT NULL
-	DROP TABLE HOADONCHITIET
-CREATE TABLE HOADONCHITIET
-(
-	ID BIGINT IDENTITY (1,1) NOT NULL,
-	IdHoaDon BIGINT NOT NULL ,
-	IdSP BIGINT NOT NULL,
-	MaHoaDonCT VARCHAR(20) NOT NULL,
-	SoLuong INT NULL,
-	DonGia FLOAT NULL,
-	ThanhTien FLOAT NULL,
-	NgayTao DATETIME DEFAULT GETDATE(),
-	TrangThai INT NULL,
-	CONSTRAINT PK_HOADONCHITIET PRIMARY KEY (ID),
-	CONSTRAINT FK_HOADONCHITIET_HOADON FOREIGN KEY (IdHoaDon) REFERENCES HOADON  (ID),
-	CONSTRAINT FK_HOADONCHITIET_CHI_TIET_SAN_PHAM FOREIGN KEY (IdSP) REFERENCES SanPhaM (ID)
-)
---select * from HOADON
-INSERT INTO HOADONCHITIET (IdHoaDon, IdSP,MaHoaDonCT, SoLuong, DonGia, ThanhTien,NgayTao, TrangThai)
-VALUES 
-(1, 2, 2, 1, 750000, 375000, GETDATE(), 1),
-(2, 3, 2, 1, 750000, 375000, GETDATE(), 1),
-(3, 4, 2, 1, 750000, 375000, GETDATE(), 1),
-(4, 5, 2, 1, 750000, 375000, GETDATE(), 1),
-(5, 6, 2, 1, 750000, 375000, GETDATE(), 1),
-(6, 7, 2, 1, 750000, 375000, GETDATE(), 1)
-
-SELECT * FROM HOADON
-SELECT * FROM HOADONCHITIET
-
-
+SET IDENTITY_INSERT [dbo].HOADON ON 
+INSERT [dbo].HOADON (id_hoaDon,id_sanPham,id_khachHang,id_khuyenMai,soLuong,donGia,
+ngayTao) VALUES (1,1,1,1,2,4000,'2023-10-10')
+INSERT [dbo].HOADON (id_hoaDon,id_sanPham,id_khachHang,id_khuyenMai,soLuong,donGia,
+ngayTao) VALUES (2,1,1,1,2,4000,'2023-10-11')
+INSERT [dbo].HOADON (id_hoaDon,id_sanPham,id_khachHang,id_khuyenMai,soLuong,donGia,
+ngayTao) VALUES (3,1,1,1,2,4000,'2023-10-12')
+SET IDENTITY_INSERT [dbo].HOADON OFF
