@@ -15,7 +15,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class dangNhap {
     public String tenDangNhap;
-    public int matKhau;
-    public int matKhauMoi;
+    public String matKhau;
+    public String matKhauMoi;
     public int vaiTro;
 }

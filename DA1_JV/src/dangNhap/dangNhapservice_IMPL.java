@@ -17,12 +17,12 @@ public class dangNhapservice_IMPL implements nhanVienIMPL{
         List<dangNhap> listDn = new ArrayList<>();
         try {
                Connection conn = DBConnect.getConnection();
-               String sql = "select tenDangNhap,matkhau from taiKhoan";
+               String sql = "select tentaiKhoan,matkhau from taiKhoan";
                Statement stm = conn.createStatement();
                ResultSet rs = stm.executeQuery(sql);
                while(rs.next()){
                    String tenDangNhap = rs.getString(1);
-                   int matKhau = Integer.parseInt(rs.getString(2));
+                   String matKhau =rs.getString(2);
                    dangNhap dn = new dangNhap();
                    dn.setMatKhau(matKhau);
                    listDn.add(dn);
@@ -37,11 +37,11 @@ public class dangNhapservice_IMPL implements nhanVienIMPL{
     public void themTaiKhoan(dangNhap dn) {
         try {
             Connection conn = DBConnect.getConnection();
-            String sql = "insert into taiKhoan(tenDangNhap,matKhau,vaiTro) values(?,?,?)";
+            String sql = "insert into taiKhoan(tentaiKhoan,matKhau,vaiTro) values(?,?,?)";
             PreparedStatement prm = conn.prepareStatement(sql);
             prm.setString(1, dn.getTenDangNhap());
             prm.setString(2, String.valueOf(dn.getMatKhau()));
-            prm.setString(3, String.valueOf(dn.getVaiTro()));
+            prm.setInt(3, dn.getVaiTro());
             prm.executeUpdate();
             JOptionPane.showMessageDialog(null, "đăng kí thành công");
         } catch (Exception e) {
@@ -54,7 +54,7 @@ public class dangNhapservice_IMPL implements nhanVienIMPL{
     public void doiMatKhau(dangNhap dn) {
         try {
             Connection conn = DBConnect.getConnection();
-            String sql = "update taiKhoan set matKhau = ? where tenDangNhap= ?";
+            String sql = "update taiKhoan set matKhau = ? where tentaiKhoan= ?";
             PreparedStatement prm = conn.prepareStatement(sql);
             prm.setString(1, String.valueOf(dn.getMatKhauMoi()));
             prm.setString(2, dn.getTenDangNhap());

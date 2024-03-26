@@ -139,15 +139,17 @@ public class viewDangNhap extends javax.swing.JFrame {
                     String sql = "select tenTaiKhoan,matKhau,vaiTro from taiKhoan where tenTaiKhoan=? and matKhau=?";
                     PreparedStatement ps = conn.prepareStatement(sql);
                     ps.setString(1, txt_tenDangNhap.getText());
-                    ps.setString(2, String.valueOf(txt_matKhau.getPassword()) );
+                    ps.setString(2, String.valueOf(txt_matKhau.getPassword()));
                     ResultSet rs = ps.executeQuery();
                     if (rs.next()) {
                         String tenDangNhap = rs.getString("tenTaiKhoan");
                         String matKhau = rs.getString("matKhau");
                         int vaiTro = Integer.parseInt(rs.getString("vaiTro"));
-//                        System.out.println(tenDangNhap);
+                        String tenNv = rs.getString(1);
+                        view_backGroud viewBg = new view_backGroud(tenNv);
+                        viewBg.setVisible(true);
+                        this.dispose();
                         JOptionPane.showMessageDialog(null, "đăng nhập thành công");
-                        checkTaiKhoan(tenDangNhap);
                     } else {
                         JOptionPane.showMessageDialog(null, "sai thông tin");
 
@@ -166,25 +168,6 @@ public class viewDangNhap extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btn_dangkiActionPerformed
 
-    void checkTaiKhoan(String tenTaiKhoan) {
-        try {
-            String sql = "select nv.hoTen from taiKhoan tk\n"
-                    + "join nhanVien nv on tk.id_taiKHoan = nv.id_taiKhoan "
-                    + "where tk.tenTaiKhoan = ?";
-            Connection conn = DBConnect.getConnection();
-            PreparedStatement prm = conn.prepareStatement(sql);
-            prm.setString(1, tenTaiKhoan);
-            ResultSet rs = prm.executeQuery();
-            while (rs.next()) {
-                String tenNv = rs.getString(1);
-                view_backGroud viewBg = new view_backGroud(tenNv);
-                viewBg.setVisible(true);
-                this.dispose();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

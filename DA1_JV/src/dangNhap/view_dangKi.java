@@ -16,6 +16,7 @@ public class view_dangKi extends javax.swing.JFrame {
      * Creates new form view_dangKi
      */
     private dangNhapservice_IMPL service = new dangNhapservice_IMPL();
+
     public view_dangKi() {
         initComponents();
     }
@@ -37,10 +38,10 @@ public class view_dangKi extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         btn_dangKi = new javax.swing.JButton();
         txt_tenDangNhap = new javax.swing.JTextField();
-        txt_matKhau = new javax.swing.JTextField();
         rdo_nhanVien = new javax.swing.JRadioButton();
         rdo_quanLi = new javax.swing.JRadioButton();
         btn_huy = new javax.swing.JButton();
+        txt_matKhau1 = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -85,13 +86,6 @@ public class view_dangKi extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(18, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel1)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(txt_tenDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)
-                            .addComponent(txt_matKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -102,7 +96,14 @@ public class view_dangKi extends javax.swing.JFrame {
                         .addGap(9, 9, 9)
                         .addComponent(btn_dangKi, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(47, 47, 47)
-                        .addComponent(btn_huy, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btn_huy, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(txt_matKhau1, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(txt_tenDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))))
                 .addGap(11, 11, 11))
         );
         jPanel1Layout.setVerticalGroup(
@@ -116,9 +117,9 @@ public class view_dangKi extends javax.swing.JFrame {
                 .addComponent(txt_tenDangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(txt_matKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txt_matKhau1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rdo_quanLi)
@@ -146,26 +147,27 @@ public class view_dangKi extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_dangKiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dangKiActionPerformed
-        String tenDangNhap = txt_tenDangNhap.getText();
-        int matKhau = Integer.parseInt(txt_matKhau.getText());
-        int vaiTro;
-        if(rdo_nhanVien.isSelected()){
-            vaiTro = 0;
-        }else{
-            vaiTro = 1;
-        }
         dangNhap nv = new dangNhap();
-        nv.setTenDangNhap(tenDangNhap);
-        nv.setMatKhau(matKhau);
-        nv.setVaiTro(vaiTro);
-        if(txt_tenDangNhap.getText().isEmpty()){
+        if (txt_tenDangNhap.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "tên đăng nhập không được để trống");
-        }else{
-            if(txt_matKhau.getText().isEmpty()){
+            return;
+        } else {
+            if (txt_matKhau1.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "mật khẩu không được để trống");
-            }else{
+                return;
+            } else {
+                String tenDangNhap = txt_tenDangNhap.getText();
+                String matKhau = txt_matKhau1.getText();
+                int vaiTro;
+                if (rdo_nhanVien.isSelected()) {
+                    vaiTro = 1;
+                } else {
+                    vaiTro = 0;
+                }
+                nv.setTenDangNhap(tenDangNhap);
+                nv.setMatKhau(matKhau);
+                nv.setVaiTro(vaiTro);
                 service.themTaiKhoan(nv);
-                
             }
         }
     }//GEN-LAST:event_btn_dangKiActionPerformed
@@ -222,7 +224,7 @@ public class view_dangKi extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton rdo_nhanVien;
     private javax.swing.JRadioButton rdo_quanLi;
-    private javax.swing.JTextField txt_matKhau;
+    private javax.swing.JPasswordField txt_matKhau1;
     private javax.swing.JTextField txt_tenDangNhap;
     // End of variables declaration//GEN-END:variables
 }

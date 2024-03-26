@@ -155,9 +155,9 @@ public class view_doiMatKhau extends javax.swing.JFrame {
     private void btn_doiMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_doiMatKhauActionPerformed
 
         String tenDangNhap = txt_tenTaiKhoan.getText();
-        int matKhauCu = Integer.parseInt(txt_passold.getText());
-        int matKhauNew = Integer.parseInt(txt_passNew.getText());
-        int nhapLai = Integer.parseInt(txt_nhapLai.getText());
+        String matKhauCu = txt_passold.getText();
+        String matKhauNew = txt_passNew.getText();
+        String nhapLai = txt_nhapLai.getText();
         for (dangNhap x : service.getMatKhau()) {
             System.out.println(x.getTenDangNhap());
             if (txt_tenTaiKhoan.getText().isEmpty()) {
