@@ -79,22 +79,22 @@ public class SanPhamCtServiceImpl implements SanPhamCtService {
     @Override
     public boolean add(SanPhamCt sp) {
         try {
-            String sql1 = "insert sanPhamCt(id_theLoai,id_chatLieu,id_thuongHieu,id_nhaCungCap,mau,gia,size,soLuong,ghiChu)VALUES(?,?,?,?,?,?,?,?,?)";
+            String sql1 = "insert sanPham(id_theLoai,id_chatLieu,id_thuongHieu,id_nhaCungCap,tenSanPham,mau,gia,size,soLuong,ghiChu)VALUES(?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement stm1 = conn.prepareStatement(sql1);
             stm1.setInt(1, sp.getIdTL());
             stm1.setInt(2, sp.getIdCL());
             stm1.setInt(3, sp.getIdTH());
             stm1.setInt(4, sp.getIdNCC());
-            stm1.setString(5, sp.getTenMau());
-            stm1.setDouble(6, sp.getGia());
-            stm1.setInt(7, sp.getSize());
-            stm1.setInt(8, sp.getSoLuong());
-            stm1.setString(9, sp.getGhiChu());
+            stm1.setString(5, sp.getTenSP());
+            stm1.setString(6, sp.getTenMau());
+            stm1.setDouble(7, sp.getGia());
+            stm1.setInt(8, sp.getSize());
+            stm1.setInt(9, sp.getSoLuong());
+            stm1.setString(10, sp.getGhiChu());
             stm1.executeUpdate();
             return true;
         } catch (SQLException ex) {
             ex.printStackTrace();
-
             return false;
         }
     }
@@ -114,19 +114,20 @@ public class SanPhamCtServiceImpl implements SanPhamCtService {
 
     @Override
     public boolean update(SanPhamCt sp) {
-        String sql = "update sanPham set id_theLoai=?,id_chatLieu=?,id_thuongHieu=?,id_nhaCungCap=?,id_mau=?,gia=?,size=?,soLuong=?,ghiChu=?  where id_sanPham =?";
+        String sql = "update sanPham set id_theLoai=?,id_chatLieu=?,id_thuongHieu=?,id_nhaCungCap=?,tenSanPham=?,mau=?,gia=?,size=?,soLuong=?,ghiChu=?  where id_sanPham =?";
         try {
             PreparedStatement stm1 = conn.prepareStatement(sql);
             stm1.setInt(1, sp.getIdTL());
             stm1.setInt(2, sp.getIdCL());
             stm1.setInt(3, sp.getIdTH());
             stm1.setInt(4, sp.getIdNCC());
-            stm1.setString(5, sp.getTenMau());
-            stm1.setDouble(6, sp.getGia());
-            stm1.setInt(7, sp.getSize());
-            stm1.setInt(8, sp.getSoLuong());
-            stm1.setString(9, sp.getGhiChu());
-            stm1.setInt(10, sp.getiDSanPham());
+            stm1.setString(5, sp.getTenSP());
+            stm1.setString(6, sp.getTenMau());
+            stm1.setDouble(7, sp.getGia());
+            stm1.setInt(8, sp.getSize());
+            stm1.setInt(9, sp.getSoLuong());
+            stm1.setString(10, sp.getGhiChu());
+            stm1.setInt(11, sp.getiDSanPham());
             stm1.executeUpdate();
             return true;
         } catch (Exception e) {
@@ -230,7 +231,7 @@ public class SanPhamCtServiceImpl implements SanPhamCtService {
             stm.setString(1, tenSanPham1);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
-               int idSP = rs.getInt("id_sanPham");
+                int idSP = rs.getInt("id_sanPham");
                 String tenSP = rs.getString("tenSanPham");
                 String theLoai = rs.getString("tenTheLoai");
                 String chatLieu = rs.getString("tenChatLieu");
@@ -355,16 +356,14 @@ public class SanPhamCtServiceImpl implements SanPhamCtService {
     }
 
     @Override
-    public boolean checkTrungTT(int id_sanPham, int id_theLoai, int id_chatLieu, int id_thuongHieu, int id_nhaCungCap, int id_mau) {
+    public boolean checkTrungTT(int id_theLoai, int id_chatLieu, int id_thuongHieu, int id_nhaCungCap) {
         try {
-            String query = "SELECT COUNT(*) FROM sanPham WHERE id_sanPham = ? AND id_theLoai = ? AND id_chatLieu = ? AND id_thuongHieu = ? AND id_nhaCungCap = ? AND id_mau = ?";
+            String query = "SELECT COUNT(*) FROM sanPham WHERE  id_theLoai = ? AND id_chatLieu = ? AND id_thuongHieu = ? AND id_nhaCungCap = ?";
             PreparedStatement stm = conn.prepareStatement(query);
-            stm.setInt(1, id_sanPham);
-            stm.setInt(2, id_theLoai);
-            stm.setInt(3, id_chatLieu);
-            stm.setInt(4, id_thuongHieu);
-            stm.setInt(5, id_nhaCungCap);
-            stm.setInt(6, id_mau);
+            stm.setInt(1, id_theLoai);
+            stm.setInt(2, id_chatLieu);
+            stm.setInt(3, id_thuongHieu);
+            stm.setInt(4, id_nhaCungCap);
             ResultSet rs = stm.executeQuery();
 
             if (rs.next()) {

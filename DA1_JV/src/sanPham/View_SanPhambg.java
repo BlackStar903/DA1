@@ -20,12 +20,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 import java.util.Vector;
 import static sanPham.view_SanPham.tenSP;
 
 public class View_SanPhambg extends javax.swing.JFrame {
 
-    private SanPhamCtService service = new SanPhamCtServiceImpl();
+    private SanPhamCtService spctService = new SanPhamCtServiceImpl();
     private TheLoaiService tlService = new TheLoaiServiceImpl();
     private ChatLieuService clService = new ChatLieuServcieImpl();
     private ThuongHieuService thService = new ThuongHieuServiceImpl();
@@ -33,6 +34,7 @@ public class View_SanPhambg extends javax.swing.JFrame {
     private MauService mauService = new MauServiceImpl();
     DefaultTableModel mol = new DefaultTableModel();
     private String dataContructor;
+    List<SanPhamCt> listSp = spctService.getAll();
 
     Connection cn;
     long count, soTrang, trang = 1;
@@ -41,6 +43,7 @@ public class View_SanPhambg extends javax.swing.JFrame {
 
     public View_SanPhambg(String dataContructor) {
         initComponents();
+        loadCboMauForm();
         setTitle("Sản phẩm chi tiết");
         setLocationRelativeTo(null);
         countDb();
@@ -51,12 +54,6 @@ public class View_SanPhambg extends javax.swing.JFrame {
         }
         //this.fillTable();
         this.loadData(1, dataContructor);
-
-        // cbo màu
-//        cboMau.removeAllItems();
-//        for (sanPham.Mau mau : mauService.getMau()) {
-//            cboMau.addItem(mau.getTenMau());
-//        }
 
         // cbo Thể loại
         cboTL.removeAllItems();
@@ -119,7 +116,7 @@ public class View_SanPhambg extends javax.swing.JFrame {
     void fillTable() {
         mol = (DefaultTableModel) tbl_SPCT.getModel();
         mol.setRowCount(0);
-        for (sanPham.SanPhamCt sp : service.getAll()) {
+        for (sanPham.SanPhamCt sp : spctService.getAll()) {
             Object[] toData = new Object[]{
                 sp.getIdSanPhamCt(), sp.getiDSanPham(), sp.getTenSP(), sp.getTenTheLoai(), sp.getTenChatLieu(), sp.getTenThuongHieu(),
                 sp.getTenNhaCungCap(), sp.getTenMau(), sp.getGia(), sp.getSize(), sp.getSoLuong(), sp.getGhiChu()
@@ -130,28 +127,28 @@ public class View_SanPhambg extends javax.swing.JFrame {
 
     void showSP(int index) {
         index = tbl_SPCT.getSelectedRow();
+        //Mã
         txtIDSP.setText(tbl_SPCT.getValueAt(index, 0).toString());
-//        txtIDSP.setText(tbl_SPCT.getValueAt(index, 1).toString());
-        txtTenSP.setText(tbl_SPCT.getValueAt(index, 2).toString());
+        //Tên
+        txtTenSP.setText(tbl_SPCT.getValueAt(index, 1).toString());
         // Thể loại
-        cboTL.setSelectedItem(tbl_SPCT.getValueAt(index, 3));
+        cboTL.setSelectedItem(tbl_SPCT.getValueAt(index, 2));
         // Chất liệu
-        cboChatLieu.setSelectedItem(tbl_SPCT.getValueAt(index, 4));
+        cboChatLieu.setSelectedItem(tbl_SPCT.getValueAt(index, 3));
         // Thương hiệu
-        cboThuongHieu.setSelectedItem(tbl_SPCT.getValueAt(index, 5));
+        cboThuongHieu.setSelectedItem(tbl_SPCT.getValueAt(index, 4));
         // Nhà cc
-        cboNCC.setSelectedItem(tbl_SPCT.getValueAt(index, 6));
+        cboNCC.setSelectedItem(tbl_SPCT.getValueAt(index, 5));
         // Màu
-        cboMau.setSelectedItem(tbl_SPCT.getValueAt(index, 7));
-        txtGia.setText(tbl_SPCT.getValueAt(index, 8).toString());
-        txtSize.setText(tbl_SPCT.getValueAt(index, 9).toString());
-        txtSoLuong.setText(tbl_SPCT.getValueAt(index, 10).toString());
-        String ghiChu = tbl_SPCT.getValueAt(index, 11).toString();
+        cboMau.setSelectedItem(tbl_SPCT.getValueAt(index, 6).toString());
+        txtGia.setText(tbl_SPCT.getValueAt(index, 7).toString());
+        txtSize.setText(tbl_SPCT.getValueAt(index, 8).toString());
+        txtSoLuong.setText(tbl_SPCT.getValueAt(index, 9).toString());
+        String ghiChu = tbl_SPCT.getValueAt(index, 10).toString();
         txtGhiChu.setText(ghiChu);
     }
 
     void addSPCT() {
-        int idSP = Integer.parseInt(txtIDSP.getText());
         int theLoai = cboTL.getSelectedIndex() + 1;
         int chatLieu = cboChatLieu.getSelectedIndex() + 1;
         int thuongHieu = cboThuongHieu.getSelectedIndex() + 1;
@@ -160,34 +157,35 @@ public class View_SanPhambg extends javax.swing.JFrame {
         Double gia = Double.parseDouble(txtGia.getText());
         int size = Integer.parseInt(txtSize.getText());
         int soLuong = Integer.parseInt(txtSoLuong.getText());
+        String tenSp = txtTenSP.getText();
         String ghiChu = txtGhiChu.getText();
         // kiểm tra trùng thuộc tính
-        if (service.checkTrungTT(idSP, theLoai, chatLieu, thuongHieu, nhaCC, mau)) {
-            JOptionPane.showMessageDialog(this, "Sản phẩm chi tiết này đã tồn tại.");
-            return;
-        }
+//        if (spctService.checkTrungTT( theLoai, chatLieu, thuongHieu, nhaCC)) {
+//            JOptionPane.showMessageDialog(this, "Sản phẩm chi tiết này đã tồn tại.");
+//            return;
+//        }
 //        // kiểm tra trùng thể loại
-//        if (service.checkTrungTheLoai(idSP, theLoai)) {
+//        if (spctService.checkTrungTheLoai(idSP, theLoai)) {
 //            JOptionPane.showMessageDialog(this, "Sản phẩm đã có thể loại này.");
 //            return; // Stop execution if category already exists
 //        } else {
 //            // kiểm tra trùng chất liệu
-//            if (service.checkTrungChatLieu(idSP, chatLieu)) {
+//            if (spctService.checkTrungChatLieu(idSP, chatLieu)) {
 //                JOptionPane.showMessageDialog(this, "Sản phẩm đã có chất liệu này.");
 //                return; // Stop execution if category already exists
 //            } else {
 //                // kiểm tra trùng thương hiệu
-//                if (service.checkTrungThuongHieu(idSP, thuongHieu)) {
+//                if (spctService.checkTrungThuongHieu(idSP, thuongHieu)) {
 //                    JOptionPane.showMessageDialog(this, "Sản phẩm đã có thương hiệu này.");
 //                    return; // Stop execution if category already exists
 //                } else {
 //                    // kiểm tra trùng nhà cung cấp
-//                    if (service.checkTrungNhaCC(idSP, nhaCC)) {
+//                    if (spctService.checkTrungNhaCC(idSP, nhaCC)) {
 //                        JOptionPane.showMessageDialog(this, "Sản phẩm đã có nhà cung cấp này.");
 //                        return; // Stop execution if category already exists
 //                    } else {
 //                        // kiểm tra trùng màu
-//                        if (service.checkTrungMau(idSP, mau)) {
+//                        if (spctService.checkTrungMau(idSP, mau)) {
 //                            JOptionPane.showMessageDialog(this, "Sản phẩm đã có màu này.");
 //                            return; // Stop execution if category already exists           
 //                        }
@@ -208,7 +206,8 @@ public class View_SanPhambg extends javax.swing.JFrame {
         spct.setSize(size);
         spct.setSoLuong(soLuong);
         spct.setGhiChu(ghiChu);
-        boolean addResult = service.add(spct);
+        spct.setTenSP(tenSp);
+        boolean addResult = spctService.add(spct);
         if (addResult) {
             JOptionPane.showMessageDialog(this, "Thêm sản phẩm thành công.");
         } else {
@@ -221,7 +220,7 @@ public class View_SanPhambg extends javax.swing.JFrame {
         int idSPCT = Integer.parseInt(txtIDSP.getText());
         sanPham.SanPhamCt sp = new sanPham.SanPhamCt();
         sp.setIdSanPhamCt(idSPCT);
-        boolean deleteResult = service.delete(sp);
+        boolean deleteResult = spctService.delete(sp);
         if (deleteResult) {
             JOptionPane.showMessageDialog(this, "Xóa thành công");
         } else {
@@ -229,7 +228,6 @@ public class View_SanPhambg extends javax.swing.JFrame {
         }
         this.loadData(trang, "");
     }
-
 
     void clearForm() {
         txtIDSP.setText("");
@@ -251,6 +249,14 @@ public class View_SanPhambg extends javax.swing.JFrame {
         mol = (DefaultTableModel) tbl_SPCT.getModel();
         mol.setRowCount(0);
 
+    }
+
+    SanPhamCt getForm() {
+        int idTL = cboTL.getSelectedIndex()+1, idCl = cboChatLieu.getSelectedIndex()+1, idTH = cboThuongHieu.getSelectedIndex()+1, idNCC = cboNCC.getSelectedIndex()+1;
+        return new SanPhamCt(Integer.parseInt(txtIDSP.getText()), idTL, idCl, idTH, idNCC, txtTenSP.getText(),
+                cboTL.getSelectedItem().toString(), cboChatLieu.getSelectedItem().toString(), cboThuongHieu.getSelectedItem().toString(), cboNCC.getSelectedItem().toString(),
+                cboMau.getSelectedItem().toString(), Double.parseDouble(txtGia.getText()), Integer.parseInt(txtSize.getText()), Integer.parseInt(txtSoLuong.getText()),
+                txtGhiChu.getText());
     }
 
     public void loadData(long trang, String strIdSp) {
@@ -494,7 +500,7 @@ public class View_SanPhambg extends javax.swing.JFrame {
             }
         });
 
-        cboMau.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboMau.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item1" }));
 
         cboTL.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -703,13 +709,13 @@ public class View_SanPhambg extends javax.swing.JFrame {
 
         tbl_SPCT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã spct", "Mã sp", "Tên sp", "Thể loại", "Chất liệu", "Thương hiệu", "Nhà cung cấp", "Màu", "Giá", "Size", "Số lượng", "Ghi chú"
+                "Mã sp", "Tên sp", "Thể loại", "Chất liệu", "Thương hiệu", "Nhà cung cấp", "Màu", "Giá", "Size", "Số lượng", "Ghi chú"
             }
         ));
         tbl_SPCT.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -920,8 +926,9 @@ public class View_SanPhambg extends javax.swing.JFrame {
         if (!validates()) {
             return;
         }
-        
-        fillTimKiemTuSP(dataContructor);
+        spctService.update(getForm());
+        loadData(tbl_SPCT.getSelectedRow(), "");
+
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiActionPerformed
@@ -937,7 +944,14 @@ public class View_SanPhambg extends javax.swing.JFrame {
         if (Integer.valueOf(txtSize.getText()) >= 50) {
             JOptionPane.showMessageDialog(null, "không tồn tại size quá lơn như vậy");
         } else {
+            countDb();
+            if (count % 5 == 0) {
+                soTrang = count / 5;
+            } else {
+                soTrang = count / 5 + 1;
+            }
             this.addSPCT();
+            loadData(soTrang, "");
             fillTimKiemTuSP(dataContructor);
         }
 
@@ -961,7 +975,7 @@ public class View_SanPhambg extends javax.swing.JFrame {
     void fillTimKiem(String tenSanPham) {
         mol = (DefaultTableModel) tbl_SPCT.getModel();
         mol.setRowCount(0);
-        for (sanPham.SanPhamCt sp : service.timTheoTen(tenSanPham)) {
+        for (sanPham.SanPhamCt sp : spctService.timTheoTen(tenSanPham)) {
             Object[] toData = new Object[]{
                 sp.getIdSanPhamCt(), sp.getiDSanPham(), sp.getTenSP(), sp.getTenTheLoai(), sp.getTenChatLieu(), sp.getTenThuongHieu(),
                 sp.getTenNhaCungCap(), sp.getTenMau(), sp.getGia(), sp.getSize(), sp.getSoLuong(), sp.getGhiChu()
@@ -973,7 +987,7 @@ public class View_SanPhambg extends javax.swing.JFrame {
     void fillTimKiemTuSP(String tenSanPham1) {
         mol = (DefaultTableModel) tbl_SPCT.getModel();
         mol.setRowCount(0);
-        for (sanPham.SanPhamCt sp : service.timTheoTuSP(tenSanPham1)) {
+        for (sanPham.SanPhamCt sp : spctService.timTheoTuSP(tenSanPham1)) {
             Object[] toData = new Object[]{
                 sp.getIdSanPhamCt(), sp.getiDSanPham(), sp.getTenSP(), sp.getTenTheLoai(), sp.getTenChatLieu(), sp.getTenThuongHieu(),
                 sp.getTenNhaCungCap(), sp.getTenMau(), sp.getGia(), sp.getSize(), sp.getSoLuong(), sp.getGhiChu()
@@ -1235,9 +1249,9 @@ public class View_SanPhambg extends javax.swing.JFrame {
     }
 
     boolean validates() {
-        // id sản phẩm
-        if (txtIDSP.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(this, "Id sản phẩm đang trống");
+        // tên sản phẩm
+        if (txtTenSP.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(this, "Tên sản phẩm đang trống");
             return false;
         }
         // giá
@@ -1274,7 +1288,7 @@ public class View_SanPhambg extends javax.swing.JFrame {
     boolean checkTK() {
         // tìm kiếm
         if (txtTimKiem.getText().equals("")) {
-            this.loadData(trang, "");
+            this.loadData(Long.parseLong(lblTrang.getText()), "");
             return false;
         }
         return true;
@@ -1487,7 +1501,7 @@ public class View_SanPhambg extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-  
+
     //cbo thương hiệu
     void loadCboThuongHieu(long sotrang, String strThuongHieu) {
         DefaultTableModel mol = new DefaultTableModel();
@@ -1554,7 +1568,7 @@ public class View_SanPhambg extends javax.swing.JFrame {
                 rs = prm.executeQuery();
             }
             while (rs.next()) {
-               Vector v = new Vector();
+                Vector v = new Vector();
                 int idSP = rs.getInt("id_sanPham");
                 String tenSP = rs.getString("tenSanPham");
                 String theLoai = rs.getString("tenTheLoai");
@@ -1650,7 +1664,7 @@ public class View_SanPhambg extends javax.swing.JFrame {
                 rs = prm.executeQuery();
             }
             while (rs.next()) {
-               Vector v = new Vector();
+                Vector v = new Vector();
                 int idSP = rs.getInt("id_sanPham");
                 String tenSP = rs.getString("tenSanPham");
                 String theLoai = rs.getString("tenTheLoai");
@@ -1739,7 +1753,7 @@ public class View_SanPhambg extends javax.swing.JFrame {
                         + "JOIN\n"
                         + "     nhaCungCap ncc ON sanPham.id_nhaCungCap = ncc.id_nhaCC\n"
                         + "   where [id_sanPham] not in (select top " + (trang * 5 - 5) + " [id_sanPham] from sanPham )"
-                        + "and sanPham.id_mau = ? ";
+                        + "and sanPham.mau = ? ";
                 Connection conn = DBConnect.getConnection();
                 PreparedStatement prm = conn.prepareStatement(sql);
                 prm.setString(1, strMau);
@@ -1770,6 +1784,22 @@ public class View_SanPhambg extends javax.swing.JFrame {
                 v.add(soLuong);
                 v.add(ghiChu);
                 mol.addRow(v);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    //cboMau ở form
+    void loadCboMauForm() {
+        try {
+            cboMau.removeAllItems();
+            String sql = "Select DISTINCT mau from sanpham";
+            Connection conn = DBConnect.getConnection();
+            Statement stm = conn.createStatement();
+            rs = stm.executeQuery(sql);
+            while (rs.next()) {
+                cboMau.addItem(rs.getString("Mau"));
             }
         } catch (Exception e) {
             e.printStackTrace();

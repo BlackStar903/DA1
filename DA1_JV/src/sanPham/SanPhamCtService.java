@@ -27,5 +27,5 @@ public interface SanPhamCtService {
 
     public boolean checkTrungMau(int id_sanPham, int id_mau);
 
-    public boolean checkTrungTT(int id_sanPham, int id_theLoai, int id_chatLieu, int id_thuongHieu, int id_nhaCungCap, int id_mau);
+    public boolean checkTrungTT( int id_theLoai, int id_chatLieu, int id_thuongHieu, int id_nhaCungCap);
 }

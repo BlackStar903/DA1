@@ -27,7 +27,7 @@ public class NhaCCServiceImpl implements NhaCCService {
         try {
             List<NhaCungCap> list = new ArrayList<>();
             Statement stm = conn.createStatement();
-            String sql = "select * from nhaCungCap";
+            String sql = "select DISTINCT * from nhaCungCap";
             ResultSet rs = stm.executeQuery(sql);
             while (rs.next()) {
                 int idNCC = rs.getInt(1);

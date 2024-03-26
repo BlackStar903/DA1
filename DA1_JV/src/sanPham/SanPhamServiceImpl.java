@@ -16,18 +16,18 @@ public class SanPhamServiceImpl implements SanPhamService {
     private Connection conn = DBConnect.getConnection();
 
     @Override
-    public List<SanPham> getAll() {
+    public List<SanPhamCt> getAll() {
         try {
-            List<SanPham> list = new ArrayList<>();
+            List<SanPhamCt> list = new ArrayList<>();
             Statement stm = conn.createStatement();
             String sql = "select * from sanPham";
             ResultSet rs = stm.executeQuery(sql);
             while (rs.next()) {
-                int idSP = rs.getInt(1);
-                String tenSP = rs.getString(2);
-                String ghiChu = rs.getString(3);
+                int idSP = rs.getInt("id_sanPham");
+                String tenSP = rs.getString("tenSanPham");
+                String ghiChu = rs.getString("ghiChu");
 
-                SanPham sp = new SanPham();
+                SanPhamCt sp = new SanPhamCt();
                 sp.setiDSanPham(idSP);
                 sp.setTenSP(tenSP);
                 sp.setGhiChu(ghiChu);

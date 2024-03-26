@@ -90,6 +90,24 @@ public class SanPhamCt {
     public SanPhamCt() {
     }
 
+    public SanPhamCt(int iDSanPham, int idTL, int idCL, int idTH, int idNCC, String tenSP, String tenTheLoai, String tenChatLieu, String tenThuongHieu, String tenNhaCungCap, String tenMau, double gia, int size, int soLuong, String ghiChu) {
+        this.iDSanPham = iDSanPham;
+        this.idTL = idTL;
+        this.idCL = idCL;
+        this.idTH = idTH;
+        this.idNCC = idNCC;
+        this.tenSP = tenSP;
+        this.tenTheLoai = tenTheLoai;
+        this.tenChatLieu = tenChatLieu;
+        this.tenThuongHieu = tenThuongHieu;
+        this.tenNhaCungCap = tenNhaCungCap;
+        this.tenMau = tenMau;
+        this.gia = gia;
+        this.size = size;
+        this.soLuong = soLuong;
+        this.ghiChu = ghiChu;
+    }
+
     public SanPhamCt(int idSanPhamCt, int iDSanPham, int idTL, int idCL, int idTH, int idNCC, int idMau, String tenSP, String tenTheLoai, String tenChatLieu, String tenThuongHieu, String tenNhaCungCap, String tenMau, double gia, int size, int soLuong, String ghiChu) {
         this.idSanPhamCt = idSanPhamCt;
         this.iDSanPham = iDSanPham;

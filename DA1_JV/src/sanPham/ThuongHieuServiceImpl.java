@@ -27,7 +27,7 @@ public class ThuongHieuServiceImpl implements ThuongHieuService {
         try {
             List<ThuongHieu> list = new ArrayList<>();
             Statement stm = conn.createStatement();
-            String sql = "select * from thuongHieu";
+            String sql = "select DISTINCT * from thuongHieu";
             ResultSet rs = stm.executeQuery(sql);
             while (rs.next()) {
                 int idThuongHieu = rs.getInt(1);

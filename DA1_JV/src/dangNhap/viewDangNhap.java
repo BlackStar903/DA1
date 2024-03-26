@@ -136,30 +136,20 @@ public class viewDangNhap extends javax.swing.JFrame {
             } else {
                 try {
                     Connection conn = DBConnect.getConnection();
-                    Statement stm = conn.createStatement();
-                    String sql = "select tenDangNhap,matKhau,vaiTro from taiKhoan";
-                    ResultSet rs = stm.executeQuery(sql);
-                    while (rs.next()) {
-                        String tenDangNhap = rs.getString(1);
-                        int matKhau = Integer.parseInt(rs.getString(2));
-                        int vaiTro = Integer.parseInt(rs.getString(3));
-                        //System.out.println(tenDangNhap);
-                        if (rs.next()) {
-                            if (txt_tenDangNhap.getText().equals(tenDangNhap)) {
-                                //JOptionPane.showMessageDialog(null, "đăng nhập thành công");
-                                if (txt_matKhau.getText().equals(String.valueOf(matKhau))) {
-                                   JOptionPane.showMessageDialog(null, "đăng nhập thành công");
-                                    checkTaiKhoan(tenDangNhap);
-                                    break;
-                                } else {
-                                    JOptionPane.showMessageDialog(null, "sai mật khẩu");
-                                    break;
-                                }
-                            }
-
-                        } else {
-                            JOptionPane.showMessageDialog(null, "sai tên đăng nhâp");
-                        }
+                    String sql = "select tenTaiKhoan,matKhau,vaiTro from taiKhoan where tenTaiKhoan=? and matKhau=?";
+                    PreparedStatement ps = conn.prepareStatement(sql);
+                    ps.setString(1, txt_tenDangNhap.getText());
+                    ps.setString(2, String.valueOf(txt_matKhau.getPassword()) );
+                    ResultSet rs = ps.executeQuery();
+                    if (rs.next()) {
+                        String tenDangNhap = rs.getString("tenTaiKhoan");
+                        String matKhau = rs.getString("matKhau");
+                        int vaiTro = Integer.parseInt(rs.getString("vaiTro"));
+//                        System.out.println(tenDangNhap);
+                        JOptionPane.showMessageDialog(null, "đăng nhập thành công");
+                        checkTaiKhoan(tenDangNhap);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "sai thông tin");
 
                     }
                 } catch (Exception e) {
@@ -180,7 +170,7 @@ public class viewDangNhap extends javax.swing.JFrame {
         try {
             String sql = "select nv.hoTen from taiKhoan tk\n"
                     + "join nhanVien nv on tk.id_taiKHoan = nv.id_taiKhoan "
-                    + "where tk.tenDangNhap = ?";
+                    + "where tk.tenTaiKhoan = ?";
             Connection conn = DBConnect.getConnection();
             PreparedStatement prm = conn.prepareStatement(sql);
             prm.setString(1, tenTaiKhoan);

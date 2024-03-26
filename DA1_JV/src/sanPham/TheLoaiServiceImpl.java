@@ -19,7 +19,7 @@ public class TheLoaiServiceImpl implements TheLoaiService {
         try {
             List<TheLoai> list = new ArrayList<>();
             Statement stm = conn.createStatement();
-            String sql = "select * from theLoai";
+            String sql = "select DISTINCT * from theLoai";
             ResultSet rs = stm.executeQuery(sql);
             while (rs.next()) {
                 int idTheLoai = rs.getInt(1);

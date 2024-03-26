@@ -4,7 +4,7 @@ import sanPham.SanPham;
 import java.util.List;
 
 public interface SanPhamService {
-    List<SanPham> getAll();
+    List<SanPhamCt> getAll();
     public boolean add(SanPham sp);
 
 }

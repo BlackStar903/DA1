@@ -19,7 +19,7 @@ public class ChatLieuServcieImpl implements ChatLieuService {
         try {
             List<ChatLieu> list = new ArrayList<>();
             Statement stm = conn.createStatement();
-            String sql = "select * from chatLieu";
+            String sql = "select DISTINCT * from chatLieu";
             ResultSet rs = stm.executeQuery(sql);
             while (rs.next()) {
                 int idChatLieu = rs.getInt(1);
