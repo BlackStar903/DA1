@@ -25,24 +25,24 @@ public class MauServiceImpl implements MauService {
 
     @Override
     public List<Mau> getMau() {
-        try {
-            List<Mau> list = new ArrayList<>();
-            Statement stm = conn.createStatement();
-            String sql = "select * from mau";
-            ResultSet rs = stm.executeQuery(sql);
-            while (rs.next()) {
-                int idMau = rs.getInt(1);
-                String tenMau = rs.getString(2);
-
-                Mau mau = new Mau();
-                mau.setIdMau(idMau);
-                mau.setTenMau(tenMau);
-                list.add(mau);
-            }
-            return list;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            List<Mau> list = new ArrayList<>();
+//            Statement stm = conn.createStatement();
+//            String sql = "select * from mau";
+//            ResultSet rs = stm.executeQuery(sql);
+//            while (rs.next()) {
+//                int idMau = rs.getInt(1);
+//                String tenMau = rs.getString(2);
+//
+//                Mau mau = new Mau();
+//                mau.setIdMau(idMau);
+//                mau.setTenMau(tenMau);
+//                list.add(mau);
+//            }
+//            return list;
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         return null;
     }
 

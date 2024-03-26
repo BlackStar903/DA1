@@ -461,7 +461,7 @@ public class view_SanPham extends javax.swing.JFrame {
         // TODO add your handling code here:
         thongTin = txt_thongTinNv.getText();
         tenSP = txtTenSP.getText();
-        View_SanPhambg_seven spct = new View_SanPhambg_seven(txtIDSP.getText());
+        View_SanPhambg spct = new View_SanPhambg(txtIDSP.getText());
         spct.setVisible(true);
         spct.setLocationRelativeTo(null);
         this.dispose();     

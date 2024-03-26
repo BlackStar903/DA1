@@ -1,4 +1,4 @@
- use BanGiay_DA1
+﻿ use BanGiay_DA1
 
 --ThuongHieu
 if object_id('THUONGHIEU') is not null
@@ -7,7 +7,7 @@ create table THUONGHIEU
 (
 	id_thuongHieu int identity(1,1),
 	tenThuongHieu nvarchar(50),
-	trangThai int, --0 ho?t �?ng, 1 ng?ng 
+	trangThai int, --0 hoạt động, 1 ngừng 
 	constraint pk_ThuongHieu primary key(id_thuongHieu)
 )
 
@@ -25,15 +25,15 @@ create table CHATLIEU
 (
 	id_chatLieu int identity(1,1),
 	tenChatLieu nvarchar(50),
-	trangThai int, --0 ho?t �?ng, 1 ng?ng 
+	trangThai int, --0 hoạt động, 1 ngừng 
 	constraint pk_ChatLieu primary key(id_chatLieu)
 )
 
 SET IDENTITY_INSERT [dbo].[chatLieu] ON 
-INSERT [dbo].[chatLieu] ([id_chatLieu], [tenChatLieu],trangThai) VALUES (1, N'v?i',0)
-INSERT [dbo].[chatLieu] ([id_chatLieu], [tenChatLieu],trangThai) VALUES (2, N'da b?',0)
+INSERT [dbo].[chatLieu] ([id_chatLieu], [tenChatLieu],trangThai) VALUES (1, N'vải',0)
+INSERT [dbo].[chatLieu] ([id_chatLieu], [tenChatLieu],trangThai) VALUES (2, N'da bò',0)
 INSERT [dbo].[chatLieu] ([id_chatLieu], [tenChatLieu],trangThai) VALUES (3, N'cacbon',0)
-INSERT [dbo].[chatLieu] ([id_chatLieu], [tenChatLieu],trangThai) VALUES (4, N'l?a',0)
+INSERT [dbo].[chatLieu] ([id_chatLieu], [tenChatLieu],trangThai) VALUES (4, N'lụa',0)
 INSERT [dbo].[chatLieu] ([id_chatLieu], [tenChatLieu],trangThai) VALUES (5, N'ninon',0)
 SET IDENTITY_INSERT [dbo].[chatLieu] OFF
 
@@ -44,14 +44,14 @@ create table NHACUNGCAP
 (
 	id_nhaCC int identity(1,1),
 	tennhaCC nvarchar(50),
-	trangThai int, --0 ho?t �?ng, 1 ng?ng 
+	trangThai int, --0 hoạt động, 1 ngừng 
 	constraint pk_NHACUNGCAP primary key(id_nhaCC)
 )
 SET IDENTITY_INSERT [dbo].NHACUNGCAP ON 
-INSERT [dbo].NHACUNGCAP (id_nhaCC, tennhaCC,trangThai) VALUES (1, N'm?',0)
+INSERT [dbo].NHACUNGCAP (id_nhaCC, tennhaCC,trangThai) VALUES (1, N'mỹ',0)
 INSERT [dbo].NHACUNGCAP (id_nhaCC, tennhaCC,trangThai) VALUES (2, N'anh',0)
-INSERT [dbo].NHACUNGCAP (id_nhaCC, tennhaCC,trangThai) VALUES (3, N'Ph�p',0)
-INSERT [dbo].NHACUNGCAP (id_nhaCC, tennhaCC,trangThai) VALUES (4, N'trung qu?c',0)
+INSERT [dbo].NHACUNGCAP (id_nhaCC, tennhaCC,trangThai) VALUES (3, N'Pháp',0)
+INSERT [dbo].NHACUNGCAP (id_nhaCC, tennhaCC,trangThai) VALUES (4, N'trung quốc',0)
 SET IDENTITY_INSERT [dbo].NHACUNGCAP OFF
 
 --TheLoai
@@ -61,14 +61,14 @@ create table THELOAI
 (
 	id_theLoai int identity(1,1),
 	tenTheLoai nvarchar(50),
-	trangThai int, --0 ho?t �?ng, 1 ng?ng 
+	trangThai int, --0 hoạt động, 1 ngừng 
 	constraint pk_THELOAI primary key(id_theLoai)
 )
 SET IDENTITY_INSERT [dbo].THELOAI ON 
-INSERT [dbo].THELOAI (id_theLoai, tenTheLoai,trangThai) VALUES (1, N'ch?y',0)
-INSERT [dbo].THELOAI (id_theLoai, tenTheLoai,trangThai) VALUES (2, N'ch?y',0)
-INSERT [dbo].THELOAI (id_theLoai, tenTheLoai,trangThai) VALUES (3, N'ch?y',0)
-INSERT [dbo].THELOAI (id_theLoai, tenTheLoai,trangThai) VALUES (4, N'ch?y',0)
+INSERT [dbo].THELOAI (id_theLoai, tenTheLoai,trangThai) VALUES (1, N'chạy',0)
+INSERT [dbo].THELOAI (id_theLoai, tenTheLoai,trangThai) VALUES (2, N'đá bóng',0)
+INSERT [dbo].THELOAI (id_theLoai, tenTheLoai,trangThai) VALUES (3, N'bóng rổ',0)
+INSERT [dbo].THELOAI (id_theLoai, tenTheLoai,trangThai) VALUES (4, N'nhảy cao',0)
 SET IDENTITY_INSERT [dbo].THELOAI OFF
 
 --SanPham
@@ -87,7 +87,7 @@ create table SANPHAM
 	size int,
 	soLuong int,
 	ghiChu nvarchar(250),
-	trangThai int, --0 ho?t �?ng, 1 ng?ng 
+	trangThai int, --0 hoạt động, 1 ngừng 
 	constraint pk_SanPham primary key(id_sanPham),
 	constraint fk_SanPham_TheLoai foreign key(id_theLoai) references theloai,
 	constraint fk_SanPham_chatLieu foreign key(id_chatLieu) references chatLieu,
@@ -96,10 +96,10 @@ create table SANPHAM
 )
 select *  from SANPHAM
 SET IDENTITY_INSERT [dbo].SANPHAM ON 
-INSERT [dbo].SANPHAM (id_sanPham,id_theLoai,id_chatLieu,id_thuongHieu,id_nhaCungCap, tenSanPham,mau,gia,size,soLuong,ghiChu,trangThai) VALUES (1,1,1,1,1, N'Gi�y 1',N'�?',1000,30,30,'',0)
-INSERT [dbo].SANPHAM (id_sanPham,id_theLoai,id_chatLieu,id_thuongHieu,id_nhaCungCap, tenSanPham,mau,gia,size,soLuong,ghiChu,trangThai) VALUES (2,2,2,2,2, N'Gi�y 2',N'V�ng',1000,40,40,'',0)
-INSERT [dbo].SANPHAM (id_sanPham,id_theLoai,id_chatLieu,id_thuongHieu,id_nhaCungCap, tenSanPham,mau,gia,size,soLuong,ghiChu,trangThai) VALUES (3,3,3,3,3, N'Gi�y 3',N'Tr?ng',1000,50,50,'',0)
-INSERT [dbo].SANPHAM (id_sanPham,id_theLoai,id_chatLieu,id_thuongHieu,id_nhaCungCap, tenSanPham,mau,gia,size,soLuong,ghiChu,trangThai) VALUES (4,4,4,4,4, N'Gi�y 4',N'�en',1000,60,60,'',0)
+INSERT [dbo].SANPHAM (id_sanPham,id_theLoai,id_chatLieu,id_thuongHieu,id_nhaCungCap, tenSanPham,mau,gia,size,soLuong,ghiChu,trangThai) VALUES (1,1,1,1,1, N'Giày 1',N'Đỏ',1000,30,30,'',0)
+INSERT [dbo].SANPHAM (id_sanPham,id_theLoai,id_chatLieu,id_thuongHieu,id_nhaCungCap, tenSanPham,mau,gia,size,soLuong,ghiChu,trangThai) VALUES (2,2,2,2,2, N'Giày 2',N'Vàng',1000,40,40,'',0)
+INSERT [dbo].SANPHAM (id_sanPham,id_theLoai,id_chatLieu,id_thuongHieu,id_nhaCungCap, tenSanPham,mau,gia,size,soLuong,ghiChu,trangThai) VALUES (3,3,3,3,3, N'Giày 3',N'Trắng',1000,50,50,'',0)
+INSERT [dbo].SANPHAM (id_sanPham,id_theLoai,id_chatLieu,id_thuongHieu,id_nhaCungCap, tenSanPham,mau,gia,size,soLuong,ghiChu,trangThai) VALUES (4,4,4,4,4, N'Giày 4',N'Đen',1000,60,60,'',0)
 SET IDENTITY_INSERT [dbo].SANPHAM OFF
 
 --taiKhoan
@@ -111,7 +111,7 @@ create table TAIKHOAN
 	tenTaiKhoan nvarchar(50),
 	matKhau nvarchar(50),
 	vaiTro bit,
-	trangThai int, --0 ho?t �?ng, 1 ng?ng 
+	trangThai int, --0 hoạt động, 1 ngừng 
 	constraint pk_TAIKHOAN primary key(id_taiKhoan)
 )
 SET IDENTITY_INSERT [dbo].TAIKHOAN ON 
@@ -128,17 +128,17 @@ create table NHANVIEN
 	id_nhanVien int identity(1,1),
 	id_taiKhoan int,
 	hoTen nvarchar(50),
-	gioiTinh bit, --0 NAM 1 N?
+	gioiTinh bit, --0 NAM 1 NỮ
 	soDt nvarchar(50),
 	diaChi nvarchar(50),
-	trangThai int, --0 ho?t �?ng, 1 ng?ng 
+	trangThai int, --0 hoạt động, 1 ngừng 
 	constraint pk_NHANVIEN primary key(id_taiKhoan),
 	constraint fk_NHANVIEN_TAIKHOAN foreign key(id_taiKhoan) references TAIKHOAN
 )
 SET IDENTITY_INSERT [dbo].NHANVIEN ON 
-INSERT [dbo].NHANVIEN (id_nhanVien, id_taiKhoan,hoTen,gioiTinh,soDt,diaChi,trangThai) VALUES (1, 1,N'Ho�n dz',0,'0915836583',N'H� N?I',0)
-INSERT [dbo].NHANVIEN (id_nhanVien, id_taiKhoan,hoTen,gioiTinh,soDt,diaChi,trangThai) VALUES (2, 2,N'Ho�n NH�N VI�N',0,'0915836583',N'H� N?I',0)
-INSERT [dbo].NHANVIEN (id_nhanVien, id_taiKhoan,hoTen,gioiTinh,soDt,diaChi,trangThai) VALUES (3, 3,N'Ho�n test',0,'0915836583',N'H� N?I',0)
+INSERT [dbo].NHANVIEN (id_nhanVien, id_taiKhoan,hoTen,gioiTinh,soDt,diaChi,trangThai) VALUES (1, 1,N'Hoàn dz',0,'0915836583',N'HÀ NỘI',0)
+INSERT [dbo].NHANVIEN (id_nhanVien, id_taiKhoan,hoTen,gioiTinh,soDt,diaChi,trangThai) VALUES (2, 2,N'Hoàn NHÂN VIÊN',0,'0915836583',N'HÀ NỘI',0)
+INSERT [dbo].NHANVIEN (id_nhanVien, id_taiKhoan,hoTen,gioiTinh,soDt,diaChi,trangThai) VALUES (3, 3,N'Hoàn test',0,'0915836583',N'HÀ NỘI',0)
 SET IDENTITY_INSERT [dbo].NHANVIEN OFF
 
 --khuyenMai
@@ -152,14 +152,14 @@ create table KHUYENMAI
 	giaTri nvarchar(20),
 	ngayBatDau datetime,
 	ngayKetThuc datetime,
-	trangThai int, --0 ho?t �?ng, 1 ng?ng 
+	trangThai int, --0 hoạt động, 1 ngừng 
 	constraint pk_KHUYENMAI primary key(id_khuyenMai)
 )
 SET IDENTITY_INSERT [dbo].KHUYENMAI ON 
-INSERT [dbo].KHUYENMAI (id_khuyenMai, tenKhuyenMai,loai,giaTri,ngayBatDau,ngayKetThuc,trangThai) VALUES (1, N'Khuy?n m?i poly','%',20,'2023-10-11','2023-12-09',1)
-INSERT [dbo].KHUYENMAI (id_khuyenMai, tenKhuyenMai,loai,giaTri,ngayBatDau,ngayKetThuc,trangThai) VALUES (2, N'Khuy?n m?i d? �n 1','%',50,'2023-10-13','2023-11-25',0)
-INSERT [dbo].KHUYENMAI (id_khuyenMai, tenKhuyenMai,loai,giaTri,ngayBatDau,ngayKetThuc,trangThai) VALUES (3, N'khuy?n m?i poly2','VN�',90000,'2023-10-10','2023-10-31',1)
-INSERT [dbo].KHUYENMAI (id_khuyenMai, tenKhuyenMai,loai,giaTri,ngayBatDau,ngayKetThuc,trangThai) VALUES (4, N'khuy?n m?i poly99','VN�',11111,'2023-10-10','2023-10-31',1)
+INSERT [dbo].KHUYENMAI (id_khuyenMai, tenKhuyenMai,loai,giaTri,ngayBatDau,ngayKetThuc,trangThai) VALUES (1, N'Khuyến mãi poly','%',20,'2023-10-11','2023-12-09',1)
+INSERT [dbo].KHUYENMAI (id_khuyenMai, tenKhuyenMai,loai,giaTri,ngayBatDau,ngayKetThuc,trangThai) VALUES (2, N'Khuyến mãi dự án 1','%',50,'2023-10-13','2023-11-25',0)
+INSERT [dbo].KHUYENMAI (id_khuyenMai, tenKhuyenMai,loai,giaTri,ngayBatDau,ngayKetThuc,trangThai) VALUES (3, N'khuyến mãi poly2','VNĐ',90000,'2023-10-10','2023-10-31',1)
+INSERT [dbo].KHUYENMAI (id_khuyenMai, tenKhuyenMai,loai,giaTri,ngayBatDau,ngayKetThuc,trangThai) VALUES (4, N'khuyến mãi poly99','VNĐ',11111,'2023-10-10','2023-10-31',1)
 SET IDENTITY_INSERT [dbo].KHUYENMAI OFF
 
 --khachHang
@@ -175,9 +175,9 @@ create table KHACHHANG
 	constraint pk_KHACHHANG primary key(id_khachHang)
 )
 SET IDENTITY_INSERT [dbo].KHACHHANG ON 
-INSERT [dbo].KHACHHANG (id_khachHang,hoTen,gioiTinh,diaChi,soDienThoai) VALUES (1,N'Nguy?n Th? A',1,N'H� N?i',1)
-INSERT [dbo].KHACHHANG (id_khachHang,hoTen,gioiTinh,diaChi,soDienThoai) VALUES (2,N'Nguy?n v�n B',0,N'H� N?i','012345')
-INSERT [dbo].KHACHHANG (id_khachHang,hoTen,gioiTinh,diaChi,soDienThoai) VALUES (3,N'Nguy?n Th? C',1,N'H� N?i','012345')
+INSERT [dbo].KHACHHANG (id_khachHang,hoTen,gioiTinh,diaChi,soDienThoai) VALUES (1,N'Nguyễn Thị A',1,N'Hà Nội',1)
+INSERT [dbo].KHACHHANG (id_khachHang,hoTen,gioiTinh,diaChi,soDienThoai) VALUES (2,N'Nguyễn văn B',0,N'Hà Nội','012345')
+INSERT [dbo].KHACHHANG (id_khachHang,hoTen,gioiTinh,diaChi,soDienThoai) VALUES (3,N'Nguyễn Thị C',1,N'Hà Nội','012345')
 
 --HoaDon
 if object_id('HOADON') is not null

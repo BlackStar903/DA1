@@ -1,7 +1,6 @@
 package sanPham;
 
 public class SanPhamCt {
-
     public int idSanPhamCt;
     public int iDSanPham;
     //

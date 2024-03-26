@@ -23,7 +23,7 @@ import java.sql.Statement;
 import java.util.Vector;
 import static sanPham.view_SanPham.tenSP;
 
-public class View_SanPhambg_seven extends javax.swing.JFrame {
+public class View_SanPhambg extends javax.swing.JFrame {
 
     private SanPhamCtService service = new SanPhamCtServiceImpl();
     private TheLoaiService tlService = new TheLoaiServiceImpl();
@@ -39,7 +39,7 @@ public class View_SanPhambg_seven extends javax.swing.JFrame {
     Statement st;
     ResultSet rs;
 
-    public View_SanPhambg_seven(String dataContructor) {
+    public View_SanPhambg(String dataContructor) {
         initComponents();
         setTitle("Sản phẩm chi tiết");
         setLocationRelativeTo(null);
@@ -53,10 +53,10 @@ public class View_SanPhambg_seven extends javax.swing.JFrame {
         this.loadData(1, dataContructor);
 
         // cbo màu
-        cboMau.removeAllItems();
-        for (sanPham.Mau mau : mauService.getMau()) {
-            cboMau.addItem(mau.getTenMau());
-        }
+//        cboMau.removeAllItems();
+//        for (sanPham.Mau mau : mauService.getMau()) {
+//            cboMau.addItem(mau.getTenMau());
+//        }
 
         // cbo Thể loại
         cboTL.removeAllItems();
@@ -90,9 +90,9 @@ public class View_SanPhambg_seven extends javax.swing.JFrame {
         cboMau1.addItem("Tất cả");
         // cbo màu
         //cboMau1.removeAllItems();
-        for (sanPham.Mau mau : mauService.getMau()) {
-            cboMau1.addItem(mau.getTenMau());
-        }
+//        for (sanPham.Mau mau : mauService.getMau()) {
+//            cboMau1.addItem(mau.getTenMau());
+//        }
         // cbo Thể loại
         for (sanPham.TheLoai tl : tlService.getTheLoai()) {
             cboTL1.addItem(tl.getTenTheLoai());
@@ -130,8 +130,8 @@ public class View_SanPhambg_seven extends javax.swing.JFrame {
 
     void showSP(int index) {
         index = tbl_SPCT.getSelectedRow();
-        txtSPCT.setText(tbl_SPCT.getValueAt(index, 0).toString());
-        txtIDSP.setText(tbl_SPCT.getValueAt(index, 1).toString());
+        txtIDSP.setText(tbl_SPCT.getValueAt(index, 0).toString());
+//        txtIDSP.setText(tbl_SPCT.getValueAt(index, 1).toString());
         txtTenSP.setText(tbl_SPCT.getValueAt(index, 2).toString());
         // Thể loại
         cboTL.setSelectedItem(tbl_SPCT.getValueAt(index, 3));
@@ -198,7 +198,7 @@ public class View_SanPhambg_seven extends javax.swing.JFrame {
 
         sanPham.SanPhamCt spct = new sanPham.SanPhamCt();
         //spct
-        spct.setiDSanPham(idSP);
+//        spct.setiDSanPham(idSP);
         spct.setIdTL(theLoai);
         spct.setIdCL(chatLieu);
         spct.setIdTH(thuongHieu);
@@ -218,7 +218,7 @@ public class View_SanPhambg_seven extends javax.swing.JFrame {
     }
 
     void delete() {
-        int idSPCT = Integer.parseInt(txtSPCT.getText());
+        int idSPCT = Integer.parseInt(txtIDSP.getText());
         sanPham.SanPhamCt sp = new sanPham.SanPhamCt();
         sp.setIdSanPhamCt(idSPCT);
         boolean deleteResult = service.delete(sp);
@@ -232,8 +232,8 @@ public class View_SanPhambg_seven extends javax.swing.JFrame {
 
 
     void clearForm() {
-        txtSPCT.setText("");
         txtIDSP.setText("");
+//        txtIDSP.setText("");
         txtTenSP.setText("");
         cboTL.setSelectedIndex(0);
         cboChatLieu.setSelectedIndex(0);
@@ -247,7 +247,7 @@ public class View_SanPhambg_seven extends javax.swing.JFrame {
     }
 
     void timKiemTheoID() {
-        String idSP = txtIDSP.getText();
+//        String idSP = txtIDSP.getText();
         mol = (DefaultTableModel) tbl_SPCT.getModel();
         mol.setRowCount(0);
 
@@ -261,63 +261,54 @@ public class View_SanPhambg_seven extends javax.swing.JFrame {
         try {
             if (strIdSp.equals("")) {
                 String query = "SELECT top 5\n"
-                        + "	sanPhamCt.id_sanPhamCt,\n"
                         + "    sanPham.id_sanPham,\n"
                         + "    sanPham.tenSanPham,  \n"
                         + "    tl.tenTheLoai,\n"
                         + "    cl.tenChatLieu,\n"
                         + "    th.tenThuongHieu,\n"
-                        + "    ncc.tenNhaCungCap,\n"
-                        + "    mau.tenMau,\n"
-                        + "    sanPhamCt.gia,\n"
-                        + "    sanPhamCt.size,\n"
-                        + "    sanPhamCt.soLuong,\n"
-                        + "    sanPhamCt.ghiChu\n"
+                        + "    ncc.tennhaCC,\n"
+                        + "    sanPham.mau,\n"
+                        + "    sanPham.gia,\n"
+                        + "    sanPham.size,\n"
+                        + "    sanPham.soLuong,\n"
+                        + "    sanPham.ghiChu\n"
                         + "FROM\n"
                         + "    sanPham sanPham\n"
                         + "JOIN\n"
-                        + "    sanPhamCt sanPhamCt ON sanPham.id_sanPham = sanPhamCt.id_sanPham\n"
+                        + "    theloai tl ON sanPham.id_theLoai = tl.id_theLoai\n"
                         + "JOIN\n"
-                        + "    theloai tl ON sanPhamCt.id_theLoai = tl.id_theLoai\n"
+                        + "      chatLieu cl ON sanPham.id_chatLieu = cl.id_chatLieu\n"
                         + "JOIN\n"
-                        + "    chatLieu cl ON sanPhamCt.id_chatLieu = cl.id_chatLieu\n"
+                        + "      thuongHieu th ON sanPham.id_thuongHieu = th.id_thuongHieu\n"
                         + "JOIN\n"
-                        + "    thuongHieu th ON sanPhamCt.id_thuongHieu = th.id_thuongHieu\n"
-                        + "JOIN\n"
-                        + "    nhaCungCap ncc ON sanPhamCt.id_nhaCungCap = ncc.id_nhaCungCap\n"
-                        + "JOIN\n"
-                        + "    mau mau ON sanPhamCt.id_mau = mau.id_mau where [id_sanPhamCt] not in (select top " + (trang * 5 - 5) + " [id_sanPhamCt] from sanPhamCt )";
+                        + "     nhaCungCap ncc ON sanPham.id_nhaCungCap = ncc.id_nhaCC\n"
+                        + "  where [id_sanPham] not in (select top " + (trang * 5 - 5) + " [id_sanPham] from sanPham )";
                 Statement stm = conn.createStatement();
                 rs = stm.executeQuery(query);
             } else {
                 String query = "SELECT top 5\n"
-                        + "	sanPhamCt.id_sanPhamCt,\n"
                         + "    sanPham.id_sanPham,\n"
                         + "    sanPham.tenSanPham,  \n"
                         + "    tl.tenTheLoai,\n"
                         + "    cl.tenChatLieu,\n"
                         + "    th.tenThuongHieu,\n"
-                        + "    ncc.tenNhaCungCap,\n"
-                        + "    mau.tenMau,\n"
-                        + "    sanPhamCt.gia,\n"
-                        + "    sanPhamCt.size,\n"
-                        + "    sanPhamCt.soLuong,\n"
-                        + "    sanPhamCt.ghiChu\n"
+                        + "    ncc.tennhaCC,\n"
+                        + "    sanPham.mau,\n"
+                        + "    sanPham.gia,\n"
+                        + "    sanPham.size,\n"
+                        + "    sanPham.soLuong,\n"
+                        + "    sanPham.ghiChu\n"
                         + "FROM\n"
                         + "    sanPham sanPham\n"
                         + "JOIN\n"
-                        + "    sanPhamCt sanPhamCt ON sanPham.id_sanPham = sanPhamCt.id_sanPham\n"
+                        + "    theloai tl ON sanPham.id_theLoai = tl.id_theLoai\n"
                         + "JOIN\n"
-                        + "    theloai tl ON sanPhamCt.id_theLoai = tl.id_theLoai\n"
+                        + "      chatLieu cl ON sanPham.id_chatLieu = cl.id_chatLieu\n"
                         + "JOIN\n"
-                        + "    chatLieu cl ON sanPhamCt.id_chatLieu = cl.id_chatLieu\n"
+                        + "      thuongHieu th ON sanPham.id_thuongHieu = th.id_thuongHieu\n"
                         + "JOIN\n"
-                        + "    thuongHieu th ON sanPhamCt.id_thuongHieu = th.id_thuongHieu\n"
-                        + "JOIN\n"
-                        + "    nhaCungCap ncc ON sanPhamCt.id_nhaCungCap = ncc.id_nhaCungCap\n"
-                        + "JOIN\n"
-                        + "    mau mau ON sanPhamCt.id_mau = mau.id_mau where [id_sanPhamCt] not in (select top " + (trang * 5 - 5) + " [id_sanPhamCt] from sanPhamCt )"
-                        + "and sanPhamCt.id_sanPham = ?";
+                        + "     nhaCungCap ncc ON sanPham.id_nhaCungCap = ncc.id_nhaCC\n"
+                        + "   where [id_sanPham] not in (select top " + (trang * 5 - 5) + " [id_sanPham] from sanPham )";
                 PreparedStatement prm = conn.prepareStatement(query);
                 prm.setString(1, strIdSp);
                 System.out.println("check:" + strIdSp);
@@ -326,19 +317,17 @@ public class View_SanPhambg_seven extends javax.swing.JFrame {
 
             while (rs.next()) {
                 Vector v = new Vector();
-                int idSPCT = rs.getInt(1);
-                int idSP = rs.getInt(2);
-                String tenSP = rs.getString(3);
-                String theLoai = rs.getString(4);
-                String chatLieu = rs.getString(5);
-                String thuongHieu = rs.getString(6);
-                String nhaCungCap = rs.getString(7);
-                String mau = rs.getString(8);
-                double gia = rs.getDouble(9);
-                int size = rs.getInt(10);
-                int soLuong = rs.getInt(11);
-                String ghiChu = rs.getString(12);
-                v.add(idSPCT);
+                int idSP = rs.getInt("id_sanPham");
+                String tenSP = rs.getString("tenSanPham");
+                String theLoai = rs.getString("tenTheLoai");
+                String chatLieu = rs.getString("tenChatLieu");
+                String thuongHieu = rs.getString("tenThuongHieu");
+                String nhaCungCap = rs.getString("tennhaCC");
+                String mau = rs.getString("mau");
+                double gia = rs.getDouble("gia");
+                int size = rs.getInt("size");
+                int soLuong = rs.getInt("soLuong");
+                String ghiChu = rs.getString("ghiChu");
                 v.add(idSP);
                 v.add(tenSP);
                 v.add(theLoai);
@@ -366,7 +355,6 @@ public class View_SanPhambg_seven extends javax.swing.JFrame {
         txt_thongTinNv = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        txtIDSP = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtTenSP = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -392,7 +380,7 @@ public class View_SanPhambg_seven extends javax.swing.JFrame {
         cboThuongHieu = new javax.swing.JComboBox<>();
         cboNCC = new javax.swing.JComboBox<>();
         jLabel15 = new javax.swing.JLabel();
-        txtSPCT = new javax.swing.JTextField();
+        txtIDSP = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         btnXoa = new javax.swing.JButton();
         btnTheLoai = new javax.swing.JButton();
@@ -461,8 +449,6 @@ public class View_SanPhambg_seven extends javax.swing.JFrame {
         jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         jPanel3.setForeground(new java.awt.Color(255, 153, 153));
 
-        jLabel1.setText("Id sản phẩm");
-
         jLabel2.setText("Tên sản phẩm:");
 
         jLabel5.setText("Thể loại:");
@@ -518,9 +504,9 @@ public class View_SanPhambg_seven extends javax.swing.JFrame {
 
         cboNCC.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jLabel15.setText("Id sản phẩm ct");
+        jLabel15.setText("Id sản phẩm");
 
-        txtSPCT.setEditable(false);
+        txtIDSP.setEditable(false);
 
         jLabel16.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(255, 0, 0));
@@ -606,7 +592,6 @@ public class View_SanPhambg_seven extends javax.swing.JFrame {
                                     .addGap(18, 18, 18)
                                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(txtIDSP, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
-                                        .addComponent(txtSPCT)
                                         .addComponent(txtTenSP)
                                         .addComponent(cboTL, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(cboChatLieu, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -634,11 +619,9 @@ public class View_SanPhambg_seven extends javax.swing.JFrame {
                 .addGap(41, 41, 41)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
-                    .addComponent(txtSPCT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
                     .addComponent(txtIDSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -689,7 +672,7 @@ public class View_SanPhambg_seven extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel13)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(btnThem)
@@ -1230,21 +1213,23 @@ public class View_SanPhambg_seven extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(View_SanPhambg_seven.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(View_SanPhambg.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(View_SanPhambg_seven.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(View_SanPhambg.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(View_SanPhambg_seven.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(View_SanPhambg.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(View_SanPhambg_seven.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(View_SanPhambg.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new View_SanPhambg_seven("").setVisible(true);
+                new View_SanPhambg("").setVisible(true);
             }
         });
     }
@@ -1299,7 +1284,7 @@ public class View_SanPhambg_seven extends javax.swing.JFrame {
     public void countDb() {
         Connection conn = DBConnect.getConnection();
         try {
-            String query = "Select count(id_sanPhamCt) from sanPhamCt";
+            String query = "Select count(id_sanPham) from sanPham";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
@@ -1320,63 +1305,55 @@ public class View_SanPhambg_seven extends javax.swing.JFrame {
         try {
             if (strTheLoai.equals("Tất cả")) {
                 String sql = "SELECT top 5\n"
-                        + "	sanPhamCt.id_sanPhamCt,\n"
                         + "    sanPham.id_sanPham,\n"
                         + "    sanPham.tenSanPham,  \n"
                         + "    tl.tenTheLoai,\n"
                         + "    cl.tenChatLieu,\n"
                         + "    th.tenThuongHieu,\n"
-                        + "    ncc.tenNhaCungCap,\n"
-                        + "    mau.tenMau,\n"
-                        + "    sanPhamCt.gia,\n"
-                        + "    sanPhamCt.size,\n"
-                        + "    sanPhamCt.soLuong,\n"
-                        + "    sanPhamCt.ghiChu\n"
+                        + "    ncc.tennhaCC,\n"
+                        + "    sanPham.mau,\n"
+                        + "    sanPham.gia,\n"
+                        + "    sanPham.size,\n"
+                        + "    sanPham.soLuong,\n"
+                        + "    sanPham.ghiChu\n"
                         + "FROM\n"
                         + "    sanPham sanPham\n"
                         + "JOIN\n"
-                        + "    sanPhamCt sanPhamCt ON sanPham.id_sanPham = sanPhamCt.id_sanPham\n"
+                        + "    theloai tl ON sanPham.id_theLoai = tl.id_theLoai\n"
                         + "JOIN\n"
-                        + "    theloai tl ON sanPhamCt.id_theLoai = tl.id_theLoai\n"
+                        + "      chatLieu cl ON sanPham.id_chatLieu = cl.id_chatLieu\n"
                         + "JOIN\n"
-                        + "    chatLieu cl ON sanPhamCt.id_chatLieu = cl.id_chatLieu\n"
+                        + "      thuongHieu th ON sanPham.id_thuongHieu = th.id_thuongHieu\n"
                         + "JOIN\n"
-                        + "    thuongHieu th ON sanPhamCt.id_thuongHieu = th.id_thuongHieu\n"
-                        + "JOIN\n"
-                        + "    nhaCungCap ncc ON sanPhamCt.id_nhaCungCap = ncc.id_nhaCungCap\n"
-                        + "JOIN\n"
-                        + "    mau mau ON sanPhamCt.id_mau = mau.id_mau where [id_sanPhamCt]not in (select top   " + (sotrang * 5 - 5) + " [id_sanPhamCt] from sanPhamCt)";
+                        + "     nhaCungCap ncc ON sanPham.id_nhaCungCap = ncc.id_nhaCC\n"
+                        + "   where [id_sanPham] not in (select top " + (trang * 5 - 5) + " [id_sanPham] from sanPham )";
                 Connection conn = DBConnect.getConnection();
                 Statement stm = conn.createStatement();
                 rs = stm.executeQuery(sql);
             } else {
                 String sql = "SELECT top 5\n"
-                        + "	sanPhamCt.id_sanPhamCt,\n"
                         + "    sanPham.id_sanPham,\n"
                         + "    sanPham.tenSanPham,  \n"
                         + "    tl.tenTheLoai,\n"
                         + "    cl.tenChatLieu,\n"
                         + "    th.tenThuongHieu,\n"
-                        + "    ncc.tenNhaCungCap,\n"
-                        + "    mau.tenMau,\n"
-                        + "    sanPhamCt.gia,\n"
-                        + "    sanPhamCt.size,\n"
-                        + "    sanPhamCt.soLuong,\n"
-                        + "    sanPhamCt.ghiChu\n"
+                        + "    ncc.tennhaCC,\n"
+                        + "    sanPham.mau,\n"
+                        + "    sanPham.gia,\n"
+                        + "    sanPham.size,\n"
+                        + "    sanPham.soLuong,\n"
+                        + "    sanPham.ghiChu\n"
                         + "FROM\n"
                         + "    sanPham sanPham\n"
                         + "JOIN\n"
-                        + "    sanPhamCt sanPhamCt ON sanPham.id_sanPham = sanPhamCt.id_sanPham\n"
+                        + "    theloai tl ON sanPham.id_theLoai = tl.id_theLoai\n"
                         + "JOIN\n"
-                        + "    theloai tl ON sanPhamCt.id_theLoai = tl.id_theLoai\n"
+                        + "      chatLieu cl ON sanPham.id_chatLieu = cl.id_chatLieu\n"
                         + "JOIN\n"
-                        + "    chatLieu cl ON sanPhamCt.id_chatLieu = cl.id_chatLieu\n"
+                        + "      thuongHieu th ON sanPham.id_thuongHieu = th.id_thuongHieu\n"
                         + "JOIN\n"
-                        + "    thuongHieu th ON sanPhamCt.id_thuongHieu = th.id_thuongHieu\n"
-                        + "JOIN\n"
-                        + "    nhaCungCap ncc ON sanPhamCt.id_nhaCungCap = ncc.id_nhaCungCap\n"
-                        + "JOIN\n"
-                        + "    mau mau ON sanPhamCt.id_mau = mau.id_mau where [id_sanPhamCt]not in (select top   " + (sotrang * 5 - 5) + " [id_sanPhamCt] from sanPhamCt)"
+                        + "     nhaCungCap ncc ON sanPham.id_nhaCungCap = ncc.id_nhaCC\n"
+                        + "   where [id_sanPham] not in (select top " + (trang * 5 - 5) + " [id_sanPham] from sanPham )"
                         + "and tl.id_theLoai = ? ";
                 Connection conn = DBConnect.getConnection();
                 PreparedStatement prm = conn.prepareStatement(sql);
@@ -1385,19 +1362,17 @@ public class View_SanPhambg_seven extends javax.swing.JFrame {
             }
             while (rs.next()) {
                 Vector v = new Vector();
-                int idSPCT = rs.getInt(1);
-                int idSP = rs.getInt(2);
-                String tenSP = rs.getString(3);
-                String theLoai = rs.getString(4);
-                String chatLieu = rs.getString(5);
-                String thuongHieu = rs.getString(6);
-                String nhaCungCap = rs.getString(7);
-                String mau = rs.getString(8);
-                double gia = rs.getDouble(9);
-                int size = rs.getInt(10);
-                int soLuong = rs.getInt(11);
-                String ghiChu = rs.getString(12);
-                v.add(idSPCT);
+                int idSP = rs.getInt("id_sanPham");
+                String tenSP = rs.getString("tenSanPham");
+                String theLoai = rs.getString("tenTheLoai");
+                String chatLieu = rs.getString("tenChatLieu");
+                String thuongHieu = rs.getString("tenThuongHieu");
+                String nhaCungCap = rs.getString("tennhaCC");
+                String mau = rs.getString("mau");
+                double gia = rs.getDouble("gia");
+                int size = rs.getInt("size");
+                int soLuong = rs.getInt("soLuong");
+                String ghiChu = rs.getString("ghiChu");
                 v.add(idSP);
                 v.add(tenSP);
                 v.add(theLoai);
@@ -1410,7 +1385,6 @@ public class View_SanPhambg_seven extends javax.swing.JFrame {
                 v.add(soLuong);
                 v.add(ghiChu);
                 mol.addRow(v);
-
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -1428,63 +1402,55 @@ public class View_SanPhambg_seven extends javax.swing.JFrame {
         try {
             if (strChatLieu.equals("Tất cả")) {
                 String sql = "SELECT top 5\n"
-                        + "	sanPhamCt.id_sanPhamCt,\n"
                         + "    sanPham.id_sanPham,\n"
                         + "    sanPham.tenSanPham,  \n"
                         + "    tl.tenTheLoai,\n"
                         + "    cl.tenChatLieu,\n"
                         + "    th.tenThuongHieu,\n"
-                        + "    ncc.tenNhaCungCap,\n"
-                        + "    mau.tenMau,\n"
-                        + "    sanPhamCt.gia,\n"
-                        + "    sanPhamCt.size,\n"
-                        + "    sanPhamCt.soLuong,\n"
-                        + "    sanPhamCt.ghiChu\n"
+                        + "    ncc.tennhaCC,\n"
+                        + "    sanPham.mau,\n"
+                        + "    sanPham.gia,\n"
+                        + "    sanPham.size,\n"
+                        + "    sanPham.soLuong,\n"
+                        + "    sanPham.ghiChu\n"
                         + "FROM\n"
                         + "    sanPham sanPham\n"
                         + "JOIN\n"
-                        + "    sanPhamCt sanPhamCt ON sanPham.id_sanPham = sanPhamCt.id_sanPham\n"
+                        + "    theloai tl ON sanPham.id_theLoai = tl.id_theLoai\n"
                         + "JOIN\n"
-                        + "    theloai tl ON sanPhamCt.id_theLoai = tl.id_theLoai\n"
+                        + "      chatLieu cl ON sanPham.id_chatLieu = cl.id_chatLieu\n"
                         + "JOIN\n"
-                        + "    chatLieu cl ON sanPhamCt.id_chatLieu = cl.id_chatLieu\n"
+                        + "      thuongHieu th ON sanPham.id_thuongHieu = th.id_thuongHieu\n"
                         + "JOIN\n"
-                        + "    thuongHieu th ON sanPhamCt.id_thuongHieu = th.id_thuongHieu\n"
-                        + "JOIN\n"
-                        + "    nhaCungCap ncc ON sanPhamCt.id_nhaCungCap = ncc.id_nhaCungCap\n"
-                        + "JOIN\n"
-                        + "    mau mau ON sanPhamCt.id_mau = mau.id_mau where [id_sanPhamCt]not in (select top   " + (sotrang * 5 - 5) + " [id_sanPhamCt] from sanPhamCt)";
+                        + "     nhaCungCap ncc ON sanPham.id_nhaCungCap = ncc.id_nhaCC\n"
+                        + "   where [id_sanPham] not in (select top " + (trang * 5 - 5) + " [id_sanPham] from sanPham )";
                 Connection conn = DBConnect.getConnection();
                 Statement stm = conn.createStatement();
                 rs = stm.executeQuery(sql);
             } else {
                 String sql = "SELECT top 5\n"
-                        + "	sanPhamCt.id_sanPhamCt,\n"
                         + "    sanPham.id_sanPham,\n"
                         + "    sanPham.tenSanPham,  \n"
                         + "    tl.tenTheLoai,\n"
                         + "    cl.tenChatLieu,\n"
                         + "    th.tenThuongHieu,\n"
-                        + "    ncc.tenNhaCungCap,\n"
-                        + "    mau.tenMau,\n"
-                        + "    sanPhamCt.gia,\n"
-                        + "    sanPhamCt.size,\n"
-                        + "    sanPhamCt.soLuong,\n"
-                        + "    sanPhamCt.ghiChu\n"
+                        + "    ncc.tennhaCC,\n"
+                        + "    sanPham.mau,\n"
+                        + "    sanPham.gia,\n"
+                        + "    sanPham.size,\n"
+                        + "    sanPham.soLuong,\n"
+                        + "    sanPham.ghiChu\n"
                         + "FROM\n"
                         + "    sanPham sanPham\n"
                         + "JOIN\n"
-                        + "    sanPhamCt sanPhamCt ON sanPham.id_sanPham = sanPhamCt.id_sanPham\n"
+                        + "    theloai tl ON sanPham.id_theLoai = tl.id_theLoai\n"
                         + "JOIN\n"
-                        + "    theloai tl ON sanPhamCt.id_theLoai = tl.id_theLoai\n"
+                        + "      chatLieu cl ON sanPham.id_chatLieu = cl.id_chatLieu\n"
                         + "JOIN\n"
-                        + "    chatLieu cl ON sanPhamCt.id_chatLieu = cl.id_chatLieu\n"
+                        + "      thuongHieu th ON sanPham.id_thuongHieu = th.id_thuongHieu\n"
                         + "JOIN\n"
-                        + "    thuongHieu th ON sanPhamCt.id_thuongHieu = th.id_thuongHieu\n"
-                        + "JOIN\n"
-                        + "    nhaCungCap ncc ON sanPhamCt.id_nhaCungCap = ncc.id_nhaCungCap\n"
-                        + "JOIN\n"
-                        + "    mau mau ON sanPhamCt.id_mau = mau.id_mau where [id_sanPhamCt]not in (select top   " + (sotrang * 5 - 5) + " [id_sanPhamCt] from sanPhamCt)"
+                        + "     nhaCungCap ncc ON sanPham.id_nhaCungCap = ncc.id_nhaCC\n"
+                        + "   where [id_sanPham] not in (select top " + (trang * 5 - 5) + " [id_sanPham] from sanPham )"
                         + "and cl.id_chatLieu = ? ";
                 Connection conn = DBConnect.getConnection();
                 PreparedStatement prm = conn.prepareStatement(sql);
@@ -1493,19 +1459,17 @@ public class View_SanPhambg_seven extends javax.swing.JFrame {
             }
             while (rs.next()) {
                 Vector v = new Vector();
-                int idSPCT = rs.getInt(1);
-                int idSP = rs.getInt(2);
-                String tenSP = rs.getString(3);
-                String theLoai = rs.getString(4);
-                String chatLieu = rs.getString(5);
-                String thuongHieu = rs.getString(6);
-                String nhaCungCap = rs.getString(7);
-                String mau = rs.getString(8);
-                double gia = rs.getDouble(9);
-                int size = rs.getInt(10);
-                int soLuong = rs.getInt(11);
-                String ghiChu = rs.getString(12);
-                v.add(idSPCT);
+                int idSP = rs.getInt("id_sanPham");
+                String tenSP = rs.getString("tenSanPham");
+                String theLoai = rs.getString("tenTheLoai");
+                String chatLieu = rs.getString("tenChatLieu");
+                String thuongHieu = rs.getString("tenThuongHieu");
+                String nhaCungCap = rs.getString("tennhaCC");
+                String mau = rs.getString("mau");
+                double gia = rs.getDouble("gia");
+                int size = rs.getInt("size");
+                int soLuong = rs.getInt("soLuong");
+                String ghiChu = rs.getString("ghiChu");
                 v.add(idSP);
                 v.add(tenSP);
                 v.add(theLoai);
@@ -1518,14 +1482,13 @@ public class View_SanPhambg_seven extends javax.swing.JFrame {
                 v.add(soLuong);
                 v.add(ghiChu);
                 mol.addRow(v);
-
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+  
     //cbo thương hiệu
-
     void loadCboThuongHieu(long sotrang, String strThuongHieu) {
         DefaultTableModel mol = new DefaultTableModel();
         mol = (DefaultTableModel) tbl_SPCT.getModel();
@@ -1535,63 +1498,55 @@ public class View_SanPhambg_seven extends javax.swing.JFrame {
         try {
             if (strThuongHieu.equals("Tất cả")) {
                 String sql = "SELECT top 5\n"
-                        + "	sanPhamCt.id_sanPhamCt,\n"
                         + "    sanPham.id_sanPham,\n"
                         + "    sanPham.tenSanPham,  \n"
                         + "    tl.tenTheLoai,\n"
                         + "    cl.tenChatLieu,\n"
                         + "    th.tenThuongHieu,\n"
-                        + "    ncc.tenNhaCungCap,\n"
-                        + "    mau.tenMau,\n"
-                        + "    sanPhamCt.gia,\n"
-                        + "    sanPhamCt.size,\n"
-                        + "    sanPhamCt.soLuong,\n"
-                        + "    sanPhamCt.ghiChu\n"
+                        + "    ncc.tennhaCC,\n"
+                        + "    sanPham.mau,\n"
+                        + "    sanPham.gia,\n"
+                        + "    sanPham.size,\n"
+                        + "    sanPham.soLuong,\n"
+                        + "    sanPham.ghiChu\n"
                         + "FROM\n"
                         + "    sanPham sanPham\n"
                         + "JOIN\n"
-                        + "    sanPhamCt sanPhamCt ON sanPham.id_sanPham = sanPhamCt.id_sanPham\n"
+                        + "    theloai tl ON sanPham.id_theLoai = tl.id_theLoai\n"
                         + "JOIN\n"
-                        + "    theloai tl ON sanPhamCt.id_theLoai = tl.id_theLoai\n"
+                        + "      chatLieu cl ON sanPham.id_chatLieu = cl.id_chatLieu\n"
                         + "JOIN\n"
-                        + "    chatLieu cl ON sanPhamCt.id_chatLieu = cl.id_chatLieu\n"
+                        + "      thuongHieu th ON sanPham.id_thuongHieu = th.id_thuongHieu\n"
                         + "JOIN\n"
-                        + "    thuongHieu th ON sanPhamCt.id_thuongHieu = th.id_thuongHieu\n"
-                        + "JOIN\n"
-                        + "    nhaCungCap ncc ON sanPhamCt.id_nhaCungCap = ncc.id_nhaCungCap\n"
-                        + "JOIN\n"
-                        + "    mau mau ON sanPhamCt.id_mau = mau.id_mau where [id_sanPhamCt]not in (select top   " + (sotrang * 5 - 5) + " [id_sanPhamCt] from sanPhamCt)";
+                        + "     nhaCungCap ncc ON sanPham.id_nhaCungCap = ncc.id_nhaCC\n"
+                        + "   where [id_sanPham] not in (select top " + (trang * 5 - 5) + " [id_sanPham] from sanPham )";
                 Connection conn = DBConnect.getConnection();
                 Statement stm = conn.createStatement();
                 rs = stm.executeQuery(sql);
             } else {
                 String sql = "SELECT top 5\n"
-                        + "	sanPhamCt.id_sanPhamCt,\n"
                         + "    sanPham.id_sanPham,\n"
                         + "    sanPham.tenSanPham,  \n"
                         + "    tl.tenTheLoai,\n"
                         + "    cl.tenChatLieu,\n"
                         + "    th.tenThuongHieu,\n"
-                        + "    ncc.tenNhaCungCap,\n"
-                        + "    mau.tenMau,\n"
-                        + "    sanPhamCt.gia,\n"
-                        + "    sanPhamCt.size,\n"
-                        + "    sanPhamCt.soLuong,\n"
-                        + "    sanPhamCt.ghiChu\n"
+                        + "    ncc.tennhaCC,\n"
+                        + "    sanPham.mau,\n"
+                        + "    sanPham.gia,\n"
+                        + "    sanPham.size,\n"
+                        + "    sanPham.soLuong,\n"
+                        + "    sanPham.ghiChu\n"
                         + "FROM\n"
                         + "    sanPham sanPham\n"
                         + "JOIN\n"
-                        + "    sanPhamCt sanPhamCt ON sanPham.id_sanPham = sanPhamCt.id_sanPham\n"
+                        + "    theloai tl ON sanPham.id_theLoai = tl.id_theLoai\n"
                         + "JOIN\n"
-                        + "    theloai tl ON sanPhamCt.id_theLoai = tl.id_theLoai\n"
+                        + "      chatLieu cl ON sanPham.id_chatLieu = cl.id_chatLieu\n"
                         + "JOIN\n"
-                        + "    chatLieu cl ON sanPhamCt.id_chatLieu = cl.id_chatLieu\n"
+                        + "      thuongHieu th ON sanPham.id_thuongHieu = th.id_thuongHieu\n"
                         + "JOIN\n"
-                        + "    thuongHieu th ON sanPhamCt.id_thuongHieu = th.id_thuongHieu\n"
-                        + "JOIN\n"
-                        + "    nhaCungCap ncc ON sanPhamCt.id_nhaCungCap = ncc.id_nhaCungCap\n"
-                        + "JOIN\n"
-                        + "    mau mau ON sanPhamCt.id_mau = mau.id_mau where [id_sanPhamCt]not in (select top   " + (sotrang * 5 - 5) + " [id_sanPhamCt] from sanPhamCt)"
+                        + "     nhaCungCap ncc ON sanPham.id_nhaCungCap = ncc.id_nhaCC\n"
+                        + "   where [id_sanPham] not in (select top " + (trang * 5 - 5) + " [id_sanPham] from sanPham )"
                         + "and th.id_thuongHieu = ? ";
                 Connection conn = DBConnect.getConnection();
                 PreparedStatement prm = conn.prepareStatement(sql);
@@ -1599,20 +1554,18 @@ public class View_SanPhambg_seven extends javax.swing.JFrame {
                 rs = prm.executeQuery();
             }
             while (rs.next()) {
-                Vector v = new Vector();
-                int idSPCT = rs.getInt(1);
-                int idSP = rs.getInt(2);
-                String tenSP = rs.getString(3);
-                String theLoai = rs.getString(4);
-                String chatLieu = rs.getString(5);
-                String thuongHieu = rs.getString(6);
-                String nhaCungCap = rs.getString(7);
-                String mau = rs.getString(8);
-                double gia = rs.getDouble(9);
-                int size = rs.getInt(10);
-                int soLuong = rs.getInt(11);
-                String ghiChu = rs.getString(12);
-                v.add(idSPCT);
+               Vector v = new Vector();
+                int idSP = rs.getInt("id_sanPham");
+                String tenSP = rs.getString("tenSanPham");
+                String theLoai = rs.getString("tenTheLoai");
+                String chatLieu = rs.getString("tenChatLieu");
+                String thuongHieu = rs.getString("tenThuongHieu");
+                String nhaCungCap = rs.getString("tennhaCC");
+                String mau = rs.getString("mau");
+                double gia = rs.getDouble("gia");
+                int size = rs.getInt("size");
+                int soLuong = rs.getInt("soLuong");
+                String ghiChu = rs.getString("ghiChu");
                 v.add(idSP);
                 v.add(tenSP);
                 v.add(theLoai);
@@ -1625,7 +1578,6 @@ public class View_SanPhambg_seven extends javax.swing.JFrame {
                 v.add(soLuong);
                 v.add(ghiChu);
                 mol.addRow(v);
-
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -1642,63 +1594,55 @@ public class View_SanPhambg_seven extends javax.swing.JFrame {
         try {
             if (StrNhaCungCap.equals("Tất cả")) {
                 String sql = "SELECT top 5\n"
-                        + "	sanPhamCt.id_sanPhamCt,\n"
                         + "    sanPham.id_sanPham,\n"
                         + "    sanPham.tenSanPham,  \n"
                         + "    tl.tenTheLoai,\n"
                         + "    cl.tenChatLieu,\n"
                         + "    th.tenThuongHieu,\n"
-                        + "    ncc.tenNhaCungCap,\n"
-                        + "    mau.tenMau,\n"
-                        + "    sanPhamCt.gia,\n"
-                        + "    sanPhamCt.size,\n"
-                        + "    sanPhamCt.soLuong,\n"
-                        + "    sanPhamCt.ghiChu\n"
+                        + "    ncc.tennhaCC,\n"
+                        + "    sanPham.mau,\n"
+                        + "    sanPham.gia,\n"
+                        + "    sanPham.size,\n"
+                        + "    sanPham.soLuong,\n"
+                        + "    sanPham.ghiChu\n"
                         + "FROM\n"
                         + "    sanPham sanPham\n"
                         + "JOIN\n"
-                        + "    sanPhamCt sanPhamCt ON sanPham.id_sanPham = sanPhamCt.id_sanPham\n"
+                        + "    theloai tl ON sanPham.id_theLoai = tl.id_theLoai\n"
                         + "JOIN\n"
-                        + "    theloai tl ON sanPhamCt.id_theLoai = tl.id_theLoai\n"
+                        + "      chatLieu cl ON sanPham.id_chatLieu = cl.id_chatLieu\n"
                         + "JOIN\n"
-                        + "    chatLieu cl ON sanPhamCt.id_chatLieu = cl.id_chatLieu\n"
+                        + "      thuongHieu th ON sanPham.id_thuongHieu = th.id_thuongHieu\n"
                         + "JOIN\n"
-                        + "    thuongHieu th ON sanPhamCt.id_thuongHieu = th.id_thuongHieu\n"
-                        + "JOIN\n"
-                        + "    nhaCungCap ncc ON sanPhamCt.id_nhaCungCap = ncc.id_nhaCungCap\n"
-                        + "JOIN\n"
-                        + "    mau mau ON sanPhamCt.id_mau = mau.id_mau where [id_sanPhamCt]not in (select top   " + (sotrang * 5 - 5) + " [id_sanPhamCt] from sanPhamCt)";
+                        + "     nhaCungCap ncc ON sanPham.id_nhaCungCap = ncc.id_nhaCC\n"
+                        + "   where [id_sanPham] not in (select top " + (trang * 5 - 5) + " [id_sanPham] from sanPham )";
                 Connection conn = DBConnect.getConnection();
                 Statement stm = conn.createStatement();
                 rs = stm.executeQuery(sql);
             } else {
                 String sql = "SELECT top 5\n"
-                        + "	sanPhamCt.id_sanPhamCt,\n"
                         + "    sanPham.id_sanPham,\n"
                         + "    sanPham.tenSanPham,  \n"
                         + "    tl.tenTheLoai,\n"
                         + "    cl.tenChatLieu,\n"
                         + "    th.tenThuongHieu,\n"
-                        + "    ncc.tenNhaCungCap,\n"
-                        + "    mau.tenMau,\n"
-                        + "    sanPhamCt.gia,\n"
-                        + "    sanPhamCt.size,\n"
-                        + "    sanPhamCt.soLuong,\n"
-                        + "    sanPhamCt.ghiChu\n"
+                        + "    ncc.tennhaCC,\n"
+                        + "    sanPham.mau,\n"
+                        + "    sanPham.gia,\n"
+                        + "    sanPham.size,\n"
+                        + "    sanPham.soLuong,\n"
+                        + "    sanPham.ghiChu\n"
                         + "FROM\n"
                         + "    sanPham sanPham\n"
                         + "JOIN\n"
-                        + "    sanPhamCt sanPhamCt ON sanPham.id_sanPham = sanPhamCt.id_sanPham\n"
+                        + "    theloai tl ON sanPham.id_theLoai = tl.id_theLoai\n"
                         + "JOIN\n"
-                        + "    theloai tl ON sanPhamCt.id_theLoai = tl.id_theLoai\n"
+                        + "      chatLieu cl ON sanPham.id_chatLieu = cl.id_chatLieu\n"
                         + "JOIN\n"
-                        + "    chatLieu cl ON sanPhamCt.id_chatLieu = cl.id_chatLieu\n"
+                        + "      thuongHieu th ON sanPham.id_thuongHieu = th.id_thuongHieu\n"
                         + "JOIN\n"
-                        + "    thuongHieu th ON sanPhamCt.id_thuongHieu = th.id_thuongHieu\n"
-                        + "JOIN\n"
-                        + "    nhaCungCap ncc ON sanPhamCt.id_nhaCungCap = ncc.id_nhaCungCap\n"
-                        + "JOIN\n"
-                        + "    mau mau ON sanPhamCt.id_mau = mau.id_mau where [id_sanPhamCt]not in (select top   " + (sotrang * 5 - 5) + " [id_sanPhamCt] from sanPhamCt)"
+                        + "     nhaCungCap ncc ON sanPham.id_nhaCungCap = ncc.id_nhaCC\n"
+                        + "   where [id_sanPham] not in (select top " + (trang * 5 - 5) + " [id_sanPham] from sanPham )"
                         + "and ncc.id_nhaCungCap = ? ";
                 Connection conn = DBConnect.getConnection();
                 PreparedStatement prm = conn.prepareStatement(sql);
@@ -1706,20 +1650,18 @@ public class View_SanPhambg_seven extends javax.swing.JFrame {
                 rs = prm.executeQuery();
             }
             while (rs.next()) {
-                Vector v = new Vector();
-                int idSPCT = rs.getInt(1);
-                int idSP = rs.getInt(2);
-                String tenSP = rs.getString(3);
-                String theLoai = rs.getString(4);
-                String chatLieu = rs.getString(5);
-                String thuongHieu = rs.getString(6);
-                String nhaCungCap = rs.getString(7);
-                String mau = rs.getString(8);
-                double gia = rs.getDouble(9);
-                int size = rs.getInt(10);
-                int soLuong = rs.getInt(11);
-                String ghiChu = rs.getString(12);
-                v.add(idSPCT);
+               Vector v = new Vector();
+                int idSP = rs.getInt("id_sanPham");
+                String tenSP = rs.getString("tenSanPham");
+                String theLoai = rs.getString("tenTheLoai");
+                String chatLieu = rs.getString("tenChatLieu");
+                String thuongHieu = rs.getString("tenThuongHieu");
+                String nhaCungCap = rs.getString("tennhaCC");
+                String mau = rs.getString("mau");
+                double gia = rs.getDouble("gia");
+                int size = rs.getInt("size");
+                int soLuong = rs.getInt("soLuong");
+                String ghiChu = rs.getString("ghiChu");
                 v.add(idSP);
                 v.add(tenSP);
                 v.add(theLoai);
@@ -1732,7 +1674,6 @@ public class View_SanPhambg_seven extends javax.swing.JFrame {
                 v.add(soLuong);
                 v.add(ghiChu);
                 mol.addRow(v);
-
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -1749,64 +1690,56 @@ public class View_SanPhambg_seven extends javax.swing.JFrame {
         try {
             if (strMau.equals("Tất cả")) {
                 String sql = "SELECT top 5\n"
-                        + "	sanPhamCt.id_sanPhamCt,\n"
                         + "    sanPham.id_sanPham,\n"
                         + "    sanPham.tenSanPham,  \n"
                         + "    tl.tenTheLoai,\n"
                         + "    cl.tenChatLieu,\n"
                         + "    th.tenThuongHieu,\n"
-                        + "    ncc.tenNhaCungCap,\n"
-                        + "    mau.tenMau,\n"
-                        + "    sanPhamCt.gia,\n"
-                        + "    sanPhamCt.size,\n"
-                        + "    sanPhamCt.soLuong,\n"
-                        + "    sanPhamCt.ghiChu\n"
+                        + "    ncc.tennhaCC,\n"
+                        + "    sanPham.mau,\n"
+                        + "    sanPham.gia,\n"
+                        + "    sanPham.size,\n"
+                        + "    sanPham.soLuong,\n"
+                        + "    sanPham.ghiChu\n"
                         + "FROM\n"
                         + "    sanPham sanPham\n"
                         + "JOIN\n"
-                        + "    sanPhamCt sanPhamCt ON sanPham.id_sanPham = sanPhamCt.id_sanPham\n"
+                        + "    theloai tl ON sanPham.id_theLoai = tl.id_theLoai\n"
                         + "JOIN\n"
-                        + "    theloai tl ON sanPhamCt.id_theLoai = tl.id_theLoai\n"
+                        + "      chatLieu cl ON sanPham.id_chatLieu = cl.id_chatLieu\n"
                         + "JOIN\n"
-                        + "    chatLieu cl ON sanPhamCt.id_chatLieu = cl.id_chatLieu\n"
+                        + "      thuongHieu th ON sanPham.id_thuongHieu = th.id_thuongHieu\n"
                         + "JOIN\n"
-                        + "    thuongHieu th ON sanPhamCt.id_thuongHieu = th.id_thuongHieu\n"
-                        + "JOIN\n"
-                        + "    nhaCungCap ncc ON sanPhamCt.id_nhaCungCap = ncc.id_nhaCungCap\n"
-                        + "JOIN\n"
-                        + "    mau mau ON sanPhamCt.id_mau = mau.id_mau where [id_sanPhamCt]not in (select top   " + (sotrang * 5 - 5) + " [id_sanPhamCt] from sanPhamCt)";
+                        + "     nhaCungCap ncc ON sanPham.id_nhaCungCap = ncc.id_nhaCC\n"
+                        + "   where [id_sanPham] not in (select top " + (trang * 5 - 5) + " [id_sanPham] from sanPham )";
                 Connection conn = DBConnect.getConnection();
                 Statement stm = conn.createStatement();
                 rs = stm.executeQuery(sql);
             } else {
                 String sql = "SELECT top 5\n"
-                        + "	sanPhamCt.id_sanPhamCt,\n"
                         + "    sanPham.id_sanPham,\n"
                         + "    sanPham.tenSanPham,  \n"
                         + "    tl.tenTheLoai,\n"
                         + "    cl.tenChatLieu,\n"
                         + "    th.tenThuongHieu,\n"
-                        + "    ncc.tenNhaCungCap,\n"
-                        + "    mau.tenMau,\n"
-                        + "    sanPhamCt.gia,\n"
-                        + "    sanPhamCt.size,\n"
-                        + "    sanPhamCt.soLuong,\n"
-                        + "    sanPhamCt.ghiChu\n"
+                        + "    ncc.tennhaCC,\n"
+                        + "    sanPham.mau,\n"
+                        + "    sanPham.gia,\n"
+                        + "    sanPham.size,\n"
+                        + "    sanPham.soLuong,\n"
+                        + "    sanPham.ghiChu\n"
                         + "FROM\n"
                         + "    sanPham sanPham\n"
                         + "JOIN\n"
-                        + "    sanPhamCt sanPhamCt ON sanPham.id_sanPham = sanPhamCt.id_sanPham\n"
+                        + "    theloai tl ON sanPham.id_theLoai = tl.id_theLoai\n"
                         + "JOIN\n"
-                        + "    theloai tl ON sanPhamCt.id_theLoai = tl.id_theLoai\n"
+                        + "      chatLieu cl ON sanPham.id_chatLieu = cl.id_chatLieu\n"
                         + "JOIN\n"
-                        + "    chatLieu cl ON sanPhamCt.id_chatLieu = cl.id_chatLieu\n"
+                        + "      thuongHieu th ON sanPham.id_thuongHieu = th.id_thuongHieu\n"
                         + "JOIN\n"
-                        + "    thuongHieu th ON sanPhamCt.id_thuongHieu = th.id_thuongHieu\n"
-                        + "JOIN\n"
-                        + "    nhaCungCap ncc ON sanPhamCt.id_nhaCungCap = ncc.id_nhaCungCap\n"
-                        + "JOIN\n"
-                        + "    mau mau ON sanPhamCt.id_mau = mau.id_mau where [id_sanPhamCt]not in (select top   " + (sotrang * 5 - 5) + " [id_sanPhamCt] from sanPhamCt)"
-                        + "and mau.id_mau = ? ";
+                        + "     nhaCungCap ncc ON sanPham.id_nhaCungCap = ncc.id_nhaCC\n"
+                        + "   where [id_sanPham] not in (select top " + (trang * 5 - 5) + " [id_sanPham] from sanPham )"
+                        + "and sanPham.id_mau = ? ";
                 Connection conn = DBConnect.getConnection();
                 PreparedStatement prm = conn.prepareStatement(sql);
                 prm.setString(1, strMau);
@@ -1814,19 +1747,17 @@ public class View_SanPhambg_seven extends javax.swing.JFrame {
             }
             while (rs.next()) {
                 Vector v = new Vector();
-                int idSPCT = rs.getInt(1);
-                int idSP = rs.getInt(2);
-                String tenSP = rs.getString(3);
-                String theLoai = rs.getString(4);
-                String chatLieu = rs.getString(5);
-                String thuongHieu = rs.getString(6);
-                String nhaCungCap = rs.getString(7);
-                String mau = rs.getString(8);
-                double gia = rs.getDouble(9);
-                int size = rs.getInt(10);
-                int soLuong = rs.getInt(11);
-                String ghiChu = rs.getString(12);
-                v.add(idSPCT);
+                int idSP = rs.getInt("id_sanPham");
+                String tenSP = rs.getString("tenSanPham");
+                String theLoai = rs.getString("tenTheLoai");
+                String chatLieu = rs.getString("tenChatLieu");
+                String thuongHieu = rs.getString("tenThuongHieu");
+                String nhaCungCap = rs.getString("tennhaCC");
+                String mau = rs.getString("mau");
+                double gia = rs.getDouble("gia");
+                int size = rs.getInt("size");
+                int soLuong = rs.getInt("soLuong");
+                String ghiChu = rs.getString("ghiChu");
                 v.add(idSP);
                 v.add(tenSP);
                 v.add(theLoai);
@@ -1839,7 +1770,6 @@ public class View_SanPhambg_seven extends javax.swing.JFrame {
                 v.add(soLuong);
                 v.add(ghiChu);
                 mol.addRow(v);
-
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -1902,7 +1832,6 @@ public class View_SanPhambg_seven extends javax.swing.JFrame {
     private javax.swing.JTextArea txtGhiChu;
     private javax.swing.JTextField txtGia;
     private javax.swing.JTextField txtIDSP;
-    private javax.swing.JTextField txtSPCT;
     private javax.swing.JTextField txtSize;
     private javax.swing.JTextField txtSoLuong;
     private javax.swing.JTextField txtTenSP;

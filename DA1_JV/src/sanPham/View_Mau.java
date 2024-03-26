@@ -219,7 +219,7 @@ public class View_Mau extends javax.swing.JFrame {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-        View_SanPhambg_seven spct = new View_SanPhambg_seven(txtIDSP.getText());
+        View_SanPhambg spct = new View_SanPhambg(txtIDSP.getText());
         spct.setVisible(true);
         spct.setLocationRelativeTo(null);
         this.dispose();

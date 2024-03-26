@@ -19,50 +19,43 @@ public class SanPhamCtServiceImpl implements SanPhamCtService {
         try {
             List<SanPhamCt> list = new ArrayList<>();
             Statement stm = conn.createStatement();
-            String sql = "SELECT \n"
-                    + "	sanPhamCt.id_sanPhamCt,\n"
+            String sql = "SELECT top 5\n"
                     + "    sanPham.id_sanPham,\n"
                     + "    sanPham.tenSanPham,  \n"
                     + "    tl.tenTheLoai,\n"
                     + "    cl.tenChatLieu,\n"
                     + "    th.tenThuongHieu,\n"
-                    + "    ncc.tenNhaCungCap,\n"
-                    + "    mau.tenMau,\n"
-                    + "    sanPhamCt.gia,\n"
-                    + "    sanPhamCt.size,\n"
-                    + "    sanPhamCt.soLuong,\n"
-                    + "    sanPhamCt.ghiChu\n"
+                    + "    ncc.tennhaCC,\n"
+                    + "    sanPham.mau,\n"
+                    + "    sanPham.gia,\n"
+                    + "    sanPham.size,\n"
+                    + "    sanPham.soLuong,\n"
+                    + "    sanPham.ghiChu\n"
                     + "FROM\n"
                     + "    sanPham sanPham\n"
                     + "JOIN\n"
-                    + "    sanPhamCt sanPhamCt ON sanPham.id_sanPham = sanPhamCt.id_sanPham\n"
+                    + "    theloai tl ON sanPham.id_theLoai = tl.id_theLoai\n"
                     + "JOIN\n"
-                    + "    theloai tl ON sanPhamCt.id_theLoai = tl.id_theLoai\n"
+                    + "      chatLieu cl ON sanPham.id_chatLieu = cl.id_chatLieu\n"
                     + "JOIN\n"
-                    + "    chatLieu cl ON sanPhamCt.id_chatLieu = cl.id_chatLieu\n"
+                    + "      thuongHieu th ON sanPham.id_thuongHieu = th.id_thuongHieu\n"
                     + "JOIN\n"
-                    + "    thuongHieu th ON sanPhamCt.id_thuongHieu = th.id_thuongHieu\n"
-                    + "JOIN\n"
-                    + "    nhaCungCap ncc ON sanPhamCt.id_nhaCungCap = ncc.id_nhaCungCap\n"
-                    + "JOIN\n"
-                    + "    mau mau ON sanPhamCt.id_mau = mau.id_mau;";
+                    + "     nhaCungCap ncc ON sanPham.id_nhaCungCap = ncc.id_nhaCC\n";
             ResultSet rs = stm.executeQuery(sql);
             while (rs.next()) {
-                int idSPCT = rs.getInt(1);
-                int idSP = rs.getInt(2);
-                String tenSP = rs.getString(3);
-                String theLoai = rs.getString(4);
-                String chatLieu = rs.getString(5);
-                String thuongHieu = rs.getString(6);
-                String nhaCungCap = rs.getString(7);
-                String mau = rs.getString(8);
-                double gia = rs.getDouble(9);
-                int size = rs.getInt(10);
-                int soLuong = rs.getInt(11);
-                String ghiChu = rs.getString(12);
+                int idSP = rs.getInt("id_sanPham");
+                String tenSP = rs.getString("tenSanPham");
+                String theLoai = rs.getString("tenTheLoai");
+                String chatLieu = rs.getString("tenChatLieu");
+                String thuongHieu = rs.getString("tenThuongHieu");
+                String nhaCungCap = rs.getString("tennhaCC");
+                String mau = rs.getString("mau");
+                double gia = rs.getDouble("gia");
+                int size = rs.getInt("size");
+                int soLuong = rs.getInt("soLuong");
+                String ghiChu = rs.getString("ghiChu");
 
                 SanPhamCt sp = new SanPhamCt();
-                sp.setIdSanPhamCt(idSPCT);
                 sp.setiDSanPham(idSP);
                 sp.setTenSP(tenSP);
                 sp.setTenTheLoai(theLoai);
@@ -86,18 +79,17 @@ public class SanPhamCtServiceImpl implements SanPhamCtService {
     @Override
     public boolean add(SanPhamCt sp) {
         try {
-            String sql1 = "insert sanPhamCt(id_sanPham,id_theLoai,id_chatLieu,id_thuongHieu,id_nhaCungCap,id_mau,gia,size,soLuong,ghiChu)VALUES(?,?,?,?,?,?,?,?,?,?)";
+            String sql1 = "insert sanPhamCt(id_theLoai,id_chatLieu,id_thuongHieu,id_nhaCungCap,mau,gia,size,soLuong,ghiChu)VALUES(?,?,?,?,?,?,?,?,?)";
             PreparedStatement stm1 = conn.prepareStatement(sql1);
-            stm1.setInt(1, sp.getiDSanPham());
-            stm1.setInt(2, sp.getIdTL());
-            stm1.setInt(3, sp.getIdCL());
-            stm1.setInt(4, sp.getIdTH());
-            stm1.setInt(5, sp.getIdNCC());
-            stm1.setInt(6, sp.getIdMau());
-            stm1.setDouble(7, sp.getGia());
-            stm1.setInt(8, sp.getSize());
-            stm1.setInt(9, sp.getSoLuong());
-            stm1.setString(10, sp.getGhiChu());
+            stm1.setInt(1, sp.getIdTL());
+            stm1.setInt(2, sp.getIdCL());
+            stm1.setInt(3, sp.getIdTH());
+            stm1.setInt(4, sp.getIdNCC());
+            stm1.setString(5, sp.getTenMau());
+            stm1.setDouble(6, sp.getGia());
+            stm1.setInt(7, sp.getSize());
+            stm1.setInt(8, sp.getSoLuong());
+            stm1.setString(9, sp.getGhiChu());
             stm1.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -109,7 +101,7 @@ public class SanPhamCtServiceImpl implements SanPhamCtService {
 
     @Override
     public boolean delete(SanPhamCt sp) {
-        String sql = "delete sanPhamCt where id_sanPhamCt=?";
+        String sql = "delete sanPhamCt where id_sanPham=?";
         try {
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setInt(1, sp.getIdSanPhamCt());
@@ -122,21 +114,20 @@ public class SanPhamCtServiceImpl implements SanPhamCtService {
 
     @Override
     public boolean update(SanPhamCt sp) {
-        String sql = "update sanPhamCt set id_sanPham=?,id_theLoai=?,id_chatLieu=?,id_thuongHieu=?,id_nhaCungCap=?,id_mau=?,gia=?,size=?,soLuong=?,ghiChu=?  where id_sanPhamCt =?";
+        String sql = "update sanPham set id_theLoai=?,id_chatLieu=?,id_thuongHieu=?,id_nhaCungCap=?,id_mau=?,gia=?,size=?,soLuong=?,ghiChu=?  where id_sanPham =?";
         try {
-            PreparedStatement stm = conn.prepareStatement(sql);
-            stm.setInt(1, sp.getiDSanPham());
-            stm.setInt(2, sp.getIdTL());
-            stm.setInt(3, sp.getIdCL());
-            stm.setInt(4, sp.getIdTH());
-            stm.setInt(5, sp.getIdNCC());
-            stm.setInt(6, sp.getIdMau());
-            stm.setDouble(7, sp.getGia());
-            stm.setInt(8, sp.getSize());
-            stm.setInt(9, sp.getSoLuong());
-            stm.setString(10, sp.getGhiChu());
-            stm.setInt(11, sp.getIdSanPhamCt());
-            stm.executeUpdate();
+            PreparedStatement stm1 = conn.prepareStatement(sql);
+            stm1.setInt(1, sp.getIdTL());
+            stm1.setInt(2, sp.getIdCL());
+            stm1.setInt(3, sp.getIdTH());
+            stm1.setInt(4, sp.getIdNCC());
+            stm1.setString(5, sp.getTenMau());
+            stm1.setDouble(6, sp.getGia());
+            stm1.setInt(7, sp.getSize());
+            stm1.setInt(8, sp.getSoLuong());
+            stm1.setString(9, sp.getGhiChu());
+            stm1.setInt(10, sp.getiDSanPham());
+            stm1.executeUpdate();
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -148,52 +139,46 @@ public class SanPhamCtServiceImpl implements SanPhamCtService {
     public List<SanPhamCt> timTheoTen(String tenSanPham) {
         try {
             List<SanPhamCt> listTK = new ArrayList<>();
-            String sql = "SELECT \n"
-                    + "	sanPhamCt.id_sanPhamCt,\n"
+            String sql = "SELECT "
                     + "    sanPham.id_sanPham,\n"
                     + "    sanPham.tenSanPham,  \n"
                     + "    tl.tenTheLoai,\n"
                     + "    cl.tenChatLieu,\n"
                     + "    th.tenThuongHieu,\n"
-                    + "    ncc.tenNhaCungCap,\n"
-                    + "    mau.tenMau,\n"
-                    + "    sanPhamCt.gia,\n"
-                    + "    sanPhamCt.size,\n"
-                    + "    sanPhamCt.soLuong,\n"
-                    + "    sanPhamCt.ghiChu\n"
+                    + "    ncc.tennhaCC,\n"
+                    + "    sanPham.mau,\n"
+                    + "    sanPham.gia,\n"
+                    + "    sanPham.size,\n"
+                    + "    sanPham.soLuong,\n"
+                    + "    sanPham.ghiChu\n"
                     + "FROM\n"
                     + "    sanPham sanPham\n"
                     + "JOIN\n"
-                    + "    sanPhamCt sanPhamCt ON sanPham.id_sanPham = sanPhamCt.id_sanPham\n"
+                    + "    theloai tl ON sanPham.id_theLoai = tl.id_theLoai\n"
                     + "JOIN\n"
-                    + "    theloai tl ON sanPhamCt.id_theLoai = tl.id_theLoai\n"
+                    + "      chatLieu cl ON sanPham.id_chatLieu = cl.id_chatLieu\n"
                     + "JOIN\n"
-                    + "    chatLieu cl ON sanPhamCt.id_chatLieu = cl.id_chatLieu\n"
+                    + "      thuongHieu th ON sanPham.id_thuongHieu = th.id_thuongHieu\n"
                     + "JOIN\n"
-                    + "    thuongHieu th ON sanPhamCt.id_thuongHieu = th.id_thuongHieu\n"
-                    + "JOIN\n"
-                    + "    nhaCungCap ncc ON sanPhamCt.id_nhaCungCap = ncc.id_nhaCungCap\n"
-                    + "JOIN\n"
-                    + "    mau mau ON sanPhamCt.id_mau = mau.id_mau where sanPham.tenSanPham like ?";
+                    + "     nhaCungCap ncc ON sanPham.id_nhaCungCap = ncc.id_nhaCC\n"
+                    + "  where sanPham.tenSanPham like ?";
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, "%" + tenSanPham + "%");
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
-                int idSPCT = Integer.parseInt(rs.getString(1));
-                int idSP = Integer.parseInt(rs.getString(2));
-                String tenSP = rs.getString(3);
-                String theLoai = rs.getString(4);
-                String chatLieu = rs.getString(5);
-                String thuongHieu = rs.getString(6);
-                String nhaCungCap = rs.getString(7);
-                String mau = rs.getString(8);
-                double gia = rs.getDouble(9);
-                int size = Integer.parseInt(rs.getString(10));
-                int soLuong = Integer.parseInt(rs.getString(11));
-                String ghiChu = rs.getString(12);
+                int idSP = rs.getInt("id_sanPham");
+                String tenSP = rs.getString("tenSanPham");
+                String theLoai = rs.getString("tenTheLoai");
+                String chatLieu = rs.getString("tenChatLieu");
+                String thuongHieu = rs.getString("tenThuongHieu");
+                String nhaCungCap = rs.getString("tennhaCC");
+                String mau = rs.getString("mau");
+                double gia = rs.getDouble("gia");
+                int size = rs.getInt("size");
+                int soLuong = rs.getInt("soLuong");
+                String ghiChu = rs.getString("ghiChu");
 
                 SanPhamCt spct = new SanPhamCt();
-                spct.setIdSanPhamCt(idSPCT);
                 spct.setiDSanPham(idSP);
                 spct.setTenSP(tenSP);
                 spct.setTenTheLoai(theLoai);
@@ -218,52 +203,46 @@ public class SanPhamCtServiceImpl implements SanPhamCtService {
     public List<SanPhamCt> timTheoTuSP(String tenSanPham1) {
         try {
             List<SanPhamCt> listTK = new ArrayList<>();
-            String sql = "SELECT \n"
-                    + "	sanPhamCt.id_sanPhamCt,\n"
+            String sql = "SELECT "
                     + "    sanPham.id_sanPham,\n"
                     + "    sanPham.tenSanPham,  \n"
                     + "    tl.tenTheLoai,\n"
                     + "    cl.tenChatLieu,\n"
                     + "    th.tenThuongHieu,\n"
-                    + "    ncc.tenNhaCungCap,\n"
-                    + "    mau.tenMau,\n"
-                    + "    sanPhamCt.gia,\n"
-                    + "    sanPhamCt.size,\n"
-                    + "    sanPhamCt.soLuong,\n"
-                    + "    sanPhamCt.ghiChu\n"
+                    + "    ncc.tennhaCC,\n"
+                    + "    sanPham.mau,\n"
+                    + "    sanPham.gia,\n"
+                    + "    sanPham.size,\n"
+                    + "    sanPham.soLuong,\n"
+                    + "    sanPham.ghiChu\n"
                     + "FROM\n"
                     + "    sanPham sanPham\n"
                     + "JOIN\n"
-                    + "    sanPhamCt sanPhamCt ON sanPham.id_sanPham = sanPhamCt.id_sanPham\n"
+                    + "    theloai tl ON sanPham.id_theLoai = tl.id_theLoai\n"
                     + "JOIN\n"
-                    + "    theloai tl ON sanPhamCt.id_theLoai = tl.id_theLoai\n"
+                    + "      chatLieu cl ON sanPham.id_chatLieu = cl.id_chatLieu\n"
                     + "JOIN\n"
-                    + "    chatLieu cl ON sanPhamCt.id_chatLieu = cl.id_chatLieu\n"
+                    + "      thuongHieu th ON sanPham.id_thuongHieu = th.id_thuongHieu\n"
                     + "JOIN\n"
-                    + "    thuongHieu th ON sanPhamCt.id_thuongHieu = th.id_thuongHieu\n"
-                    + "JOIN\n"
-                    + "    nhaCungCap ncc ON sanPhamCt.id_nhaCungCap = ncc.id_nhaCungCap\n"
-                    + "JOIN\n"
-                    + "    mau mau ON sanPhamCt.id_mau = mau.id_mau where sanPhamCt.id_sanPham=?";
+                    + "     nhaCungCap ncc ON sanPham.id_nhaCungCap = ncc.id_nhaCC\n"
+                    + "  where sanPham.id_sanPham=?";
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, tenSanPham1);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
-                int idSPCT = Integer.parseInt(rs.getString(1));
-                int idSP = Integer.parseInt(rs.getString(2));
-                String tenSP = rs.getString(3);
-                String theLoai = rs.getString(4);
-                String chatLieu = rs.getString(5);
-                String thuongHieu = rs.getString(6);
-                String nhaCungCap = rs.getString(7);
-                String mau = rs.getString(8);
-                double gia = rs.getDouble(9);
-                int size = Integer.parseInt(rs.getString(10));
-                int soLuong = Integer.parseInt(rs.getString(11));
-                String ghiChu = rs.getString(12);
+               int idSP = rs.getInt("id_sanPham");
+                String tenSP = rs.getString("tenSanPham");
+                String theLoai = rs.getString("tenTheLoai");
+                String chatLieu = rs.getString("tenChatLieu");
+                String thuongHieu = rs.getString("tenThuongHieu");
+                String nhaCungCap = rs.getString("tennhaCC");
+                String mau = rs.getString("mau");
+                double gia = rs.getDouble("gia");
+                int size = rs.getInt("size");
+                int soLuong = rs.getInt("soLuong");
+                String ghiChu = rs.getString("ghiChu");
 
                 SanPhamCt spct = new SanPhamCt();
-                spct.setIdSanPhamCt(idSPCT);
                 spct.setiDSanPham(idSP);
                 spct.setTenSP(tenSP);
                 spct.setTenTheLoai(theLoai);
@@ -288,7 +267,7 @@ public class SanPhamCtServiceImpl implements SanPhamCtService {
     @Override
     public boolean checkTrungTheLoai(int id_sanPham, int id_theLoai) {
         try {
-            String query = "SELECT COUNT(*) FROM sanPhamCt WHERE id_sanPham = ? AND id_theLoai = ? ";
+            String query = "SELECT COUNT(*) FROM sanPham WHERE id_sanPham = ? AND id_theLoai = ? ";
             PreparedStatement stm = conn.prepareStatement(query);
             stm.setInt(1, id_sanPham);
             stm.setInt(2, id_theLoai);
@@ -306,7 +285,7 @@ public class SanPhamCtServiceImpl implements SanPhamCtService {
     @Override
     public boolean checkTrungChatLieu(int id_sanPham, int id_chatLieu) {
         try {
-            String query = "SELECT COUNT(*) FROM sanPhamCt WHERE id_sanPham = ? AND id_chatLieu = ? ";
+            String query = "SELECT COUNT(*) FROM sanPham WHERE id_sanPham = ? AND id_chatLieu = ? ";
             PreparedStatement stm = conn.prepareStatement(query);
             stm.setInt(1, id_sanPham);
             stm.setInt(2, id_chatLieu);
@@ -324,7 +303,7 @@ public class SanPhamCtServiceImpl implements SanPhamCtService {
     @Override
     public boolean checkTrungThuongHieu(int id_sanPham, int id_thuongHieu) {
         try {
-            String query = "SELECT COUNT(*) FROM sanPhamCt WHERE id_sanPham = ? AND id_thuongHieu = ? ";
+            String query = "SELECT COUNT(*) FROM sanPham WHERE id_sanPham = ? AND id_thuongHieu = ? ";
             PreparedStatement stm = conn.prepareStatement(query);
             stm.setInt(1, id_sanPham);
             stm.setInt(2, id_thuongHieu);
@@ -342,7 +321,7 @@ public class SanPhamCtServiceImpl implements SanPhamCtService {
     @Override
     public boolean checkTrungNhaCC(int id_sanPham, int id_nhaCungCap) {
         try {
-            String query = "SELECT COUNT(*) FROM sanPhamCt WHERE id_sanPham = ? AND id_nhaCungCap = ? ";
+            String query = "SELECT COUNT(*) FROM sanPham WHERE id_sanPham = ? AND id_nhaCungCap = ? ";
             PreparedStatement stm = conn.prepareStatement(query);
             stm.setInt(1, id_sanPham);
             stm.setInt(2, id_nhaCungCap);
@@ -359,26 +338,26 @@ public class SanPhamCtServiceImpl implements SanPhamCtService {
 
     @Override
     public boolean checkTrungMau(int id_sanPham, int id_mau) {
-        try {
-            String query = "SELECT COUNT(*) FROM sanPhamCt WHERE id_sanPham = ? AND id_mau = ? ";
-            PreparedStatement stm = conn.prepareStatement(query);
-            stm.setInt(1, id_sanPham);
-            stm.setInt(2, id_mau);
-            ResultSet rs = stm.executeQuery();
-            if (rs.next()) {
-                int count = rs.getInt(1);
-                return count > 0;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            String query = "SELECT COUNT(*) FROM sanPhamCt WHERE id_sanPham = ? AND id_mau = ? ";
+//            PreparedStatement stm = conn.prepareStatement(query);
+//            stm.setInt(1, id_sanPham);
+//            stm.setInt(2, id_mau);
+//            ResultSet rs = stm.executeQuery();
+//            if (rs.next()) {
+//                int count = rs.getInt(1);
+//                return count > 0;
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
         return false;
     }
 
     @Override
     public boolean checkTrungTT(int id_sanPham, int id_theLoai, int id_chatLieu, int id_thuongHieu, int id_nhaCungCap, int id_mau) {
         try {
-            String query = "SELECT COUNT(*) FROM sanPhamCt WHERE id_sanPham = ? AND id_theLoai = ? AND id_chatLieu = ? AND id_thuongHieu = ? AND id_nhaCungCap = ? AND id_mau = ?";
+            String query = "SELECT COUNT(*) FROM sanPham WHERE id_sanPham = ? AND id_theLoai = ? AND id_chatLieu = ? AND id_thuongHieu = ? AND id_nhaCungCap = ? AND id_mau = ?";
             PreparedStatement stm = conn.prepareStatement(query);
             stm.setInt(1, id_sanPham);
             stm.setInt(2, id_theLoai);
