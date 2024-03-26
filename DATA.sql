@@ -132,7 +132,7 @@ create table NHANVIEN
 	soDt nvarchar(50),
 	diaChi nvarchar(50),
 	trangThai int, --0 hoạt động, 1 ngừng 
-	constraint pk_NHANVIEN primary key(id_taiKhoan),
+	constraint pk_NHANVIEN primary key(id_nhanVien),
 	constraint fk_NHANVIEN_TAIKHOAN foreign key(id_taiKhoan) references TAIKHOAN
 )
 SET IDENTITY_INSERT [dbo].NHANVIEN ON 
@@ -178,6 +178,7 @@ SET IDENTITY_INSERT [dbo].KHACHHANG ON
 INSERT [dbo].KHACHHANG (id_khachHang,hoTen,gioiTinh,diaChi,soDienThoai) VALUES (1,N'Nguyễn Thị A',1,N'Hà Nội',1)
 INSERT [dbo].KHACHHANG (id_khachHang,hoTen,gioiTinh,diaChi,soDienThoai) VALUES (2,N'Nguyễn văn B',0,N'Hà Nội','012345')
 INSERT [dbo].KHACHHANG (id_khachHang,hoTen,gioiTinh,diaChi,soDienThoai) VALUES (3,N'Nguyễn Thị C',1,N'Hà Nội','012345')
+SET IDENTITY_INSERT [dbo].KHACHHANG OFF
 
 --HoaDon
 if object_id('HOADON') is not null
@@ -185,6 +186,7 @@ drop table HOADON
 create table HOADON
 (
 	id_hoaDon int identity(1,1),
+	id_nhanvien int,
 	id_sanPham int,
 	id_khachHang int,
 	id_khuyenMai int,
@@ -192,15 +194,16 @@ create table HOADON
 	donGia float,
 	ngayTao datetime,
 	constraint pk_HOADON primary key(id_hoaDon),
+	constraint fk_HOADON_NhanVien foreign key(id_nhanvien) references nhanvien,
 	constraint fk_HOADON_SanPham foreign key(id_sanPham) references sanpham,
 	constraint fk_HOADON_khachHang foreign key(id_khachHang) references khachHang,
 	constraint fk_HOADON_khuyenMai foreign key(id_khuyenMai) references khuyenMai
 )
 SET IDENTITY_INSERT [dbo].HOADON ON 
-INSERT [dbo].HOADON (id_hoaDon,id_sanPham,id_khachHang,id_khuyenMai,soLuong,donGia,
-ngayTao) VALUES (1,1,1,1,2,4000,'2023-10-10')
-INSERT [dbo].HOADON (id_hoaDon,id_sanPham,id_khachHang,id_khuyenMai,soLuong,donGia,
-ngayTao) VALUES (2,1,1,1,2,4000,'2023-10-11')
-INSERT [dbo].HOADON (id_hoaDon,id_sanPham,id_khachHang,id_khuyenMai,soLuong,donGia,
-ngayTao) VALUES (3,1,1,1,2,4000,'2023-10-12')
+INSERT [dbo].HOADON (id_hoaDon,id_nhanvien,id_sanPham,id_khachHang,id_khuyenMai,soLuong,donGia,
+ngayTao) VALUES (1,1,1,1,1,2,4000,'2023-10-10')
+INSERT [dbo].HOADON (id_hoaDon,id_nhanvien,id_sanPham,id_khachHang,id_khuyenMai,soLuong,donGia,
+ngayTao) VALUES (2,1,1,1,1,2,4000,'2023-10-11')
+INSERT [dbo].HOADON (id_hoaDon,id_nhanvien,id_sanPham,id_khachHang,id_khuyenMai,soLuong,donGia,
+ngayTao) VALUES (3,1,1,1,1,2,4000,'2023-10-12')
 SET IDENTITY_INSERT [dbo].HOADON OFF
