@@ -80,18 +80,18 @@ public class View_Mau extends javax.swing.JFrame {
 
         int idMau = Integer.parseInt(tblMau.getValueAt(selectedRow, 0).toString());
   
-//        boolean deleteResult = mauService.
-//      
-//
-//        if (deleteResult) {
-//            JOptionPane.showMessageDialog(this, "Xóa thành công.");
-//            // Remove the selected row from the table
-//            mol.removeRow(selectedRow);
-//            // Reset the index variable
-//            index = -1;
-//        } else {
-//            JOptionPane.showMessageDialog(this, "Xóa thất bại.");
-//        }
+        boolean deleteResult = mauService.
+      
+
+        if (deleteResult) {
+            JOptionPane.showMessageDialog(this, "Xóa thành công.");
+            // Remove the selected row from the table
+            mol.removeRow(selectedRow);
+            // Reset the index variable
+            index = -1;
+        } else {
+            JOptionPane.showMessageDialog(this, "Xóa thất bại.");
+        }
     }
 
     @SuppressWarnings("unchecked")
