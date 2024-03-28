@@ -870,6 +870,7 @@ public class view_nhanVien extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                System.out.println("1");
                 new view_nhanVien("").setVisible(true);
             }
         });
