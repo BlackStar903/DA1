@@ -930,12 +930,16 @@ public class View_SanPhambg extends javax.swing.JFrame {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
-        if (!validates()) {
-            return;
+        int selectedRow = tbl_SPCT.getSelectedRow();
+        if (selectedRow > 0) {
+            if (!validates()) {
+                return;
+            }
+            spctService.update(getForm());
+            loadData(tbl_SPCT.getSelectedRow(), "");
+        }else {
+           JOptionPane.showMessageDialog(this, "Bạn chưa chọn vào bảng để sửa");
         }
-        spctService.update(getForm());
-        loadData(tbl_SPCT.getSelectedRow(), "");
-
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiActionPerformed
@@ -984,7 +988,7 @@ public class View_SanPhambg extends javax.swing.JFrame {
         mol.setRowCount(0);
         for (Servic.SanPhamCt sp : spctService.timTheoTen(tenSanPham)) {
             Object[] toData = new Object[]{
-                sp.getIdSanPhamCt(), sp.getiDSanPham(), sp.getTenSP(), sp.getTenTheLoai(), sp.getTenChatLieu(), sp.getTenThuongHieu(),
+                sp.getiDSanPham(), sp.getTenSP(), sp.getTenTheLoai(), sp.getTenChatLieu(), sp.getTenThuongHieu(),
                 sp.getTenNhaCungCap(), sp.getTenMau(), sp.getGia(), sp.getSize(), sp.getSoLuong(), sp.getGhiChu()
             };
             mol.addRow(toData);
