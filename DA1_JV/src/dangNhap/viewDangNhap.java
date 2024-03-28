@@ -7,7 +7,7 @@ package dangNhap;
 import ConnectionProvider.DBConnect;
 import java.sql.*;
 import javax.swing.JOptionPane;
-import quanlybangiaybg_seven.view_backGroud;
+import VIEW.view_backGroud;
 
 public class viewDangNhap extends javax.swing.JFrame {
 

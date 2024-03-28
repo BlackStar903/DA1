@@ -2,7 +2,7 @@
 package dangNhap;
 
 import ConnectionProvider.DBConnect;
-import NhanVien.nhanVien;
+import Model.nhanVien;
 
 /**
  *

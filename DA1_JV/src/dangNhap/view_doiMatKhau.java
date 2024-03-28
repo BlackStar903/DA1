@@ -5,10 +5,10 @@
 package dangNhap;
 
 import ConnectionProvider.DBConnect;
-import NhanVien.nhanVien;
+import Model.nhanVien;
 import javax.swing.JOptionPane;
 import java.sql.*;
-import quanlybangiaybg_seven.view_backGroud;
+import VIEW.view_backGroud;
 
 public class view_doiMatKhau extends javax.swing.JFrame {
 
