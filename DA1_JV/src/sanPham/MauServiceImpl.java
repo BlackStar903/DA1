@@ -21,7 +21,7 @@ import java.util.ArrayList;
  */
 public class MauServiceImpl implements MauService {
 
-    private Connection conn =  DBConnect.getConnection();
+    private Connection conn = DBConnect.getConnection();
 
     @Override
     public List<Mau> getMau() {
@@ -48,7 +48,7 @@ public class MauServiceImpl implements MauService {
 
     @Override
     public boolean add(Mau mau) {
- try {
+        try {
             String sql = "INSERT mau(tenMau) VALUES(?)";
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setString(1, mau.getTenMau());
@@ -59,6 +59,22 @@ public class MauServiceImpl implements MauService {
             ex.printStackTrace();
 
             return false;
-        }    }
+        }
+    }
+    
+    
+    
+      @Override
+    public boolean delete(int idMau) {
+        try (Connection conn = DBConnect.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM mau WHERE idMau = ?");
+            stmt.setInt(1, idMau);
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
 }

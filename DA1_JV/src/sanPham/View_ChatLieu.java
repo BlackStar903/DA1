@@ -4,6 +4,8 @@
  */
 package sanPham;
 
+import java.util.ArrayList;
+import java.util.List;
 import sanPham.ChatLieuServcieImpl;
 import sanPham.ChatLieuService;
 import javax.swing.JOptionPane;
@@ -15,9 +17,12 @@ import javax.swing.table.DefaultTableModel;
  */
 public class View_ChatLieu extends javax.swing.JFrame {
 
-    private ChatLieuService service = new ChatLieuServcieImpl();
+    private ChatLieu s = new ChatLieu();
+    private ChatLieuServcieImpl ss = new ChatLieuServcieImpl();
     DefaultTableModel mol = new DefaultTableModel();
     private String dtChatLieu;
+    private List<ChatLieu> listCL = new ArrayList<>();
+    private int index = -1;
 
     public View_ChatLieu(String dtChatLieu) {
         initComponents();
@@ -38,7 +43,7 @@ public class View_ChatLieu extends javax.swing.JFrame {
     void fillTable() {
         mol = (DefaultTableModel) tblCL.getModel();
         mol.setRowCount(0);
-        for (sanPham.ChatLieu sp : service.getChatLieu()) {
+        for (sanPham.ChatLieu sp : ss.getChatLieu()) {
             Object[] toData = new Object[]{
                 sp.getIdChatLieu(), sp.getTenChatLieu()
             };
@@ -48,7 +53,7 @@ public class View_ChatLieu extends javax.swing.JFrame {
 
     void showSP(int index) {
         index = tblCL.getSelectedRow();
-        txtID.setText(tblCL.getValueAt(index, 0).toString());
+        txt_IDchatLIeu.setText(tblCL.getValueAt(index, 0).toString());
         txtTen.setText(tblCL.getValueAt(index, 1).toString());
     }
 
@@ -56,13 +61,37 @@ public class View_ChatLieu extends javax.swing.JFrame {
         String tenCL = txtTen.getText();
         sanPham.ChatLieu cl = new sanPham.ChatLieu();
         cl.setTenChatLieu(tenCL);
-        boolean addResult = service.add(cl);
+        boolean addResult = ss.add(cl);
         if (addResult) {
             JOptionPane.showMessageDialog(this, "Thêm chất liệu thành công.");
         } else {
             JOptionPane.showMessageDialog(this, "thêm chất liệu thất bại.");
         }
         this.fillTable();
+    }
+
+    void delete() {
+        int selectedRow = tblCL.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row to delete.");
+            return;
+        }
+
+        int idChatLieu = Integer.parseInt(tblCL.getValueAt(selectedRow, 0).toString());
+        ChatLieu cl = new ChatLieu();
+        cl.setIdChatLieu(idChatLieu);
+        ChatLieuServcieImpl ss = new ChatLieuServcieImpl();
+        boolean deleteResult = ss.deleteSV(cl);
+
+        if (deleteResult) {
+            JOptionPane.showMessageDialog(this, "Xóa thành công.");
+            // Remove the selected row from the table
+            mol.removeRow(selectedRow);
+            // Reset the index variable
+            index = -1;
+        } else {
+            JOptionPane.showMessageDialog(this, "Xóa thất bại.");
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -74,11 +103,12 @@ public class View_ChatLieu extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         btnThem = new javax.swing.JButton();
-        txtID = new javax.swing.JTextField();
+        txt_IDchatLIeu = new javax.swing.JTextField();
         txtTen = new javax.swing.JTextField();
         btnReset = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         txtIDSP = new javax.swing.JTextField();
+        btn_Delete = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -111,7 +141,7 @@ public class View_ChatLieu extends javax.swing.JFrame {
             }
         });
 
-        txtID.setEditable(false);
+        txt_IDchatLIeu.setEditable(false);
 
         txtTen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,6 +166,13 @@ public class View_ChatLieu extends javax.swing.JFrame {
 
         txtIDSP.setEditable(false);
 
+        btn_Delete.setText("Xóa ");
+        btn_Delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_DeleteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -151,16 +188,18 @@ public class View_ChatLieu extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txt_IDchatLIeu, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(btnThem)
-                                        .addGap(38, 38, 38)
-                                        .addComponent(btnReset))
-                                    .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btnReset)
+                                        .addGap(30, 30, 30)
+                                        .addComponent(btn_Delete)))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtIDSP, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -175,7 +214,7 @@ public class View_ChatLieu extends javax.swing.JFrame {
                         .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txt_IDchatLIeu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
@@ -188,7 +227,8 @@ public class View_ChatLieu extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThem)
-                    .addComponent(btnReset))
+                    .addComponent(btnReset)
+                    .addComponent(btn_Delete))
                 .addGap(26, 26, 26)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27))
@@ -214,7 +254,7 @@ public class View_ChatLieu extends javax.swing.JFrame {
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         // TODO add your handling code here:
-        txtID.setText("");
+        txt_IDchatLIeu.setText("");
         txtTen.setText("");
     }//GEN-LAST:event_btnResetActionPerformed
 
@@ -225,6 +265,16 @@ public class View_ChatLieu extends javax.swing.JFrame {
         spct.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btn_DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DeleteActionPerformed
+
+        delete();
+        fillTable();
+        txt_IDchatLIeu.setText("");
+        txtTen.setText("");
+
+
+    }//GEN-LAST:event_btn_DeleteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -266,12 +316,14 @@ public class View_ChatLieu extends javax.swing.JFrame {
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnReset;
     private javax.swing.JButton btnThem;
+    private javax.swing.JButton btn_Delete;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblCL;
-    private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtIDSP;
     private javax.swing.JTextField txtTen;
+    private javax.swing.JTextField txt_IDchatLIeu;
     // End of variables declaration//GEN-END:variables
+
 }

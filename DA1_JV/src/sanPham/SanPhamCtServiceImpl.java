@@ -20,8 +20,8 @@ public class SanPhamCtServiceImpl implements SanPhamCtService {
             List<SanPhamCt> list = new ArrayList<>();
             Statement stm = conn.createStatement();
             String sql = "SELECT top 5\n"
-                    + "    sanPham.id_sanPham,\n"
-                    + "    sanPham.tenSanPham,  \n"
+                    + "    id_sanPham,\n"
+                    + "    tenSanPham,  \n"
                     + "    tl.tenTheLoai,\n"
                     + "    cl.tenChatLieu,\n"
                     + "    th.tenThuongHieu,\n"
@@ -32,7 +32,7 @@ public class SanPhamCtServiceImpl implements SanPhamCtService {
                     + "    sanPham.soLuong,\n"
                     + "    sanPham.ghiChu\n"
                     + "FROM\n"
-                    + "    sanPham sanPham\n"
+                    + "   sanPham\n"
                     + "JOIN\n"
                     + "    theloai tl ON sanPham.id_theLoai = tl.id_theLoai\n"
                     + "JOIN\n"
@@ -43,7 +43,7 @@ public class SanPhamCtServiceImpl implements SanPhamCtService {
                     + "     nhaCungCap ncc ON sanPham.id_nhaCungCap = ncc.id_nhaCC\n";
             ResultSet rs = stm.executeQuery(sql);
             while (rs.next()) {
-                int idSP = rs.getInt("id_sanPham");
+              
                 String tenSP = rs.getString("tenSanPham");
                 String theLoai = rs.getString("tenTheLoai");
                 String chatLieu = rs.getString("tenChatLieu");
@@ -56,7 +56,7 @@ public class SanPhamCtServiceImpl implements SanPhamCtService {
                 String ghiChu = rs.getString("ghiChu");
 
                 SanPhamCt sp = new SanPhamCt();
-                sp.setiDSanPham(idSP);
+              
                 sp.setTenSP(tenSP);
                 sp.setTenTheLoai(theLoai);
                 sp.setTenChatLieu(chatLieu);
@@ -101,7 +101,7 @@ public class SanPhamCtServiceImpl implements SanPhamCtService {
 
     @Override
     public boolean delete(SanPhamCt sp) {
-        String sql = "delete sanPhamCt where id_sanPham=?";
+        String sql = "delete sanPham where id_sanPham=?";
         try {
             PreparedStatement stm = conn.prepareStatement(sql);
             stm.setInt(1, sp.getIdSanPhamCt());

@@ -29,9 +29,17 @@ public class Mau {
         this.tenMau = tenMau;
     }
 
+    
     @Override
     public String toString() {
         return String.valueOf(idMau);
+    }
+    
+      public Object[] toDataRow() {
+        return new Object[]{
+           this.idMau,
+            this.tenMau
+        };
     }
 
 }

@@ -1,5 +1,4 @@
-﻿create database BanGiay_DA1
- use BanGiay_DA1
+﻿ use BanGiay_DA1
 
 --ThuongHieu
 if object_id('THUONGHIEU') is not null

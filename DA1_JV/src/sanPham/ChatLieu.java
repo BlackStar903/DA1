@@ -35,5 +35,20 @@ public class ChatLieu {
     public void setTenChatLieu(String tenChatLieu) {
         this.tenChatLieu = tenChatLieu;
     }
+
+    String idChatLieu() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public String toString() {
+        return "ChatLieu{" + "idChatLieu=" + idChatLieu + ", tenChatLieu=" + tenChatLieu + '}';
+    }
     
+      public Object[] toDataRow() {
+        return new Object[]{
+           this.idChatLieu,
+            this.tenChatLieu
+        };
+    }
 }

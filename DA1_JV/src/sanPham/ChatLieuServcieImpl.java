@@ -10,11 +10,17 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class ChatLieuServcieImpl implements ChatLieuService {
+/**
+ *
+ * @author Admin
+ */
+public class ChatLieuServcieImpl {
 
     private Connection conn = DBConnect.getConnection();
+    private PreparedStatement ps = null;
+    private ResultSet rs = null;
+    List<ChatLieu> listCL;
 
-    @Override
     public List<ChatLieu> getChatLieu() {
         try {
             List<ChatLieu> list = new ArrayList<>();
@@ -37,7 +43,6 @@ public class ChatLieuServcieImpl implements ChatLieuService {
         return null;
     }
 
-    @Override
     public boolean add(ChatLieu cl) {
         try {
             String sql = "INSERT chatLieu(tenChatLieu) VALUES(?)";
@@ -49,6 +54,18 @@ public class ChatLieuServcieImpl implements ChatLieuService {
         } catch (SQLException ex) {
             ex.printStackTrace();
 
+            return false;
+        }
+    }
+
+    public boolean deleteSV(ChatLieu cl) {
+        String SQL = "DELETE FROM chatLieu WHERE id_chatLieu = ?";
+        try (Connection conn = DBConnect.getConnection(); PreparedStatement ps = conn.prepareStatement(SQL)) {
+            ps.setInt(1, cl.getIdChatLieu());
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
             return false;
         }
     }

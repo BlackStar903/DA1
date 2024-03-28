@@ -15,9 +15,14 @@ import javax.swing.table.DefaultTableModel;
  */
 public class View_Mau extends javax.swing.JFrame {
 
-    private MauService service = new MauServiceImpl();
+    private Mau m = new Mau();
+   
+    private MauServiceImpl ss = new MauServiceImpl();
     DefaultTableModel mol = new DefaultTableModel();
     private String dtMau;
+
+    private int index = -1;
+    private Object mauService;
 
     public View_Mau(String dtMau) {
         initComponents();
@@ -38,7 +43,7 @@ public class View_Mau extends javax.swing.JFrame {
     void fillTable() {
         mol = (DefaultTableModel) tblMau.getModel();
         mol.setRowCount(0);
-        for (sanPham.Mau sp : service.getMau()) {
+        for (sanPham.Mau sp : ss.getMau()) {
             Object[] toData = new Object[]{
                 sp.getIdMau(), sp.getTenMau()
             };
@@ -56,13 +61,36 @@ public class View_Mau extends javax.swing.JFrame {
         String tenMau = txtTen.getText();
         sanPham.Mau ncc = new sanPham.Mau();
         ncc.setTenMau(tenMau);
-        boolean addResult = service.add(ncc);
+        boolean addResult = ss.add(ncc);
         if (addResult) {
             JOptionPane.showMessageDialog(this, "Thêm màu thành công.");
         } else {
             JOptionPane.showMessageDialog(this, "thêm màu thất bại.");
         }
         this.fillTable();
+    }
+
+    void delete() {
+        int selectedRow = tblMau.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row to delete.");
+            return;
+        }
+
+        int idMau = Integer.parseInt(tblMau.getValueAt(selectedRow, 0).toString());
+  
+        boolean deleteResult = mauService.
+      
+
+        if (deleteResult) {
+            JOptionPane.showMessageDialog(this, "Xóa thành công.");
+            // Remove the selected row from the table
+            mol.removeRow(selectedRow);
+            // Reset the index variable
+            index = -1;
+        } else {
+            JOptionPane.showMessageDialog(this, "Xóa thất bại.");
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -79,6 +107,7 @@ public class View_Mau extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
         txtIDSP = new javax.swing.JTextField();
+        btn_deleteMau = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -136,6 +165,13 @@ public class View_Mau extends javax.swing.JFrame {
 
         txtIDSP.setEditable(false);
 
+        btn_deleteMau.setText("Xóa");
+        btn_deleteMau.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_deleteMauActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -143,27 +179,31 @@ public class View_Mau extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(47, 47, 47)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnBack)
+                            .addComponent(txtIDSP, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(46, 46, 46)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(108, 108, 108)
                                 .addComponent(btnThem)
-                                .addGap(32, 32, 32)
-                                .addComponent(btnReset))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnBack)
-                                    .addComponent(txtIDSP, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addGap(35, 35, 35)
+                                .addComponent(btnReset)
+                                .addGap(35, 35, 35)
+                                .addComponent(btn_deleteMau)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(17, 17, 17))
         );
         layout.setVerticalGroup(
@@ -187,7 +227,8 @@ public class View_Mau extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThem)
-                    .addComponent(btnReset))
+                    .addComponent(btnReset)
+                    .addComponent(btn_deleteMau))
                 .addGap(29, 29, 29)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28))
@@ -224,6 +265,12 @@ public class View_Mau extends javax.swing.JFrame {
         spct.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btn_deleteMauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteMauActionPerformed
+        delete();
+        fillTable();
+
+    }//GEN-LAST:event_btn_deleteMauActionPerformed
 
     /**
      * @param args the command line arguments
@@ -265,6 +312,7 @@ public class View_Mau extends javax.swing.JFrame {
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnReset;
     private javax.swing.JButton btnThem;
+    private javax.swing.JButton btn_deleteMau;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

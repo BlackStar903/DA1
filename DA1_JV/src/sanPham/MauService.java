@@ -14,5 +14,6 @@ import java.util.List;
 public interface MauService {
      List<Mau> getMau();
 
-    public boolean add(Mau mau);
+     boolean add(Mau mau);
+    boolean delete(int idMau);
 }

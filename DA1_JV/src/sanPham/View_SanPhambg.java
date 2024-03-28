@@ -28,7 +28,7 @@ public class View_SanPhambg extends javax.swing.JFrame {
 
     private SanPhamCtService spctService = new SanPhamCtServiceImpl();
     private TheLoaiService tlService = new TheLoaiServiceImpl();
-    private ChatLieuService clService = new ChatLieuServcieImpl();
+    private ChatLieuServcieImpl clService = new ChatLieuServcieImpl();
     private ThuongHieuService thService = new ThuongHieuServiceImpl();
     private NhaCCService nccService = new NhaCCServiceImpl();
     private MauService mauService = new MauServiceImpl();
@@ -217,10 +217,16 @@ public class View_SanPhambg extends javax.swing.JFrame {
     }
 
     void delete() {
+
+        int check = JOptionPane.showConfirmDialog(this, "bạn muốn thêm XÓA KHÔNG");
+        if (check != JOptionPane.YES_OPTION) {
+            return;
+        }
         int idSPCT = Integer.parseInt(txtIDSP.getText());
         sanPham.SanPhamCt sp = new sanPham.SanPhamCt();
         sp.setIdSanPhamCt(idSPCT);
         boolean deleteResult = spctService.delete(sp);
+
         if (deleteResult) {
             JOptionPane.showMessageDialog(this, "Xóa thành công");
         } else {
@@ -252,7 +258,7 @@ public class View_SanPhambg extends javax.swing.JFrame {
     }
 
     SanPhamCt getForm() {
-        int idTL = cboTL.getSelectedIndex()+1, idCl = cboChatLieu.getSelectedIndex()+1, idTH = cboThuongHieu.getSelectedIndex()+1, idNCC = cboNCC.getSelectedIndex()+1;
+        int idTL = cboTL.getSelectedIndex() + 1, idCl = cboChatLieu.getSelectedIndex() + 1, idTH = cboThuongHieu.getSelectedIndex() + 1, idNCC = cboNCC.getSelectedIndex() + 1;
         return new SanPhamCt(Integer.parseInt(txtIDSP.getText()), idTL, idCl, idTH, idNCC, txtTenSP.getText(),
                 cboTL.getSelectedItem().toString(), cboChatLieu.getSelectedItem().toString(), cboThuongHieu.getSelectedItem().toString(), cboNCC.getSelectedItem().toString(),
                 cboMau.getSelectedItem().toString(), Double.parseDouble(txtGia.getText()), Integer.parseInt(txtSize.getText()), Integer.parseInt(txtSoLuong.getText()),
