@@ -4,10 +4,10 @@
  */
 package dangNhap;
 
-import ConnectionProvider.DBConnect;
+import connectionProvider.DBConnect;
 import java.sql.*;
 import javax.swing.JOptionPane;
-import VIEW.view_backGroud;
+import view.view_backGroud;
 
 public class viewDangNhap extends javax.swing.JFrame {
 

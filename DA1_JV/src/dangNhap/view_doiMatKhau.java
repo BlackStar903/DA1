@@ -4,11 +4,11 @@
  */
 package dangNhap;
 
-import ConnectionProvider.DBConnect;
-import Model.nhanVien;
+import connectionProvider.DBConnect;
+import model.nhanVien;
 import javax.swing.JOptionPane;
 import java.sql.*;
-import VIEW.view_backGroud;
+import view.view_backGroud;
 
 public class view_doiMatKhau extends javax.swing.JFrame {
 
