@@ -258,7 +258,7 @@ public class View_ChatLieu extends javax.swing.JFrame {
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         // TODO add your handling code here:
         txt_IDchatLIeu.setText("");
-        txtTen.setText(" 11");
+        txtTen.setText(" ");
     }//GEN-LAST:event_btnResetActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
