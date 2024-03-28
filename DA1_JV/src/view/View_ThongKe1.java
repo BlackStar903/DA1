@@ -1,9 +1,9 @@
-package VIEW;
+package view;
 
-import Servic.ThongKeServiceImpl;
-import Servic.ThongKeService;
-import Model.ThongKe;
-import Servic.banHangService_IMPL;
+import service.ThongKeServiceImpl;
+import service.ThongKeService;
+import model.ThongKe;
+import service.banHangService_IMPL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,11 +16,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
-import ConnectionProvider.DBConnect;
-import VIEW.view_khuyenMai;
-import VIEW.view_nhanVien;
-import VIEW.View_banHang;
-import VIEW.view_hoaDon;
+import connectionProvider.DBConnect;
+import view.view_khuyenMai;
+import view.view_nhanVien;
+import view.View_banHang;
+import view.view_hoaDon;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
@@ -31,8 +31,8 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
-import VIEW.view_backGroud;
-import VIEW.view_SanPham;
+import view.view_backGroud;
+import view.view_SanPham;
 
 /**
  *

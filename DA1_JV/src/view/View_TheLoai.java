@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package VIEW;
+package view;
 
-import Servic.TheLoaiService;
-import Servic.TheLoaiServiceImpl;
+import service.TheLoaiService;
+import service.TheLoaiServiceImpl;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -38,7 +38,7 @@ public class View_TheLoai extends javax.swing.JFrame {
     void fillTable() {
         mol = (DefaultTableModel) tblTL.getModel();
         mol.setRowCount(0);
-        for (Model.TheLoai sp : service.getTheLoai()) {
+        for (model.TheLoai sp : service.getTheLoai()) {
             Object[] toData = new Object[]{
                 sp.getIdTheLoai(), sp.getTenTheLoai()
             };
@@ -54,7 +54,7 @@ public class View_TheLoai extends javax.swing.JFrame {
 
     void addTL() {
         String tenTheLoai = txtTen.getText();
-        Model.TheLoai sp = new Model.TheLoai();
+        model.TheLoai sp = new model.TheLoai();
         sp.setTenTheLoai(tenTheLoai);
         boolean addResult = service.add(sp);
         if (addResult) {

@@ -1,8 +1,8 @@
-package Servic;
+package service;
 
-import ConnectionProvider.DBConnect;
-import Model.SanPham;
-import Servic.SanPhamCt;
+import connectionProvider.DBConnect;
+import model.SanPham;
+import service.SanPhamCt;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

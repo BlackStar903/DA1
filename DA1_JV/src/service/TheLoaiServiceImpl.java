@@ -1,7 +1,7 @@
-package Servic;
+package service;
 
-import ConnectionProvider.DBConnect;
-import Model.TheLoai;
+import connectionProvider.DBConnect;
+import model.TheLoai;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Statement;

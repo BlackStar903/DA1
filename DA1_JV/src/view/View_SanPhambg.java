@@ -1,21 +1,21 @@
-package VIEW;
+package view;
 
-import Servic.SanPhamCt;
-import ConnectionProvider.DBConnect;
-import Servic.ChatLieuServcieImpl;
-import Servic.ChatLieuService;
-import Servic.MauService;
-import Servic.MauServiceImpl;
-import Servic.NhaCCService;
-import Servic.NhaCCServiceImpl;
-import Servic.SanPhamCtServiceImpl;
+import service.SanPhamCt;
+import connectionProvider.DBConnect;
+import service.ChatLieuServcieImpl;
+import service.ChatLieuService;
+import service.MauService;
+import service.MauServiceImpl;
+import service.NhaCCService;
+import service.NhaCCServiceImpl;
+import service.SanPhamCtServiceImpl;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import Servic.SanPhamCtService;
-import Servic.TheLoaiService;
-import Servic.TheLoaiServiceImpl;
-import Servic.ThuongHieuService;
-import Servic.ThuongHieuServiceImpl;
+import service.SanPhamCtService;
+import service.TheLoaiService;
+import service.TheLoaiServiceImpl;
+import service.ThuongHieuService;
+import service.ThuongHieuServiceImpl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,7 +23,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 import java.util.Vector;
-import static VIEW.view_SanPham.tenSP;
+import static view.view_SanPham.tenSP;
 
 public class View_SanPhambg extends javax.swing.JFrame {
 
@@ -58,22 +58,22 @@ public class View_SanPhambg extends javax.swing.JFrame {
 
         // cbo Thể loại
         cboTL.removeAllItems();
-        for (Model.TheLoai tl : tlService.getTheLoai()) {
+        for (model.TheLoai tl : tlService.getTheLoai()) {
             cboTL.addItem(tl.getTenTheLoai());
         }
         // cbo chất liệu
         cboChatLieu.removeAllItems();
-        for (Model.ChatLieu cl : clService.getChatLieu()) {
+        for (model.ChatLieu cl : clService.getChatLieu()) {
             cboChatLieu.addItem(cl.getTenChatLieu());
         }
         // cbo thương hiệu
         cboThuongHieu.removeAllItems();
-        for (Model.ThuongHieu th : thService.getThuongHieu()) {
+        for (model.ThuongHieu th : thService.getThuongHieu()) {
             cboThuongHieu.addItem(th.getTenThuongHieu());
         }
         // cbo nhà cung cấp
         cboNCC.removeAllItems();
-        for (Model.NhaCungCap ncc : nccService.getNCC()) {
+        for (model.NhaCungCap ncc : nccService.getNCC()) {
             cboNCC.addItem(ncc.getTenNhaCungCap());
         }
         //phân trang
@@ -92,19 +92,19 @@ public class View_SanPhambg extends javax.swing.JFrame {
 //            cboMau1.addItem(mau.getTenMau());
 //        }
         // cbo Thể loại
-        for (Model.TheLoai tl : tlService.getTheLoai()) {
+        for (model.TheLoai tl : tlService.getTheLoai()) {
             cboTL1.addItem(tl.getTenTheLoai());
         }
         // cbo chất liệu
-        for (Model.ChatLieu cl : clService.getChatLieu()) {
+        for (model.ChatLieu cl : clService.getChatLieu()) {
             cboChatLieu1.addItem(cl.getTenChatLieu());
         }
         // cbo thương hiệu
-        for (Model.ThuongHieu th : thService.getThuongHieu()) {
+        for (model.ThuongHieu th : thService.getThuongHieu()) {
             cboThuongHieu1.addItem(th.getTenThuongHieu());
         }
         // cbo nhà cung cấp
-        for (Model.NhaCungCap ncc : nccService.getNCC()) {
+        for (model.NhaCungCap ncc : nccService.getNCC()) {
             cboNCC1.addItem(ncc.getTenNhaCungCap());
         }
         fillTimKiemTuSP(dataContructor);
@@ -117,7 +117,7 @@ public class View_SanPhambg extends javax.swing.JFrame {
     void fillTable() {
         mol = (DefaultTableModel) tbl_SPCT.getModel();
         mol.setRowCount(0);
-        for (Servic.SanPhamCt sp : spctService.getAll()) {
+        for (service.SanPhamCt sp : spctService.getAll()) {
             Object[] toData = new Object[]{
                 sp.getIdSanPhamCt(), sp.getiDSanPham(), sp.getTenSP(), sp.getTenTheLoai(), sp.getTenChatLieu(), sp.getTenThuongHieu(),
                 sp.getTenNhaCungCap(), sp.getTenMau(), sp.getGia(), sp.getSize(), sp.getSoLuong(), sp.getGhiChu()
@@ -195,7 +195,7 @@ public class View_SanPhambg extends javax.swing.JFrame {
 //            }
 //        }
 
-        Servic.SanPhamCt spct = new Servic.SanPhamCt();
+        service.SanPhamCt spct = new service.SanPhamCt();
         //spct
 //        spct.setiDSanPham(idSP);
         spct.setIdTL(theLoai);
@@ -224,7 +224,7 @@ public class View_SanPhambg extends javax.swing.JFrame {
             return;
         }
         int idSPCT = Integer.parseInt(txtIDSP.getText());
-        Servic.SanPhamCt sp = new Servic.SanPhamCt();
+        service.SanPhamCt sp = new service.SanPhamCt();
         sp.setIdSanPhamCt(idSPCT);
         boolean deleteResult = spctService.delete(sp);
 
@@ -400,7 +400,6 @@ public class View_SanPhambg extends javax.swing.JFrame {
         btnThuongHieu = new javax.swing.JButton();
         btnChatLieu = new javax.swing.JButton();
         btnNCC = new javax.swing.JButton();
-        btnMau = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         txtTimKiem = new javax.swing.JTextField();
@@ -560,13 +559,6 @@ public class View_SanPhambg extends javax.swing.JFrame {
             }
         });
 
-        btnMau.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Add.png"))); // NOI18N
-        btnMau.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMauActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -620,7 +612,6 @@ public class View_SanPhambg extends javax.swing.JFrame {
                             .addComponent(btnTheLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnThuongHieu, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnChatLieu, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnMau, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(179, Short.MAX_VALUE))
         );
@@ -664,11 +655,9 @@ public class View_SanPhambg extends javax.swing.JFrame {
                             .addComponent(jLabel8)
                             .addComponent(cboNCC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel9)
-                                .addComponent(cboMau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btnMau, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(cboMau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel10)
@@ -986,7 +975,7 @@ public class View_SanPhambg extends javax.swing.JFrame {
     void fillTimKiem(String tenSanPham) {
         mol = (DefaultTableModel) tbl_SPCT.getModel();
         mol.setRowCount(0);
-        for (Servic.SanPhamCt sp : spctService.timTheoTen(tenSanPham)) {
+        for (service.SanPhamCt sp : spctService.timTheoTen(tenSanPham)) {
             Object[] toData = new Object[]{
                 sp.getiDSanPham(), sp.getTenSP(), sp.getTenTheLoai(), sp.getTenChatLieu(), sp.getTenThuongHieu(),
                 sp.getTenNhaCungCap(), sp.getTenMau(), sp.getGia(), sp.getSize(), sp.getSoLuong(), sp.getGhiChu()
@@ -998,7 +987,7 @@ public class View_SanPhambg extends javax.swing.JFrame {
     void fillTimKiemTuSP(String tenSanPham1) {
         mol = (DefaultTableModel) tbl_SPCT.getModel();
         mol.setRowCount(0);
-        for (Servic.SanPhamCt sp : spctService.timTheoTuSP(tenSanPham1)) {
+        for (service.SanPhamCt sp : spctService.timTheoTuSP(tenSanPham1)) {
             Object[] toData = new Object[]{
                 sp.getIdSanPhamCt(), sp.getiDSanPham(), sp.getTenSP(), sp.getTenTheLoai(), sp.getTenChatLieu(), sp.getTenThuongHieu(),
                 sp.getTenNhaCungCap(), sp.getTenMau(), sp.getGia(), sp.getSize(), sp.getSoLuong(), sp.getGhiChu()
@@ -1078,13 +1067,6 @@ public class View_SanPhambg extends javax.swing.JFrame {
         ncc.setVisible(true);
         ncc.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnNCCActionPerformed
-
-    private void btnMauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMauActionPerformed
-        // TODO add your handling code here:
-        View_Mau mau = new View_Mau(txtIDSP.getText());
-        mau.setVisible(true);
-        mau.setLocationRelativeTo(null);
-    }//GEN-LAST:event_btnMauActionPerformed
 
     private void cboTL1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTL1ActionPerformed
         int theLoai = cboTL1.getSelectedIndex();
@@ -1821,7 +1803,6 @@ public class View_SanPhambg extends javax.swing.JFrame {
     private javax.swing.JButton btnChatLieu;
     private javax.swing.JButton btnFirst;
     private javax.swing.JButton btnLast;
-    private javax.swing.JButton btnMau;
     private javax.swing.JButton btnMoi;
     private javax.swing.JButton btnNCC;
     private javax.swing.JButton btnNext;

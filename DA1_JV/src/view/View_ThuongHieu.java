@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package VIEW;
+package view;
 
-import Servic.ThuongHieuService;
-import Servic.ThuongHieuServiceImpl;
+import service.ThuongHieuService;
+import service.ThuongHieuServiceImpl;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -38,7 +38,7 @@ public class View_ThuongHieu extends javax.swing.JFrame {
     void fillTable() {
         mol = (DefaultTableModel) tblTH.getModel();
         mol.setRowCount(0);
-        for (Model.ThuongHieu sp : service.getThuongHieu()) {
+        for (model.ThuongHieu sp : service.getThuongHieu()) {
             Object[] toData = new Object[]{
                 sp.getIdThuongHieu(), sp.getTenThuongHieu()
             };
@@ -54,7 +54,7 @@ public class View_ThuongHieu extends javax.swing.JFrame {
 
     void addCL() {
         String tenTH = txtTen.getText();
-        Model.ThuongHieu th = new Model.ThuongHieu();
+        model.ThuongHieu th = new model.ThuongHieu();
         th.setTenThuongHieu(tenTH);
         boolean addResult = service.add(th);
         if (addResult) {

@@ -1,6 +1,6 @@
-package Servic;
+package service;
 
-import Model.SanPham;
+import model.SanPham;
 import java.util.List;
 
 public interface SanPhamService {

@@ -2,13 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package VIEW;
+package view;
 
-import Model.ChatLieu;
+import model.ChatLieu;
 import java.util.ArrayList;
 import java.util.List;
-import Servic.ChatLieuServcieImpl;
-import Servic.ChatLieuService;
+import service.ChatLieuServcieImpl;
+import service.ChatLieuService;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -44,7 +44,7 @@ public class View_ChatLieu extends javax.swing.JFrame {
     void fillTable() {
         mol = (DefaultTableModel) tblCL.getModel();
         mol.setRowCount(0);
-        for (Model.ChatLieu sp : ss.getChatLieu()) {
+        for (model.ChatLieu sp : ss.getChatLieu()) {
             Object[] toData = new Object[]{
                 sp.getIdChatLieu(), sp.getTenChatLieu()
             };
@@ -60,7 +60,7 @@ public class View_ChatLieu extends javax.swing.JFrame {
 
     void addCL() {
         String tenCL = txtTen.getText();
-        Model.ChatLieu cl = new Model.ChatLieu();
+        model.ChatLieu cl = new model.ChatLieu();
         cl.setTenChatLieu(tenCL);
         boolean addResult = ss.add(cl);
         if (addResult) {

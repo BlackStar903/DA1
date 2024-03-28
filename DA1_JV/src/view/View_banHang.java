@@ -2,14 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package VIEW;
+package view;
 
-import Model.banHang;
-import Servic.banHangService_IMPL;
-import ConnectionProvider.DBConnect;
-import VIEW.view_khachHang;
-import VIEW.view_khuyenMai;
-import VIEW.view_nhanVien;
+import model.banHang;
+import service.banHangService_IMPL;
+import connectionProvider.DBConnect;
+import view.view_khachHang;
+import view.view_khuyenMai;
+import view.view_nhanVien;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,10 +21,10 @@ import java.util.Vector;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import ThongKe.View_ThongKe1;
+import thongke.View_ThongKe1;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import VIEW.view_SanPham;
+import view.view_SanPham;
 
 /**
  *

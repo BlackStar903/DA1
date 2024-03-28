@@ -1,10 +1,10 @@
-package VIEW;
+package view;
 
-import Servic.SanPhamCt;
-import ConnectionProvider.DBConnect;
-import Model.SanPham;
-import Servic.SanPhamService;
-import Servic.SanPhamServiceImpl;
+import service.SanPhamCt;
+import connectionProvider.DBConnect;
+import model.SanPham;
+import service.SanPhamService;
+import service.SanPhamServiceImpl;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -198,7 +198,7 @@ public class view_SanPham extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(621, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(txt_thongTinNv, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -427,7 +427,7 @@ public class view_SanPham extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_nhanVienActionPerformed
 
     private void btn_thongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_thongKeActionPerformed
-        ThongKe.View_ThongKe1 viewTK = new ThongKe.View_ThongKe1(txt_thongTinNv.getText());
+        thongke.View_ThongKe1 viewTK = new thongke.View_ThongKe1(txt_thongTinNv.getText());
         viewTK.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btn_thongKeActionPerformed

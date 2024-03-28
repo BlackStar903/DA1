@@ -1,7 +1,7 @@
-package Servic;
+package service;
 
-import ConnectionProvider.DBConnect;
-import Servic.SanPhamCt;
+import connectionProvider.DBConnect;
+import service.SanPhamCt;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;

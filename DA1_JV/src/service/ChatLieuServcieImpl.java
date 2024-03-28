@@ -1,7 +1,7 @@
-package Servic;
+package service;
 
-import ConnectionProvider.DBConnect;
-import Model.ChatLieu;
+import connectionProvider.DBConnect;
+import model.ChatLieu;
 import java.util.List;
 import java.sql.Statement;
 import java.sql.PreparedStatement;

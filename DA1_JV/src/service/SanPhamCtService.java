@@ -1,7 +1,7 @@
-package Servic;
+package service;
 
 import java.util.List;
-import Servic.SanPhamCt;
+import service.SanPhamCt;
 
 public interface SanPhamCtService {
 

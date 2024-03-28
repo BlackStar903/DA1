@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package VIEW;
+package view;
 
-import VIEW.view_khachHang;
-import Servic.khachHangService_impl;
-import Model.khachHang;
+import view.view_khachHang;
+import service.khachHangService_impl;
+import model.khachHang;
 import javax.swing.JOptionPane;
 
 /**

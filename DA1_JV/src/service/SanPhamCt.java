@@ -1,4 +1,4 @@
-package Servic;
+package service;
 
 public class SanPhamCt {
     public int idSanPhamCt;

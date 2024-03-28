@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 public class SanPham {
     public int iDSanPham;

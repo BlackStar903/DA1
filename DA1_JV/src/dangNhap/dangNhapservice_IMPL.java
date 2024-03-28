@@ -1,8 +1,8 @@
 
 package dangNhap;
 
-import ConnectionProvider.DBConnect;
-import Model.nhanVien;
+import connectionProvider.DBConnect;
+import model.nhanVien;
 
 /**
  *

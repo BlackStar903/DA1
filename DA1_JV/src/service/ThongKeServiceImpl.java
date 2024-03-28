@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Servic;
+package service;
 
-import Model.ThongKe;
-import ConnectionProvider.DBConnect;
-import Model.banHang;
+import model.ThongKe;
+import connectionProvider.DBConnect;
+import model.banHang;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;

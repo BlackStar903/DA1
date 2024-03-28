@@ -2,14 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package VIEW;
+package view;
 
-import Servic.nhanVien_serviceIMPL;
-import Model.nhanVien;
-import ConnectionProvider.DBConnect;
-import VIEW.view_khuyenMai;
-import ThongKe.View_ThongKe;
-import VIEW.view_SanPham;
+import service.nhanVien_serviceIMPL;
+import model.nhanVien;
+import connectionProvider.DBConnect;
+import view.view_khuyenMai;
+import thongke.View_ThongKe;
+import view.view_SanPham;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Stack;
@@ -230,13 +230,13 @@ public class view_nhanVien extends javax.swing.JFrame {
 
         tbl_nhanVien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "id nhân viên", "tên nhân viên", "Giới tính", "số điện thoại", "email", "địa chỉ", "id tài khoản", "trạng thái"
+                "id nhân viên", "tên nhân viên", "Giới tính", "số điện thoại", "địa chỉ", "id tài khoản", "trạng thái"
             }
         ));
         tbl_nhanVien.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -799,7 +799,7 @@ public class view_nhanVien extends javax.swing.JFrame {
         mol.setRowCount(0);
         mol.getDataVector().removeAllElements();
         try {
-            String sql = "select top 3 id_nhanVien, hoTen, gioiTinh,soDt,email,diaChi,id_taiKhoan,trangThai from nhanVien where [id_nhanVien]not in (select top " + (trang * 3 - 3) + " [id_nhanVien] from nhanVien)";
+            String sql = "select top 3 id_nhanVien, hoTen, gioiTinh,soDt,diaChi,id_taiKhoan,trangThai from nhanVien where [id_nhanVien]not in (select top " + (trang * 3 - 3) + " [id_nhanVien] from nhanVien)";
             Statement stm = conn.createStatement();
             ResultSet rs = stm.executeQuery(sql);
             while (rs.next()) {
@@ -807,10 +807,9 @@ public class view_nhanVien extends javax.swing.JFrame {
                 String hoTen = rs.getString(2);
                 int gioiTinh = Integer.parseInt(rs.getString(3));
                 int soDienthoai = Integer.parseInt(rs.getString(4));
-                String email = rs.getString(5);
-                String diaChi = rs.getString(6);
-                int idTaiKhoan = Integer.parseInt(rs.getString(7));
-                int trangThai = Integer.parseInt(rs.getString(8));
+                String diaChi = rs.getString(5);
+                int idTaiKhoan = Integer.parseInt(rs.getString(6));
+                int trangThai = Integer.parseInt(rs.getString(7));
 
                 Vector vt = new Vector();
                 vt.add(idNhanVien);
@@ -823,7 +822,6 @@ public class view_nhanVien extends javax.swing.JFrame {
                 }
                 vt.add(strGioiTinh);
                 vt.add(soDienthoai);
-                vt.add(email);
                 vt.add(diaChi);
                 vt.add(idTaiKhoan);
                 String strTrangThai;

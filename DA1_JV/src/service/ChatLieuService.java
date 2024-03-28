@@ -1,6 +1,6 @@
-package Servic;
+package service;
 
-import Model.ChatLieu;
+import model.ChatLieu;
 import java.util.List;
 
 public interface ChatLieuService {

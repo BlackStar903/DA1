@@ -1,6 +1,6 @@
-package Servic;
+package service;
 
-import Model.TheLoai;
+import model.TheLoai;
 import java.util.List;
 
 public interface TheLoaiService {

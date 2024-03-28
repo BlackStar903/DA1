@@ -2,12 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package VIEW;
+package view;
 
-import Servic.khuyenMaiServiceIMPL;
-import Model.khuyenMai;
-import ConnectionProvider.DBConnect;
-import ThongKe.View_ThongKe;
+import service.khuyenMaiServiceIMPL;
+import model.khuyenMai;
+import connectionProvider.DBConnect;
+import thongke.View_ThongKe;
 import com.toedter.calendar.JDateChooser;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -20,7 +20,7 @@ import java.util.Date;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import VIEW.view_SanPham;
+import view.view_SanPham;
 
 /**
  *

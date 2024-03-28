@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package VIEW;
+package view;
 
-import Model.Mau;
-import Servic.MauService;
-import Servic.MauServiceImpl;
+import model.Mau;
+import service.MauService;
+import service.MauServiceImpl;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -44,7 +44,7 @@ public class View_Mau extends javax.swing.JFrame {
     void fillTable() {
         mol = (DefaultTableModel) tblMau.getModel();
         mol.setRowCount(0);
-        for (Model.Mau sp : ss.getMau()) {
+        for (model.Mau sp : ss.getMau()) {
             Object[] toData = new Object[]{
                 sp.getIdMau(), sp.getTenMau()
             };
@@ -60,7 +60,7 @@ public class View_Mau extends javax.swing.JFrame {
 
     void addNCC() {
         String tenMau = txtTen.getText();
-        Model.Mau ncc = new Model.Mau();
+        model.Mau ncc = new model.Mau();
         ncc.setTenMau(tenMau);
         boolean addResult = ss.add(ncc);
         if (addResult) {

@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Servic;
+package service;
 
-import Servic.khachHang_service;
-import Model.khachHang;
-import ConnectionProvider.DBConnect;
+import service.khachHang_service;
+import model.khachHang;
+import connectionProvider.DBConnect;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

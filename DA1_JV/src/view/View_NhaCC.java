@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package VIEW;
+package view;
 
-import Servic.NhaCCService;
-import Servic.NhaCCServiceImpl;
+import service.NhaCCService;
+import service.NhaCCServiceImpl;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -38,7 +38,7 @@ public class View_NhaCC extends javax.swing.JFrame {
     void fillTable() {
         mol = (DefaultTableModel) tblNCC.getModel();
         mol.setRowCount(0);
-        for (Model.NhaCungCap sp : service.getNCC()) {
+        for (model.NhaCungCap sp : service.getNCC()) {
             Object[] toData = new Object[]{
                 sp.getIdNhaCungCap(), sp.getTenNhaCungCap()
             };
@@ -54,7 +54,7 @@ public class View_NhaCC extends javax.swing.JFrame {
 
     void addNCC() {
         String tenTH = txtTen.getText();
-        Model.NhaCungCap ncc = new Model.NhaCungCap();
+        model.NhaCungCap ncc = new model.NhaCungCap();
         ncc.setTenNhaCungCap(tenTH);
         boolean addResult = service.add(ncc);
         if (addResult) {

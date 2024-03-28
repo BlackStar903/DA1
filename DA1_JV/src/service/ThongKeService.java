@@ -1,6 +1,6 @@
-package Servic;
+package service;
 
-import Model.ThongKe;
+import model.ThongKe;
 import java.util.List;
 
 public interface ThongKeService {

@@ -2,16 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package VIEW;
+package view;
 
-import VIEW.view_khuyenMai;
-import VIEW.view_nhanVien;
-import ThongKe.View_ThongKe;
-import VIEW.View_banHang;
+import view.view_khuyenMai;
+import view.view_nhanVien;
+import thongke.View_ThongKe;
+import view.View_banHang;
 import dangNhap.viewDangNhap;
 import dangNhap.view_doiMatKhau;
-import VIEW.view_hoaDon;
-import VIEW.view_SanPham;
+import view.view_hoaDon;
+import view.view_SanPham;
 
 /**
  *
