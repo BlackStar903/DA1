@@ -4,7 +4,7 @@
  */
 package dangNhap;
 
-import NhanVien.nhanVien;
+import Model.nhanVien;
 
 /**
  *
