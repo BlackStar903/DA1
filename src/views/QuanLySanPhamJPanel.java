@@ -709,7 +709,6 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
     private void setForm(SanPham sp) {
         if (tblSanPhansd.isShowing()) {
             String douong = tblSanPhansd.getValueAt(row, 2).toString();
-            System.out.println("ĐÂY LÀ douong" + douong);
             for (int i = 0; i < listlsp.size(); i++) {
                 if (douong.equals(listlsp.get(i).getTenLoai())) {
                     cboLoaidouong.setSelectedIndex(i);
