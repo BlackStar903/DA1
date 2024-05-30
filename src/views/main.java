@@ -5,7 +5,7 @@ import views.DangnhapJDialog;
 import views.DoiMatKhauJDialog;
 //import views.GiamGiaSanPhamJPanel;
 //import views.MainThongKeJPanel;
-//import views.QuanLyBanHangJPanel;
+import views.QuanLyBanHangJPanel;
 //import views.QuanLyHoaDonJPanel;
 //import views.QuanLyNhanvienJPanel;
 import views.QuanLySanPhamJPanel;
@@ -481,7 +481,7 @@ public class main extends javax.swing.JFrame {
         resetColor(lblTrangchu);
         resetColor(lblThongke);
         resetColor(lblGiamGia);
-//        showPanel(new QuanLyBanHangJPanel());
+        showPanel(new QuanLyBanHangJPanel());
     }//GEN-LAST:event_pnBanHangMouseClicked
 
     private void pnHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnHoaDonMouseClicked
@@ -600,6 +600,8 @@ public class main extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
