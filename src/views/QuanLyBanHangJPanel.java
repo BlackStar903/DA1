@@ -831,7 +831,6 @@ public class QuanLyBanHangJPanel extends javax.swing.JPanel {
             }
             thanhToanDon();
             JOptionPane.showMessageDialog(this, "Thanh toán thành công");
-            DAOSP.update_size2("DV2");
         }
         filltoTableHDCT();
         filltoHoadonCTT();

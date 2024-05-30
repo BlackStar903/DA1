@@ -20,7 +20,6 @@ public class SanPhamDao implements InterfaceSanPham {
     String insert = "insert into dbo.SanPham(ID_Sanpham,TenSP,Gia,ID_DonviSP,ID_LoaiSP,Trangthai,Hinh) values(?,?,?,?,?,?,?)";
 //String insert = "insert into dbo.SanPham(ID_Sanpham,TenSP,Gia,ID_DonviSP,ID_LoaiSP,Trangthai,Hinh) values(?,?,?,DV1,?,?,?)";
     String update_size = "update SanPham set ID_DonviSP=? where ID_Sanpham=?";
-    String update_size2 = "update SanPham set ID_DonviSP=?";
     String update = "update SanPham set TenSP = ? , Gia =? ,ID_DonviSP=?,"
             + "ID_LoaiSP =?, Trangthai=?  ,Hinh= ? where ID_Sanpham=?";
 
@@ -57,10 +56,6 @@ public class SanPhamDao implements InterfaceSanPham {
 
     public void update_size(String size, String idSP) {
         JDBCHeper.update(update_size, size, idSP);
-    }
-
-    public void update_size2(String size) {
-        JDBCHeper.update(update_size2, size);
     }
 
     @Override

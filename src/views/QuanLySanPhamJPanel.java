@@ -732,6 +732,7 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
                     cboLoaidouong.setSelectedIndex(i);
                 }
             }
+
             String donvidouong = tblSanPhansd.getValueAt(row, 4).toString();
             for (int i = 0; i < listdv.size(); i++) {
                 if (donvidouong.equals(listdv.get(i).getTenDonvi())) {
