@@ -71,18 +71,18 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
         //DAOSP.update_size2(daodv.selectByName(cboDonvi.getSelectedItem()+""));
         if (Auth.isManager() == false) {
             btnThem.setVisible(false);
-            btnSua.setVisible(false);
+            btnSua.setVisible(true);
             btnXoa.setVisible(false);
             tbnLamMoi.setVisible(false);
-            txtTenSP.setEditable(false);
-            txtMaSP.setEditable(false);
-            txtGia.setEditable(false);
+            txtTenSP.setEnabled(false);
+            txtMaSP.setEnabled(false);
+            txtGia.setEnabled(false);
             btndonvi.setEnabled(false);
             btnloaidouong.setEnabled(false);
             cboDonvi.setEnabled(false);
             cboLoaidouong.setEnabled(false);
-            rdoksd.setEnabled(false);
-            rdosd.setEnabled(false);
+            rdoksd.setEnabled(true);
+            rdosd.setEnabled(true);
         } else {
             btnThem.setVisible(true);
             btnSua.setVisible(true);
@@ -146,6 +146,7 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
         btndonvi = new javax.swing.JButton();
         btnloaidouong = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        lblPhanTrang = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(241, 241, 241));
 
@@ -354,7 +355,7 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
             }
         });
         jPanel1.add(btnPrev);
-        btnPrev.setBounds(950, 420, 61, 32);
+        btnPrev.setBounds(920, 420, 61, 32);
 
         btnnext.setText(">>");
         btnnext.addActionListener(new java.awt.event.ActionListener() {
@@ -363,7 +364,7 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
             }
         });
         jPanel1.add(btnnext);
-        btnnext.setBounds(1080, 420, 61, 34);
+        btnnext.setBounds(1070, 420, 61, 34);
 
         btnLast.setText(">|");
         btnLast.addActionListener(new java.awt.event.ActionListener() {
@@ -372,7 +373,7 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
             }
         });
         jPanel1.add(btnLast);
-        btnLast.setBounds(1170, 420, 61, 34);
+        btnLast.setBounds(1150, 420, 61, 34);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel7.setText("Trạng thái");
@@ -459,6 +460,11 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
         jLabel1.setText("QUẢN LÝ ĐỒ UỐNG");
         jPanel1.add(jLabel1);
         jLabel1.setBounds(470, 10, 380, 44);
+
+        lblPhanTrang.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblPhanTrang.setText("1/x");
+        jPanel1.add(lblPhanTrang);
+        lblPhanTrang.setBounds(1020, 420, 40, 30);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -1030,6 +1036,7 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblPhanTrang;
     private javax.swing.JRadioButton rdoksd;
     private javax.swing.JRadioButton rdosd;
     private javax.swing.JTabbedPane tabs;
