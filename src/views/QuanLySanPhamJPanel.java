@@ -849,7 +849,7 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
             return true;
         }
         if (regex3.matcher(txtGia.getText()).find()) {
-            JOptionPane.showMessageDialog(this, "Giá chứa ký tự đặc biệt, vui lòng xem lại!");
+            JOptionPane.showMessageDialog(this, "Giá không hợp lệ, vui lòng xem lại!");
             txtGia.requestFocus();
             return true;
         }

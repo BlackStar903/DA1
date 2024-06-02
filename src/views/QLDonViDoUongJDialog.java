@@ -31,6 +31,7 @@ public class QLDonViDoUongJDialog extends javax.swing.JDialog {
         filltableDonVi();
 //        txtmadonvi.setEnabled(true);
         txttendonvi.requestFocus();
+        jButton2.setEnabled(false);
         if (dao.selectAll().isEmpty()) {
             txtmadonvi.setText("DV01");
         } else {
@@ -104,7 +105,7 @@ public class QLDonViDoUongJDialog extends javax.swing.JDialog {
         });
         jPanel2.add(jButton1);
 
-        jButton3.setText("xóa");
+        jButton3.setText("XÓA");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -112,7 +113,7 @@ public class QLDonViDoUongJDialog extends javax.swing.JDialog {
         });
         jPanel2.add(jButton3);
 
-        jButton2.setText("Sửa ");
+        jButton2.setText("SỬA");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -260,11 +261,13 @@ public class QLDonViDoUongJDialog extends javax.swing.JDialog {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        jButton2.setEnabled(false);
         clear();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void tbldonviMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbldonviMouseClicked
         // TODO add your handling code here:
+        jButton2.setEnabled(true);
         try {
             row = tbldonvi.getSelectedRow();
             edit();
@@ -362,6 +365,7 @@ public class QLDonViDoUongJDialog extends javax.swing.JDialog {
 
     //
     private boolean checknull() {
+        List<DonViSanPham> list = dao.selectAll();
         String chuoi = "^[a-zA-Z]$";
         String ktso = "^[0-9]{0,9}$";
         int gia = 0;
@@ -426,6 +430,13 @@ public class QLDonViDoUongJDialog extends javax.swing.JDialog {
         } else if (checknull()) {
             return;
         } else {
+            List<DonViSanPham> list = dao.selectAll();
+            for (DonViSanPham dvsp : list) {
+                if (txttendonvi.getText().equalsIgnoreCase(dvsp.getTenDonvi())) {
+                    JOptionPane.showMessageDialog(this, "tên  đơn vị không được trùng");
+                    return;
+                }
+            }
             DonViSanPham dv = getform();
             dao.insert(dv);
             filltableDonVi();
@@ -435,9 +446,19 @@ public class QLDonViDoUongJDialog extends javax.swing.JDialog {
     }
 
     private void delete() {
+        if (checknull()) {
+            return;
+        }
         if (JOptionPane.showConfirmDialog(this, "bạn có muốn xóa loại sản phẩm này ?") == JOptionPane.YES_OPTION) {
             try {
                 String masp = txtmadonvi.getText();
+                List<DonViSanPham> list = dao.selectAll();
+                for (DonViSanPham dvsp : list) {
+                    if (!masp.equalsIgnoreCase(dvsp.getID_DonviSP())) {
+                        JOptionPane.showMessageDialog(this, "Mã đơn vị không có trong dữ liệu");
+                        return;
+                    }
+                }
                 dao.delete(masp);
                 filltableDonVi();
                 clear();
@@ -455,6 +476,14 @@ public class QLDonViDoUongJDialog extends javax.swing.JDialog {
         if (checknull()) {
             return;
         } else {
+//            List<DonViSanPham> list = dao.selectAll();
+//            for (DonViSanPham dvsp : list) {
+//                if (txttendonvi.getText().equalsIgnoreCase(dvsp.getTenDonvi())) {
+//                    JOptionPane.showMessageDialog(this, "tên  đơn vị không được trùng");
+//                    return;
+//                }
+//            }
+            jButton2.setEnabled(false);
             DonViSanPham dv = getform();
             dao.update(dv);
             filltableDonVi();
