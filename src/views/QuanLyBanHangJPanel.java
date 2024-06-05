@@ -152,6 +152,7 @@ public class QuanLyBanHangJPanel extends javax.swing.JPanel {
         tblHoadonchitiet = new javax.swing.JTable();
         jLabel19 = new javax.swing.JLabel();
         lblBan = new javax.swing.JLabel();
+        btnTaoDon1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         txtTimkiem = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
@@ -445,6 +446,18 @@ public class QuanLyBanHangJPanel extends javax.swing.JPanel {
         lblBan.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblBan.setText("......");
 
+        btnTaoDon1.setBackground(new java.awt.Color(153, 255, 153));
+        btnTaoDon1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnTaoDon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/printing.png"))); // NOI18N
+        btnTaoDon1.setText("In");
+        btnTaoDon1.setToolTipText("");
+        btnTaoDon1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnTaoDon1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTaoDon1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnHoadonLayout = new javax.swing.GroupLayout(pnHoadon);
         pnHoadon.setLayout(pnHoadonLayout);
         pnHoadonLayout.setHorizontalGroup(
@@ -488,10 +501,14 @@ public class QuanLyBanHangJPanel extends javax.swing.JPanel {
                                 .addComponent(jLabel13)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(pnHoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btnTaoDon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnThanhToan, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnHoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnHoadonLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(pnHoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(btnTaoDon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnThanhToan, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(btnTaoDon1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
 
@@ -526,11 +543,12 @@ public class QuanLyBanHangJPanel extends javax.swing.JPanel {
                 .addGroup(pnHoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnHoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel13)
-                        .addComponent(lblNgay))
+                        .addComponent(lblNgay)
+                        .addComponent(btnTaoDon1))
                     .addGroup(pnHoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel18)
                         .addComponent(txttienThoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(19, 19, 19)
+                .addGap(11, 11, 11)
                 .addGroup(pnHoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20)
                     .addComponent(txthientennhanvien))
@@ -611,7 +629,7 @@ public class QuanLyBanHangJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel22))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 545, Short.MAX_VALUE)
+                .addComponent(jScrollPane2)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -669,7 +687,7 @@ public class QuanLyBanHangJPanel extends javax.swing.JPanel {
                         .addComponent(pnBan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -1043,10 +1061,22 @@ public class QuanLyBanHangJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_tblSanPhamMouseClicked
 
+    private void btnTaoDon1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoDon1ActionPerformed
+        // TODO add your handling code here:
+        PrintPDF p = new PrintPDF();
+        if (!lblMaHoaDon.getText().equals("......")) {
+            JOptionPane.showMessageDialog(this, "In hóa đơn thành công");
+            p.a((DefaultTableModel) tblHoadonchitiet.getModel(), Integer.parseInt(lblMaHoaDon.getText()), Integer.parseInt(txttienKhachTra.getText()), Integer.parseInt(txttienThoi.getText()));
+        } else {
+            JOptionPane.showMessageDialog(this, "Chưa chọn đơn để in!");
+        }
+    }//GEN-LAST:event_btnTaoDon1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnHuydon;
     private javax.swing.JButton btnTaoDon;
+    private javax.swing.JButton btnTaoDon1;
     private javax.swing.JButton btnThanhToan;
     private javax.swing.JMenuItem btnxoaHDchitiet;
     private javax.swing.JComboBox<String> cboLoaidouong;

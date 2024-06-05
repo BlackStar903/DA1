@@ -3,8 +3,8 @@ package views;
 import helper.Auth;
 import views.DangnhapJDialog;
 import views.DoiMatKhauJDialog;
-//import views.GiamGiaSanPhamJPanel;
-//import views.MainThongKeJPanel;
+import views.GiamGiaSanPhamJPanel;
+import views.MainThongKeJPanel;
 import views.QuanLyBanHangJPanel;
 //import views.QuanLyHoaDonJPanel;
 //import views.QuanLyNhanvienJPanel;
@@ -462,7 +462,7 @@ public class main extends javax.swing.JFrame {
         resetColor(lblSanPham);
         resetColor(lblTrangchu);
         resetColor(lblThongke);
-//        showPanel(new QuanLyNhanvienJPanel());
+        showPanel(new QuanLyNhanvienJPanel());
     }//GEN-LAST:event_pnNhanVienMouseClicked
 
     private void pnBanHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnBanHangMouseClicked
@@ -518,7 +518,7 @@ public class main extends javax.swing.JFrame {
         resetColor(lblTrangchu);
         resetColor(lblHoaDon);
         resetColor(lblGiamGia);
-//        showPanel(new MainThongKeJPanel());
+        showPanel(new MainThongKeJPanel());
     }//GEN-LAST:event_pnThongkeMouseClicked
 
     private void pnGiagiaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnGiagiaMouseClicked
@@ -537,7 +537,7 @@ public class main extends javax.swing.JFrame {
         resetColor(lblTrangchu);
         resetColor(lblHoaDon);
         resetColor(lblThongke);
-//        showPanel(new GiamGiaSanPhamJPanel());
+        showPanel(new GiamGiaSanPhamJPanel());
     }//GEN-LAST:event_pnGiagiaMouseClicked
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked

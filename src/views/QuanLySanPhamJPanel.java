@@ -47,6 +47,12 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
     List<DonViSanPham> listdv;
     LoaiSanPhamDao dao = new LoaiSanPhamDao();
     List<LoaiSanPham> listlsp;
+    int pageCount2;
+    int pageSize = 8;
+    int soTrang = 0;
+    int maxPage;
+    int end;
+    int start;
 
     /**
      * Creates new form QuanLySanPhamJPanel
@@ -245,7 +251,7 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
         );
 
         jPanel1.add(jPanel4);
-        jPanel4.setBounds(50, 400, 499, 58);
+        jPanel4.setBounds(50, 400, 0, 0);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("Mã sản phẩm");
@@ -464,7 +470,7 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
         lblPhanTrang.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblPhanTrang.setText("1/x");
         jPanel1.add(lblPhanTrang);
-        lblPhanTrang.setBounds(1020, 420, 40, 30);
+        lblPhanTrang.setBounds(1010, 420, 40, 30);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -537,63 +543,33 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
         // TODO add your handling code here:
-        row = 0;
-        if (tabs.getSelectedIndex() == 0) {
-            tblSanPhansd.setRowSelectionInterval(row, row);
-            edit();
-        } else {
-            tblSanPHamksd.setRowSelectionInterval(row, row);
-            editksd();
-        }
+        soTrang = 0;
+        filltotableSP();
     }//GEN-LAST:event_btnStartActionPerformed
 
     private void btnPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevActionPerformed
-        // TODO add your handling code here:
-        if (tabs.getSelectedIndex() == 0) {
-            if (row > 0) {
-                row--;
-                tblSanPhansd.setRowSelectionInterval(row, row);
-                edit();
-            }
-        } else {
-            if (row > 0) {
-                row--;
-                tblSanPHamksd.setRowSelectionInterval(row, row);
-                editksd();
-            }
+        if (soTrang > 0) {
+            soTrang--;
+            filltotableSP();
         }
     }//GEN-LAST:event_btnPrevActionPerformed
 
     private void btnnextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnextActionPerformed
         // TODO add your handling code here:
-        if (tabs.getSelectedIndex() == 0) {
-            if (row < tblSanPhansd.getRowCount() - 1) {
-                row++;
-                tblSanPhansd.setRowSelectionInterval(row, row);
-                edit();
-            }
-        } else {
-            if (row < tblSanPHamksd.getRowCount() - 1) {
-                row++;
-                tblSanPHamksd.setRowSelectionInterval(row, row);
-                editksd();
-            }
+//        maxPage = (int) (DAOSP.selectAll().size() / pageSize);
+//        if ((DAOSP.selectAll().size() / pageSize) % pageSize != 0) {
+//            maxPage++;
+//        }
+        if (soTrang < maxPage - 1) {
+            soTrang++;
+            filltotableSP();
         }
+
     }//GEN-LAST:event_btnnextActionPerformed
 
     private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
-        // TODO add your handling code here:
-        if (tabs.getSelectedIndex() == 0) {
-            row = tblSanPhansd.getRowCount() - 1;
-
-            tblSanPhansd.setRowSelectionInterval(row, row);
-            edit();
-        } else {
-            row = tblSanPHamksd.getRowCount() - 1;
-            tblSanPHamksd.setRowSelectionInterval(row, row);
-            editksd();
-
-        }
+        soTrang = maxPage - 1;
+        filltotableSP();
     }//GEN-LAST:event_btnLastActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
@@ -652,7 +628,29 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
         model.setRowCount(0);
         try {
             List<SanPham> list = DAOSP.selectAll();
-            for (SanPham x : list) {
+            List<SanPham> listPT = new ArrayList<>();
+            start = (int) (soTrang * pageSize);
+            end = Math.min(start + pageSize, list.size());
+            maxPage = (int) (list.size() / pageSize);
+            if ((DAOSP.selectAll().size() / pageSize) % pageSize != 0) {
+                maxPage++;
+            }
+            for (int i = start; i < end; i++) {
+                SanPham s = new SanPham();
+                s.setId_sp(list.get(i).getId_sp());
+                s.setGia_sp(list.get(i).getGia_sp());
+                s.setId_donviSP(list.get(i).getId_donviSP());
+                s.setTrangthai(list.get(i).isTrangthai());
+                s.setId_loaiSP(list.get(i).getId_loaiSP());
+                s.setTen_sp(list.get(i).getTen_sp());
+                listPT.add(s);
+                if (s.getId_sp().equalsIgnoreCase(list.get(list.size() - 1).getId_sp())) {
+                    break;
+                }
+            }
+            lblPhanTrang.setText((soTrang + 1) + "/" + maxPage);
+
+            for (SanPham x : listPT) {
                 model.addRow(new Object[]{
                     x.getId_sp(),
                     x.getTen_sp(),
@@ -849,7 +847,7 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
             return true;
         }
         if (regex3.matcher(txtGia.getText()).find()) {
-            JOptionPane.showMessageDialog(this, "Giá không hợp lệ, vui lòng xem lại!");
+            JOptionPane.showMessageDialog(this, "Giá chứa ký tự đặc biệt, vui lòng xem lại!");
             txtGia.requestFocus();
             return true;
         }
