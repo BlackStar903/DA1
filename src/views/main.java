@@ -576,7 +576,7 @@ public class main extends javax.swing.JFrame {
     }//GEN-LAST:event_mnThoatActionPerformed
 
     /**
-     * @param args the command line arguments
+     * @param args the command line arguments1
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

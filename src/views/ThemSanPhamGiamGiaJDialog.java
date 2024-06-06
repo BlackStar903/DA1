@@ -115,7 +115,6 @@ public class ThemSanPhamGiamGiaJDialog extends javax.swing.JDialog {
         }
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Giảm(%)");
 
         txtGiam.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -297,7 +296,7 @@ public class ThemSanPhamGiamGiaJDialog extends javax.swing.JDialog {
             if (checkGiamGia()) {
                 return;
             }
-            if (MsgBox.confirm(this, "bạn có muốn thêm sản phẩm này cho sự kiện giảm giá ?")) {
+            if (MsgBox.confirm(this, "Bạn có muốn thêm sản phẩm này cho sự kiện giảm giá ?")) {
                 for (int i = 0; i < tblSanPham.getRowCount(); i++) {
                     if (tblSanPham.getValueAt(i, 4) == null) {
                         continue;
@@ -314,9 +313,9 @@ public class ThemSanPhamGiamGiaJDialog extends javax.swing.JDialog {
                         dao.insert(gg);
                     }
                 };
-                JOptionPane.showMessageDialog(this, "đã thêm sản phẩm vào giảm giá");
                 fillToTableSP();
                 dispose();
+                JOptionPane.showMessageDialog(this, "Đã thêm sản phẩm vào sự kiện giảm giá");
 
             }
 
@@ -327,15 +326,15 @@ public class ThemSanPhamGiamGiaJDialog extends javax.swing.JDialog {
 
     private boolean checkGiamGia() {
         String regex = "\\d+";
-//        int giamgia = Integer.parseInt(txtGiam.getText());
+        //  int giamgia = Integer.parseInt(txtGiam.getText());
         if (txtGiam.getText().equals("")) {
-            MsgBox.alert(this, "hãy nhập vào phần trăm giảm gía");
+            MsgBox.alert(this, "Hãy nhập vào phần trăm giảm gía");
             return true;
         } else if (!txtGiam.getText().matches(regex)) {
-            MsgBox.alert(this, " phần trăm giảm giá nhập là số");
+            MsgBox.alert(this, "Phần trăm giảm giá phải là số");
             return true;
         } else if (Integer.parseInt(txtGiam.getText()) < 0 || Integer.parseInt(txtGiam.getText()) > 100) {
-            MsgBox.alert(this, "giảm không được nhập lớn hơn 0 hoặc 100");
+            MsgBox.alert(this, "Phần trăm giảm giá phải lớn hơn hoặc bằng 0 và nhỏ hơn hoặc bằng 100");
             return true;
         };
         return false;

@@ -6,7 +6,7 @@ public class GiamGiaChiTiet {
     private int idgiamgia;
     private String idsp;
     private int phantramgiam;
-
+   
     public GiamGiaChiTiet() {
     }
 
