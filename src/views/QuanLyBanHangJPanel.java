@@ -1636,7 +1636,8 @@ public class QuanLyBanHangJPanel extends javax.swing.JPanel {
             }
             for (HoaDonChiTiet hdct : list) {
 //                hdct.setGia(GiaTheoSize(hdct.getID_SanPHam()));
-                hdct.setTongGia(GiaTheoSize(hdct.getID_SanPHam()) * hdct.getSoluong());
+                int giaTheoSize = GiaTheoSize(hdct.getID_SanPHam());
+                hdct.setTongGia(giaTheoSize * hdct.getSoluong());
                 SanPham sp = DAOSP.selectID(hdct.getID_SanPHam());
                 model.addRow(new Object[]{
                     hdct.getID_Hoadon(),
@@ -1644,9 +1645,9 @@ public class QuanLyBanHangJPanel extends javax.swing.JPanel {
                     DAOSP.selecteByIDSP(hdct.getID_SanPHam()).getTen_sp(),
                     hdct.getSoluong(),
                     NumberFormat.getInstance().format(SanPhamGiamGia(sp.getId_sp(), sp.getGia_sp()) == 0 ? sp.getGia_sp() : SanPhamGiamGia(sp.getId_sp(), sp.getGia_sp())),
-                    DAODVSP.selectid_DVDU(sp.getId_donviSP()).getTenDonvi(),
-                    NumberFormat.getInstance().format(DAODVSP.selectid_DVDU(sp.getId_donviSP()).getThemTien()),
-                    NumberFormat.getInstance().format(hdct.getTongGia()),
+                    DAODVSP.selectid_DVDU(hdct.getID_DonviSP()).getTenDonvi(),
+                    NumberFormat.getInstance().format(DAODVSP.selectid_DVDU(hdct.getID_DonviSP()).getThemTien()),
+                    NumberFormat.getInstance().format(hdct.getSoluong()*hdct.getGia()+DAODVSP.selectid_DVDU(hdct.getID_DonviSP()).getThemTien()*hdct.getSoluong()),
                     hdct.getGhiChu()
                 });
             }

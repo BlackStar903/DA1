@@ -1,4 +1,3 @@
-
 package model;
 
 public class HoaDonChiTiet {
@@ -11,6 +10,7 @@ public class HoaDonChiTiet {
     private boolean trangThai;
     private String lyDoHuy;
     private String ghiChu;
+    private String ID_DonviSP;
 
     public HoaDonChiTiet() {
     }
@@ -26,6 +26,26 @@ public class HoaDonChiTiet {
         this.ghiChu = ghiChu;
     }
 
+    public HoaDonChiTiet(int ID_Hoadon, String ID_SanPHam, int Soluong, int gia, int tongGia, boolean trangThai, String lyDoHuy, String ghiChu, String ID_DonviSP) {
+        this.ID_Hoadon = ID_Hoadon;
+        this.ID_SanPHam = ID_SanPHam;
+        this.Soluong = Soluong;
+        this.gia = gia;
+        this.tongGia = tongGia;
+        this.trangThai = trangThai;
+        this.lyDoHuy = lyDoHuy;
+        this.ghiChu = ghiChu;
+        this.ID_DonviSP = ID_DonviSP;
+    }
+
+    public String getID_DonviSP() {
+        return ID_DonviSP;
+    }
+
+    public void setID_DonviSP(String ID_DonviSP) {
+        this.ID_DonviSP = ID_DonviSP;
+    }
+    
     public int getID_Hoadon() {
         return ID_Hoadon;
     }
