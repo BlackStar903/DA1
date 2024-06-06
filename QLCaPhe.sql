@@ -1,5 +1,4 @@
-﻿drop database UPCOFFEE
-CREATE DATABASE UPCOFFEE
+﻿CREATE DATABASE UPCOFFEE
 GO
 USE UPCOFFEE
 GO 
@@ -43,7 +42,7 @@ CREATE TABLE SanPham(
 	ID_DonviSP VARCHAR(10) NOT NULL,
 	ID_LoaiSP VARCHAR(10) NOT NULL,
 	Trangthai BIT DEFAULT 1,
-	Hinh NVARCHAR(100)
+	Hinh NVARCHAR(100),
 )
 GO 
 CREATE TABLE LoaiSanPham(
@@ -80,9 +79,11 @@ CREATE TABLE HoaDonChiTiet(
 	TongGia INT NOT NULL,
 	TTthanhtoan BIT DEFAULT 0,
 	Lydohuy NVARCHAR(100),
-	ghichu NVARCHAR(100)
+	ghichu NVARCHAR(100),
+	TenDonvi NVARCHAR(20)
 	--trang thai thanh toan
 )
+select * from HoaDonChiTiet
 GO 
 CREATE TABLE BanDat(
 	ID_Ban INT NOT NULL,
@@ -139,7 +140,6 @@ INSERT dbo.LoaiSanPham VALUES('LSP2', N'Sinh tố')
 INSERT dbo.LoaiSanPham VALUES('LSP3', N'Nước ngọt')
 INSERT dbo.LoaiSanPham VALUES('LSP4', N'Trà')
 INSERT dbo.LoaiSanPham VALUES('LSP5', N'Sữa')
-INSERT dbo.LoaiSanPham VALUES('LSP6', N'Tất cả')
 go
 --Donvisanpham
 INSERT dbo.DonViSanPham VALUES('DV1', N'M',250,0)
@@ -194,3 +194,5 @@ BEGIN
 	DELETE FROM dbo.BanChiTiet WHERE ID_Hoadon = @mahd
 	DELETE FROM dbo.HoaDon WHERE ID_Hoadon = @mahd
 END 
+
+drop table HoaDonChiTiet
