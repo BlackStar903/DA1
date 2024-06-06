@@ -1644,7 +1644,7 @@ public class QuanLyBanHangJPanel extends javax.swing.JPanel {
                     hdct.getID_SanPHam(),
                     DAOSP.selecteByIDSP(hdct.getID_SanPHam()).getTen_sp(),
                     hdct.getSoluong(),
-                    NumberFormat.getInstance().format(SanPhamGiamGia(sp.getId_sp(), sp.getGia_sp()) == 0 ? sp.getGia_sp() : SanPhamGiamGia(sp.getId_sp(), sp.getGia_sp())),
+                    hdct.getGia(),
                     DAODVSP.selectid_DVDU(hdct.getID_DonviSP()).getTenDonvi(),
                     NumberFormat.getInstance().format(DAODVSP.selectid_DVDU(hdct.getID_DonviSP()).getThemTien()),
                     NumberFormat.getInstance().format(hdct.getSoluong()*hdct.getGia()+DAODVSP.selectid_DVDU(hdct.getID_DonviSP()).getThemTien()*hdct.getSoluong()),
