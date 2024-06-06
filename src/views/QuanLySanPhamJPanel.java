@@ -666,7 +666,6 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
     }
 
     private void filltotableSPKD() {
-
         modelspkd.setRowCount(0);
         try {
             List<SanPham> list = DAOSP.select_Trangthai();
@@ -678,6 +677,39 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+//          modelspkd.setRowCount(0);
+//        try {
+//            List<SanPham> list = DAOSP.select_Trangthai();
+//             List<SanPham> listPT = new ArrayList<>();
+//            start = (int) (soTrang * pageSize);
+//            end = Math.min(start + pageSize, list.size());
+//            maxPage = (int) (list.size() / pageSize);
+//            if ((DAOSP.select_Trangthai().size() / pageSize) % pageSize != 0) {
+//                maxPage++;
+//            }
+//            for (int i = start; i < end; i++) {
+//                SanPham s = new SanPham();
+//                s.setId_sp(list.get(i).getId_sp());
+//                s.setGia_sp(list.get(i).getGia_sp());
+//                s.setId_donviSP(list.get(i).getId_donviSP());
+//                s.setTrangthai(list.get(i).isTrangthai());
+//                s.setId_loaiSP(list.get(i).getId_loaiSP());
+//                s.setTen_sp(list.get(i).getTen_sp());
+//                listPT.add(s);
+//                if (s.getId_sp().equalsIgnoreCase(list.get(list.size() - 1).getId_sp())) {
+//                    break;
+//                }
+//            }
+//            lblPhanTrang.setText((soTrang + 1) + "/" + maxPage);
+//            for (SanPham x : listPT) {
+//                modelspkd.addRow(new Object[]{x.getId_sp(), x.getTen_sp(), daolsp.selectNameByID(x.getId_loaiSP()),
+//                    x.getGia_sp(), daodv.selectNameByID(x.getId_donviSP()),
+//                    x.isTrangthai() ? "Sử dụng" : "Không sử dụng"});
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     private void fillcomboboxLoaiSP() {
