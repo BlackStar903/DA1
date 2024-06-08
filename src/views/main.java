@@ -4,7 +4,7 @@ import helper.Auth;
 import views.DangnhapJDialog;
 import views.DoiMatKhauJDialog;
 import views.GiamGiaSanPhamJPanel;
-//import views.MainThongKeJPanel;
+import views.MainThongKeJPanel;
 import views.QuanLyBanHangJPanel;
 //import views.QuanLyHoaDonJPanel;
 //import views.QuanLyNhanvienJPanel;
@@ -518,7 +518,7 @@ public class main extends javax.swing.JFrame {
         resetColor(lblTrangchu);
         resetColor(lblHoaDon);
         resetColor(lblGiamGia);
-//        showPanel(new MainThongKeJPanel());
+        showPanel(new MainThongKeJPanel());
     }//GEN-LAST:event_pnThongkeMouseClicked
 
     private void pnGiagiaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnGiagiaMouseClicked

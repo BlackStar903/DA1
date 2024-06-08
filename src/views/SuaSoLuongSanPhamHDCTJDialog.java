@@ -170,7 +170,7 @@ SanPhamDao DAOSP = new SanPhamDao();
           HoaDonChiTiet hdct = HDCT.selectById(MAHOADON, MASP);
            hdct.setID_Hoadon(MAHOADON);
         hdct.setID_SanPHam(MASP);
-        int slnew = hdct.getSoluong() + Integer.parseInt(txtSoluongSP.getText());
+        int slnew = Integer.parseInt(txtSoluongSP.getText());
         hdct.setSoluong(slnew);
         System.out.println("slnew: "+slnew);
         

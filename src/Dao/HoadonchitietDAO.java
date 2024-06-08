@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class HoadonchitietDAO implements InterfaceHoadonchittiet {
 
-    String INSERT_SQL = "INSERT dbo.HoaDonChiTiet VALUES (?,?,?,?,?,?,?,?)";
+    String INSERT_SQL = "INSERT dbo.HoaDonChiTiet VALUES (?,?,?,?,?,?,?,?,?)";
     String UPDATE_SQL_TrangThai = "UPDATE dbo.HoaDonChiTiet SET TTthanhtoan = ?  WHERE ID_HoaDon = ? AND ID_SanPham = ?";
     String UPDATE_SQL_IDHoaDon = "UPDATE dbo.HoaDonChiTiet SET ID_HoaDon = ?  WHERE ID_HoaDon = ? AND ID_SanPham = ? ";
     String UPDATE_SQL_soluong = "UPDATE dbo.HoaDonChiTiet SET Soluong = ?, TongGia = ?, ghichu = ?, Gia = ? WHERE ID_HoaDon = ? AND ID_SanPham = ?";
@@ -45,7 +45,7 @@ public class HoadonchitietDAO implements InterfaceHoadonchittiet {
     
     @Override
     public void insert(HoaDonChiTiet Entity) {
-        helper.JDBCHeper.update(INSERT_SQL, Entity.getID_Hoadon(), Entity.getID_SanPHam(), Entity.getSoluong(), Entity.getGia(), Entity.getTongGia(), Entity.isTrangThai(), Entity.getLyDoHuy(), Entity.getGhiChu());
+        helper.JDBCHeper.update(INSERT_SQL, Entity.getID_Hoadon(), Entity.getID_SanPHam(), Entity.getSoluong(), Entity.getGia(), Entity.getTongGia(), Entity.isTrangThai(), Entity.getLyDoHuy(), Entity.getGhiChu(),Entity.getID_DonviSP());
     }
 
     @Override
@@ -78,6 +78,7 @@ public class HoadonchitietDAO implements InterfaceHoadonchittiet {
                 Entity.setID_SanPHam(rs.getString("ID_SanPham"));
                 Entity.setSoluong(rs.getInt("Soluong"));
                 Entity.setGia(rs.getInt("Gia"));
+                Entity.setID_DonviSP(rs.getString("TenDonvi"));
                 Entity.setTongGia(rs.getInt("TongGia"));
                 Entity.setTrangThai(rs.getBoolean("TTthanhToan"));
                 Entity.setLyDoHuy(rs.getString("Lydohuy"));

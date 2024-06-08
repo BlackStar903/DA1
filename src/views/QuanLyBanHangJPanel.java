@@ -152,6 +152,7 @@ public class QuanLyBanHangJPanel extends javax.swing.JPanel {
         tblHoadonchitiet = new javax.swing.JTable();
         jLabel19 = new javax.swing.JLabel();
         lblBan = new javax.swing.JLabel();
+        btnTaoDon1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         txtTimkiem = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
@@ -445,6 +446,18 @@ public class QuanLyBanHangJPanel extends javax.swing.JPanel {
         lblBan.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblBan.setText("......");
 
+        btnTaoDon1.setBackground(new java.awt.Color(153, 255, 153));
+        btnTaoDon1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnTaoDon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/printing.png"))); // NOI18N
+        btnTaoDon1.setText("In");
+        btnTaoDon1.setToolTipText("");
+        btnTaoDon1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnTaoDon1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTaoDon1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnHoadonLayout = new javax.swing.GroupLayout(pnHoadon);
         pnHoadon.setLayout(pnHoadonLayout);
         pnHoadonLayout.setHorizontalGroup(
@@ -488,10 +501,14 @@ public class QuanLyBanHangJPanel extends javax.swing.JPanel {
                                 .addComponent(jLabel13)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(pnHoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btnTaoDon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnThanhToan, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnHoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnHoadonLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(pnHoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(btnTaoDon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnThanhToan, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(btnTaoDon1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
 
@@ -526,11 +543,12 @@ public class QuanLyBanHangJPanel extends javax.swing.JPanel {
                 .addGroup(pnHoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnHoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel13)
-                        .addComponent(lblNgay))
+                        .addComponent(lblNgay)
+                        .addComponent(btnTaoDon1))
                     .addGroup(pnHoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel18)
                         .addComponent(txttienThoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(19, 19, 19)
+                .addGap(11, 11, 11)
                 .addGroup(pnHoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20)
                     .addComponent(txthientennhanvien))
@@ -611,7 +629,7 @@ public class QuanLyBanHangJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel22))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 545, Short.MAX_VALUE)
+                .addComponent(jScrollPane2)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -669,7 +687,7 @@ public class QuanLyBanHangJPanel extends javax.swing.JPanel {
                         .addComponent(pnBan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -733,7 +751,7 @@ public class QuanLyBanHangJPanel extends javax.swing.JPanel {
             lblMaHoaDon.setText(list.get(list.size() - 1).getIdHoaDon() + "");
             resettrue();
             filltoHoadonCTT();
-        } 
+        }
 
     }//GEN-LAST:event_btnTaoDonActionPerformed
 
@@ -1031,37 +1049,34 @@ public class QuanLyBanHangJPanel extends javax.swing.JPanel {
 
             // Get the product code from the selected row in the table
             String masp = tblSanPham.getValueAt(row, 0).toString();
+            // If the product is not in the invoice, open a dialog to enter quantity
+            NhapsoluongSanPhamJDialog a = new NhapsoluongSanPhamJDialog(null, true, masp, Integer.parseInt(lblMaHoaDon.getText()));
+            a.setVisible(true);
+            filltoTableHDCT(); // Update invoice details table
+            Hoadon hd = DAOHOADON.selectById(Integer.parseInt(lblMaHoaDon.getText()));
+            hd.setThanhTien(Integer.parseInt(txtTongTien.getText()));
+            DAOHOADON.updateThanhtien(hd); // Update total amount
 
-            if (!DAOHDCHITIET.selectByIdHD_TT0(Integer.parseInt(lblMaHoaDon.getText()), masp).isEmpty()) {
-                // If the product is marked as canceled, prompt to restore and modify quantity
-                if (JOptionPane.showConfirmDialog(this, "Sản phẩm này đã bị hủy bạn có muốn khôi phục và sửa số lượng?") == JOptionPane.YES_OPTION) {
-                    HoaDonChiTiet hdtc = DAOHDCHITIET.selectById(Integer.parseInt(lblMaHoaDon.getText()), masp);
-                    hdtc.setTrangThai(true);
-                    DAOHDCHITIET.update_TT(hdtc);
-                    suaSl(masp, Integer.parseInt(lblMaHoaDon.getText())); // Modify quantity
-                }
-            } else if (!DAOHDCHITIET.selectByIdHD_TT1(Integer.parseInt(lblMaHoaDon.getText()), masp).isEmpty()) {
-                // If the product is already in the invoice, prompt to modify quantity
-                if (JOptionPane.showConfirmDialog(this, "Đồ uống này đã có trong hóa đơn, vui lòng sửa số lượng\n WARNNING: Size không thể thay đổi!") == JOptionPane.YES_OPTION) {
-                    suaSl(masp, Integer.parseInt(lblMaHoaDon.getText())); // Modify quantity
-                }
-            } else {
-                // If the product is not in the invoice, open a dialog to enter quantity
-                NhapsoluongSanPhamJDialog a = new NhapsoluongSanPhamJDialog(null, true, masp, Integer.parseInt(lblMaHoaDon.getText()));
-                a.setVisible(true);
-                filltoTableHDCT(); // Update invoice details table
-                Hoadon hd = DAOHOADON.selectById(Integer.parseInt(lblMaHoaDon.getText()));
-                hd.setThanhTien(Integer.parseInt(txtTongTien.getText()));
-                DAOHOADON.updateThanhtien(hd); // Update total amount
-            }
             filltoHoadonCTT(); // Fill invoice details
         }
     }//GEN-LAST:event_tblSanPhamMouseClicked
+
+    private void btnTaoDon1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoDon1ActionPerformed
+        // TODO add your handling code here:
+        PrintPDF p = new PrintPDF();
+        if (!lblMaHoaDon.getText().equals("......")) {
+            JOptionPane.showMessageDialog(this, "In hóa đơn thành công");
+            p.a((DefaultTableModel) tblHoadonchitiet.getModel(), Integer.parseInt(lblMaHoaDon.getText()), Integer.parseInt(txttienKhachTra.getText()), Integer.parseInt(txttienThoi.getText()));
+        } else {
+            JOptionPane.showMessageDialog(this, "Chưa chọn đơn để in!");
+        }
+    }//GEN-LAST:event_btnTaoDon1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnHuydon;
     private javax.swing.JButton btnTaoDon;
+    private javax.swing.JButton btnTaoDon1;
     private javax.swing.JButton btnThanhToan;
     private javax.swing.JMenuItem btnxoaHDchitiet;
     private javax.swing.JComboBox<String> cboLoaidouong;
@@ -1464,14 +1479,30 @@ public class QuanLyBanHangJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tblSanPham.getModel();
         model.setRowCount(0);
         try {
-            LoaiSanPham lsp = (LoaiSanPham) cboLoaidouong.getSelectedItem();
-            List<SanPham> list = DAOSP.selectByKeyword(txtTimkiem.getText(), lsp.getID_LoaiSP());
-            for (SanPham sp : list) {
-                model.addRow(new Object[]{sp.getId_sp(),
-                    sp.getTen_sp(), DAOLSP.selectId_LSP(sp.getId_loaiSP()).getTenLoai(),
-                    NumberFormat.getInstance().format(SanPhamGiamGia(sp.getId_sp(), sp.getGia_sp()) == 0 ? sp.getGia_sp() : SanPhamGiamGia(sp.getId_sp(), sp.getGia_sp())),
-                    NumberFormat.getInstance().format(sp.getGia_sp())
-                });
+            String selectedOption = cboLoaidouong.getSelectedItem().toString();
+            if (selectedOption.equals("Tất cả")) {
+                List<SanPham> list = DAOSP.selectAll();
+                for (SanPham sp : list) {
+                    model.addRow(new Object[]{
+                        sp.getId_sp(),
+                        sp.getTen_sp(),
+                        DAOLSP.selectId_LSP(sp.getId_loaiSP()).getTenLoai(),
+                        NumberFormat.getInstance().format(SanPhamGiamGia(sp.getId_sp(), sp.getGia_sp()) == 0 ? sp.getGia_sp() : SanPhamGiamGia(sp.getId_sp(), sp.getGia_sp())),
+                        NumberFormat.getInstance().format(sp.getGia_sp())
+                    });
+                }
+            } else {
+                LoaiSanPham lsp = (LoaiSanPham) cboLoaidouong.getSelectedItem();
+                List<SanPham> list = DAOSP.selectByKeyword(txtTimkiem.getText(), lsp.getID_LoaiSP());
+                for (SanPham sp : list) {
+                    model.addRow(new Object[]{
+                        sp.getId_sp(),
+                        sp.getTen_sp(),
+                        DAOLSP.selectId_LSP(sp.getId_loaiSP()).getTenLoai(),
+                        NumberFormat.getInstance().format(SanPhamGiamGia(sp.getId_sp(), sp.getGia_sp()) == 0 ? sp.getGia_sp() : SanPhamGiamGia(sp.getId_sp(), sp.getGia_sp())),
+                        NumberFormat.getInstance().format(sp.getGia_sp())
+                    });
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -1605,17 +1636,18 @@ public class QuanLyBanHangJPanel extends javax.swing.JPanel {
             }
             for (HoaDonChiTiet hdct : list) {
 //                hdct.setGia(GiaTheoSize(hdct.getID_SanPHam()));
-                hdct.setTongGia(GiaTheoSize(hdct.getID_SanPHam()) * hdct.getSoluong());
+                int giaTheoSize = GiaTheoSize(hdct.getID_SanPHam());
+                hdct.setTongGia(giaTheoSize * hdct.getSoluong());
                 SanPham sp = DAOSP.selectID(hdct.getID_SanPHam());
                 model.addRow(new Object[]{
                     hdct.getID_Hoadon(),
                     hdct.getID_SanPHam(),
                     DAOSP.selecteByIDSP(hdct.getID_SanPHam()).getTen_sp(),
                     hdct.getSoluong(),
-                    NumberFormat.getInstance().format(SanPhamGiamGia(sp.getId_sp(), sp.getGia_sp()) == 0 ? sp.getGia_sp() : SanPhamGiamGia(sp.getId_sp(), sp.getGia_sp())),
-                    DAODVSP.selectid_DVDU(sp.getId_donviSP()).getTenDonvi(),
-                    NumberFormat.getInstance().format(DAODVSP.selectid_DVDU(sp.getId_donviSP()).getThemTien()),
-                    NumberFormat.getInstance().format(hdct.getTongGia()),
+                    hdct.getGia(),
+                    DAODVSP.selectid_DVDU(hdct.getID_DonviSP()).getTenDonvi(),
+                    NumberFormat.getInstance().format(DAODVSP.selectid_DVDU(hdct.getID_DonviSP()).getThemTien()),
+                    NumberFormat.getInstance().format(hdct.getSoluong()*hdct.getGia()+DAODVSP.selectid_DVDU(hdct.getID_DonviSP()).getThemTien()*hdct.getSoluong()),
                     hdct.getGhiChu()
                 });
             }

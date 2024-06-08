@@ -207,7 +207,9 @@ public class NhapsoluongSanPhamJDialog extends javax.swing.JDialog {
     HoadonchitietDAO DAOHDCT = new HoadonchitietDAO();
     private void btnNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhapActionPerformed
         // TODO add your handling code here:
-        if (checknumber()) return;
+        if (checknumber()) {
+            return;
+        }
         if (txtSoluong.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Chưa nhập sô lượng!");
             return;
@@ -216,13 +218,13 @@ public class NhapsoluongSanPhamJDialog extends javax.swing.JDialog {
         hdct.setID_Hoadon(MAHOADON);
         hdct.setID_SanPHam(MASP);
         hdct.setSoluong(Integer.parseInt(txtSoluong.getText()));
-        txtSoluong.setText(hdct.getSoluong()+"");
-        SanPham sp = DAOSP.selectID(MASP);
-        sp.setId_donviSP(daodv.selectByName(cboDonvi.getSelectedItem()+""));
-        DAOSP.update(sp);
+        txtSoluong.setText(hdct.getSoluong() + "");
+        SanPham sp = DAOSP.selectID(MASP);       
+        sp.setId_donviSP(daodv.selectByName(cboDonvi.getSelectedItem() + ""));
+        hdct.setID_DonviSP(sp.getId_donviSP());
         int gia = GiaTheoSize(MASP);
         hdct.setGia(gia);
-        int tongGia = gia * Integer.parseInt(txtSoluong.getText());
+        int tongGia = gia * hdct.getSoluong();
         hdct.setTongGia(tongGia);
         hdct.setTrangThai(true);
         hdct.setLyDoHuy("");
