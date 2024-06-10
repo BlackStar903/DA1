@@ -1631,7 +1631,8 @@ public class QuanLyBanHangJPanel extends javax.swing.JPanel {
                 }
 
                 if (Integer.parseInt(lblMaHoaDon.getText()) == hdct.getID_Hoadon()) {
-                    i += GiaTheoSize(hdct.getID_SanPHam()) * hdct.getSoluong();
+                    int tongGia = hdct.getSoluong() * hdct.getGia() + DAODVSP.selectid_DVDU(hdct.getID_DonviSP()).getThemTien() * hdct.getSoluong();
+                    i += tongGia;
                 }
             }
             for (HoaDonChiTiet hdct : list) {
