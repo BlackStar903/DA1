@@ -560,6 +560,7 @@ public class main extends javax.swing.JFrame {
             DangnhapJDialog b = new DangnhapJDialog(null, true);
 
             b.setVisible(true);
+            this.setVisible(false);
             if (Auth.isLogin() == true) {
                 lblNameNV.setText(Auth.user.getTenNV());
             }
