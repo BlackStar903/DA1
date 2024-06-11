@@ -69,11 +69,11 @@ public class QuanLyHoaDonJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã hóa đơn", "Ngày tạo", "Trạng thái", "Thanh toán", "Người tạo", "Thành tiền", "Số Lượng SP bị hủy", "SDT"
+                "Mã hóa đơn", "Ngày tạo", "Trạng thái", "Thanh toán", "Người tạo", "Thành tiền", "Số Lượng SP bị hủy"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -110,11 +110,11 @@ public class QuanLyHoaDonJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã hóa đơn", "Ngày tạo", "Trạng thái", "Thanh toán", "Người tạo", "Thành tiền", "Số Lượng SP bị hủy", "Lý Do Hủy", "SDT"
+                "Mã hóa đơn", "Ngày tạo", "Trạng thái", "Thanh toán", "Người tạo", "Thành tiền", "Số Lượng SP bị hủy", "Lý Do Hủy"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

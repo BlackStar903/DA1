@@ -35,6 +35,7 @@ public class SerHoaDonChiTiet {
     HoadonchitietDAO dao = new HoadonchitietDAO();
     DaoGiamGia DAOGG = new DaoGiamGia();
     ChiTietGiamGiaDao DAOGGCT = new ChiTietGiamGiaDao();
+    DonViSanPhamDao DAODVSP = new DonViSanPhamDao();
 
     public void filltotablehoadonchitiet(int a) {
         List<HoaDonChiTiet> list = new ArrayList<>();
@@ -48,10 +49,10 @@ public class SerHoaDonChiTiet {
                     hd.getID_SanPHam(),
                     hd.getSoluong(),
                     NumberFormat.getInstance().format(hd.getGia()),
-                    NumberFormat.getInstance().format(hd.getGia() * hd.getSoluong()),
-                    hd.isTrangThai() ? "" : "Hủy",
-                    hd.getLyDoHuy()
-                });
+                    DAODVSP.selectid_DVDU(hd.getID_DonviSP()).getTenDonvi(),
+                    NumberFormat.getInstance().format(DAODVSP.selectid_DVDU(hd.getID_DonviSP()).getThemTien()),
+                    NumberFormat.getInstance().format(hd.getSoluong() * hd.getGia() + DAODVSP.selectid_DVDU(hd.getID_DonviSP()).getThemTien() * hd.getSoluong()),
+                    hd.isTrangThai() ? "" : "Hủy",});
             }
         } catch (Exception e) {
         }

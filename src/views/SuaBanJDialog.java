@@ -37,16 +37,26 @@ public class SuaBanJDialog extends javax.swing.JDialog {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        rdoBanao = new javax.swing.JRadioButton();
+        rdoBanThuc = new javax.swing.JRadioButton();
+        jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtSocho = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        rdoBanao = new javax.swing.JRadioButton();
-        rdoBanThuc = new javax.swing.JRadioButton();
         btnSua = new javax.swing.JButton();
         lblThoat = new javax.swing.JLabel();
         cboBanso = new javax.swing.JComboBox<>();
+
+        buttonGroup1.add(rdoBanao);
+        rdoBanao.setText("Bàn ảo");
+
+        buttonGroup1.add(rdoBanThuc);
+        rdoBanThuc.setSelected(true);
+        rdoBanThuc.setText("Bàn thực");
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel2.setText("Kiểu:");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -61,16 +71,6 @@ public class SuaBanJDialog extends javax.swing.JDialog {
         jLabel3.setText("Số chỗ:");
 
         txtSocho.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel2.setText("Kiểu:");
-
-        buttonGroup1.add(rdoBanao);
-        rdoBanao.setText("Bàn ảo");
-
-        buttonGroup1.add(rdoBanThuc);
-        rdoBanThuc.setSelected(true);
-        rdoBanThuc.setText("Bàn thực");
 
         btnSua.setBackground(new java.awt.Color(250, 182, 124));
         btnSua.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -103,26 +103,18 @@ public class SuaBanJDialog extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(25, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel1)
-                                .addComponent(jLabel3))
-                            .addGap(18, 18, 18)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtSocho, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(cboBanso, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(18, 18, 18)
-                                    .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(rdoBanao)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(rdoBanThuc)))
-                            .addGap(24, 24, 24))
-                        .addComponent(lblThoat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtSocho, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cboBanso, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24))
+                    .addComponent(lblThoat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -141,12 +133,7 @@ public class SuaBanJDialog extends javax.swing.JDialog {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(txtSocho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(rdoBanao)
-                    .addComponent(rdoBanThuc))
-                .addGap(33, 33, 33))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -194,7 +181,7 @@ boolean status = true;
         try {
             int i = Integer.parseInt(txtSocho.getText());
             if (i < 1 || i > 6) {
-                JOptionPane.showMessageDialog(this, "Số chỗ tối đa của bàn là 1 -> 5");
+                JOptionPane.showMessageDialog(this, "Số chỗ tối đa của bàn là 1 -> 6");
                 return true;
             } else if (i < 1) {
                 JOptionPane.showMessageDialog(this, "Sô chỗ ngồi không được bằng không hoặc là số âm");

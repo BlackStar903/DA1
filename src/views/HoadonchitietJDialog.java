@@ -32,11 +32,11 @@ public class HoadonchitietJDialog extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Mã Hóa Đơn", "Mã Sản Phẩm", "Số Lượng", "Giá", "Tổng Giá", "Sản Phẩm Hủy", "Lý do hủy"
+                "Mã Hóa Đơn", "Mã Sản Phẩm", "Số Lượng", "Giá", "Size", "Tiền Upsize", "Tổng Giá", "Trạng Thái"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

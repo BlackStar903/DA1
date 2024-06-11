@@ -377,7 +377,7 @@ public class QuanLyBanHangJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã HĐ", "Ngày", "Thanh toán", "Người tạo", "Tổng tiền (VND)", "Bàn", "SĐT khách hàng"
+                "Mã HĐ", "Ngày", "Thanh toán", "Người tạo", "Tổng tiền (VND)", "Bàn", "SDT Khách hàng"
             }
         ));
         tblHoadon.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -883,7 +883,7 @@ public class QuanLyBanHangJPanel extends javax.swing.JPanel {
 
     private void btnxoaHDchitietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxoaHDchitietActionPerformed
         // TODO add your handling code here:
-        huySP();
+        huySP1();
     }//GEN-LAST:event_btnxoaHDchitietActionPerformed
 
     private void mnXoaDanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnXoaDanActionPerformed
@@ -1819,6 +1819,23 @@ public class QuanLyBanHangJPanel extends javax.swing.JPanel {
         HoaDonChiTiet hdct = DAOHDCHITIET.selectById(maHD, maSP);
         LydohuySanPhamJDialog ldhsp = new LydohuySanPhamJDialog(null, true, hdct);
         ldhsp.setVisible(true);
+        hdct.setTrangThai(false);
+        System.out.println(hdct.getID_Hoadon());
+        DAOHDCHITIET.delete(hdct);
+        filltoTableHDCT();
+        Hoadon hd = DAOHOADON.selectById(Integer.parseInt(lblMaHoaDon.getText()));
+        hd.setThanhTien(Integer.parseInt(txtTongTien.getText()));
+        hd.setSlSanPhamHuy(hdct.getSoluong() + hd.getSlSanPhamHuy());
+        DAOHOADON.updateThanhtien(hd);
+        DAOHOADON.updateSLSPHUY(hd);
+        filltoHoadonCTT();
+    }
+    
+    public void huySP1() {
+        int row = tblHoadonchitiet.getSelectedRow();
+        int maHD = (int) tblHoadonchitiet.getValueAt(row, 0);
+        String maSP = tblHoadonchitiet.getValueAt(row, 1).toString();
+        HoaDonChiTiet hdct = DAOHDCHITIET.selectById(maHD, maSP);
         hdct.setTrangThai(false);
         System.out.println(hdct.getID_Hoadon());
         DAOHDCHITIET.delete(hdct);
