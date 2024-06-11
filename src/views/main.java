@@ -6,8 +6,8 @@ import views.DoiMatKhauJDialog;
 import views.GiamGiaSanPhamJPanel;
 import views.MainThongKeJPanel;
 import views.QuanLyBanHangJPanel;
-//import views.QuanLyHoaDonJPanel;
-//import views.QuanLyNhanvienJPanel;
+import views.QuanLyHoaDonJPanel;
+import views.QuanLyNhanvienJPanel;
 import views.QuanLySanPhamJPanel;
 import views.TrangchuJPanel;
 import java.awt.Color;
@@ -499,7 +499,7 @@ public class main extends javax.swing.JFrame {
         resetColor(lblSanPham);
         resetColor(lblTrangchu);
         resetColor(lblThongke);
-//        showPanel(new QuanLyHoaDonJPanel());
+        showPanel(new QuanLyHoaDonJPanel());
     }//GEN-LAST:event_pnHoaDonMouseClicked
 
     private void pnThongkeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnThongkeMouseClicked

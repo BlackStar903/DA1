@@ -251,7 +251,7 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
         );
 
         jPanel1.add(jPanel4);
-        jPanel4.setBounds(50, 400, 0, 0);
+        jPanel4.setBounds(50, 400, 499, 58);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("Mã sản phẩm");
@@ -816,14 +816,14 @@ public class QuanLySanPhamJPanel extends javax.swing.JPanel {
         String masp = tblSanPhansd.getValueAt(row, 0).toString();
         SanPham sp = DAOSP.selectID(masp);
         setForm(sp);
-        updateStatus();
+//        updateStatus();
     }
 
     private void editksd() {
         String maspksd = tblSanPHamksd.getValueAt(row, 0).toString();
         SanPham sp = DAOSP.selectID(maspksd);
         setForm(sp);
-        updateStatus2();
+//        updateStatus2();
     }
 
     private boolean Checknull() {
