@@ -113,9 +113,9 @@ public class PrintPDF {
             b.addCell(b3).setBorder(0);
             PdfPCell b4 = new PdfPCell(new Phrase("" + NumberFormat.getInstance().format(tienkh) + " VND", f2));
             b.addCell(b4).setBorder(0);
-            PdfPCell b5 = new PdfPCell(new Phrase("Tiền thối: ", f2));
+            PdfPCell b5 = new PdfPCell(new Phrase("Tiền thừa: ", f2));
             b.addCell(b5).setBorder(0);
-            PdfPCell b6 = new PdfPCell(new Phrase("" + tienthoi, f2));
+            PdfPCell b6 = new PdfPCell(new Phrase("" + NumberFormat.getInstance().format(tienthoi) + " VND", f2));
             b.addCell(b6).setBorder(0);
             document.add(b);
 //            t.addCell("1.1");

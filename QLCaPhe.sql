@@ -140,10 +140,11 @@ INSERT dbo.LoaiSanPham VALUES('LSP2', N'Sinh tố')
 INSERT dbo.LoaiSanPham VALUES('LSP3', N'Nước ngọt')
 INSERT dbo.LoaiSanPham VALUES('LSP4', N'Trà')
 INSERT dbo.LoaiSanPham VALUES('LSP5', N'Sữa')
+INSERT dbo.LoaiSanPham VALUES('LSP6', N'Tất cả')
 go
 --Donvisanpham
-INSERT dbo.DonViSanPham VALUES('DV1', N'M',250,0)
-INSERT dbo.DonViSanPham VALUES('DV2', N'X',300,5000)
+INSERT dbo.DonViSanPham VALUES('DV1', N'S',250,0)
+INSERT dbo.DonViSanPham VALUES('DV2', N'M',300,5000)
 INSERT dbo.DonViSanPham VALUES('DV3', N'L',350,7000)
 INSERT dbo.DonViSanPham VALUES('DV4', N'XL',400,10000)
 go
