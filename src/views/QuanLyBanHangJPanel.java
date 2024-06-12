@@ -1623,6 +1623,7 @@ public class QuanLyBanHangJPanel extends javax.swing.JPanel {
             }
             List<HoaDonChiTiet> list = DAOHDCHITIET.selectByIDBan(numberDesk.getIdBan());
             if (list.isEmpty()) {
+                tongTien(0);
                 return;
             }
             for (HoaDonChiTiet hdct : list) {

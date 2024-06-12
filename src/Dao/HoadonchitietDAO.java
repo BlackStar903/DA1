@@ -20,7 +20,8 @@ import java.util.List;
 public class HoadonchitietDAO implements InterfaceHoadonchittiet {
 
     String INSERT_SQL = "INSERT dbo.HoaDonChiTiet VALUES (?,?,?,?,?,?,?,?,?)";
-    String UPDATE_SQL_TrangThai = "UPDATE dbo.HoaDonChiTiet SET TTthanhtoan = ?  WHERE ID_HoaDon = ? AND ID_SanPham = ?";
+//    String UPDATE_SQL_TrangThai = "UPDATE dbo.HoaDonChiTiet SET TTthanhtoan = ?  WHERE ID_HoaDon = ? AND ID_SanPham = ? AND Idhoadon=?";
+    String UPDATE_SQL_TrangThai = "delete from dbo.HoaDonChiTiet WHERE ID_HoaDon = ? AND ID_SanPham = ? AND Idhoadon=?";
     String UPDATE_SQL_IDHoaDon = "UPDATE dbo.HoaDonChiTiet SET ID_HoaDon = ?  WHERE ID_HoaDon = ? AND ID_SanPham = ? ";
     String UPDATE_SQL_soluong = "UPDATE dbo.HoaDonChiTiet SET Soluong = ?, TongGia = ?, ghichu = ?, Gia = ? WHERE ID_HoaDon = ? AND ID_SanPham = ?";
     //String UPDATE_SQL_TrangThaiTT = "UPDATE dbo.HoaDon SET TTThanhtoan = ? WHERE ID_Hoadon = ?";
@@ -41,16 +42,15 @@ public class HoadonchitietDAO implements InterfaceHoadonchittiet {
     String UPDATE_Ghi_chu = "UPDATE dbo.HoaDonChiTiet SET ghichu = ? WHERE ID_HoaDon = ? AND ID_SanPham = ?";
     String selcecCountSPhuy = "SELECT COUNT(*) AS Soluongdonhuy FROM dbo.HoaDonChiTiet WHERE TTthanhtoan = 0 AND ID_HoaDon = ?";
     String SELECT_BY_ID_SQL_1 = "SELECT * FROM dbo.HoaDonChiTiet WHERE ID_HoaDon = ?";
-    
-    
+
     @Override
     public void insert(HoaDonChiTiet Entity) {
-        helper.JDBCHeper.update(INSERT_SQL, Entity.getID_Hoadon(), Entity.getID_SanPHam(), Entity.getSoluong(), Entity.getGia(), Entity.getTongGia(), Entity.isTrangThai(), Entity.getLyDoHuy(), Entity.getGhiChu(),Entity.getID_DonviSP());
+        helper.JDBCHeper.update(INSERT_SQL, Entity.getID_Hoadon(), Entity.getID_SanPHam(), Entity.getSoluong(), Entity.getGia(), Entity.getTongGia(), Entity.isTrangThai(), Entity.getLyDoHuy(), Entity.getGhiChu(), Entity.getID_DonviSP());
     }
 
     @Override
     public void delete(HoaDonChiTiet Entity) {
-        helper.JDBCHeper.update(UPDATE_SQL_TrangThai, Entity.isTrangThai(), Entity.getID_Hoadon(), Entity.getID_SanPHam());
+        helper.JDBCHeper.update(UPDATE_SQL_TrangThai, Entity.getID_Hoadon(), Entity.getID_SanPHam(), Entity.getIdhoadon());
     }
 
     @Override
@@ -83,6 +83,7 @@ public class HoadonchitietDAO implements InterfaceHoadonchittiet {
                 Entity.setTrangThai(rs.getBoolean("TTthanhToan"));
                 Entity.setLyDoHuy(rs.getString("Lydohuy"));
                 Entity.setGhiChu(rs.getString("ghichu"));
+                Entity.setIdhoadon(rs.getInt("Idhoadon"));
                 list.add(Entity);
             }
             rs.getStatement().getConnection().close();
@@ -161,5 +162,4 @@ public class HoadonchitietDAO implements InterfaceHoadonchittiet {
         helper.JDBCHeper.update(DELETE_SQL, mahd, masp);
     }
 
-    
 }

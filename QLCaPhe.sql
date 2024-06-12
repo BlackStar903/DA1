@@ -80,7 +80,8 @@ CREATE TABLE HoaDonChiTiet(
 	TTthanhtoan BIT DEFAULT 0,
 	Lydohuy NVARCHAR(100),
 	ghichu NVARCHAR(100),
-	TenDonvi NVARCHAR(20)
+	TenDonvi NVARCHAR(20),
+	Idhoadon int identity(1,1)
 	--trang thai thanh toan
 )
 select * from HoaDonChiTiet
