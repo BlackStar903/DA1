@@ -1,9 +1,9 @@
 package views;
 
+import Dao.HoadonchitietDAO;
 import dao1.BanChiTietDAO;
 import dao1.BanDao;
 import dao1.HoaDonDAO;
-import dao1.HoadonchitietDAO;
 import model.Ban;
 import model.BanChiTiet;
 import model.Hoadon;

@@ -1,6 +1,6 @@
 package views;
 
-import dao1.HoadonchitietDAO;
+import Dao.HoadonchitietDAO;
 import dao1.SanPhamDao;
 import model.HoaDonChiTiet;
 import javax.swing.ComboBoxModel;

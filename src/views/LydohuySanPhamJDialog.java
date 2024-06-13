@@ -1,6 +1,7 @@
 package views;
 
-import dao1.HoadonchitietDAO;
+
+import Dao.HoadonchitietDAO;
 import model.HoaDonChiTiet;
 import javax.swing.JOptionPane;
 

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dao1;
+package Dao;
 
 import dao.impl.InterfaceHoadonchittiet;
 import model.HoaDonChiTiet;
@@ -20,10 +20,10 @@ import java.util.List;
 public class HoadonchitietDAO implements InterfaceHoadonchittiet {
 
     String INSERT_SQL = "INSERT dbo.HoaDonChiTiet VALUES (?,?,?,?,?,?,?,?,?)";
-//    String UPDATE_SQL_TrangThai = "UPDATE dbo.HoaDonChiTiet SET TTthanhtoan = ?  WHERE ID_HoaDon = ? AND ID_SanPham = ? AND Idhoadon=?";
-    String UPDATE_SQL_TrangThai = "delete from dbo.HoaDonChiTiet WHERE ID_HoaDon = ? AND ID_SanPham = ? AND Idhoadon=?";
+    String UPDATE_SQL_TrangThai = "UPDATE dbo.HoaDonChiTiet SET TTthanhtoan = ?  WHERE ID_HoaDon = ? AND ID_SanPham = ? AND Idhoadon=?";
+//    String UPDATE_SQL_TrangThai = "delete from dbo.HoaDonChiTiet WHERE ID_HoaDon = ? AND ID_SanPham = ? AND Idhoadon=?";
     String UPDATE_SQL_IDHoaDon = "UPDATE dbo.HoaDonChiTiet SET ID_HoaDon = ?  WHERE ID_HoaDon = ? AND ID_SanPham = ? ";
-    String UPDATE_SQL_soluong = "UPDATE dbo.HoaDonChiTiet SET Soluong = ?, TongGia = ?, ghichu = ?, Gia = ? WHERE ID_HoaDon = ? AND ID_SanPham = ?";
+    String UPDATE_SQL_soluong = "UPDATE dbo.HoaDonChiTiet SET Soluong = ?, TongGia = ?, ghichu = ?, Gia = ? WHERE ID_HoaDon = ? AND ID_SanPham = ? and Idhoadon=?";
     //String UPDATE_SQL_TrangThaiTT = "UPDATE dbo.HoaDon SET TTThanhtoan = ? WHERE ID_Hoadon = ?";
     String DELETE_SQL = "DELETE FROM dbo.HoaDonChiTiet WHERE ID_Hoadon = ? AND ID_SanPham = ?";
     String SELECT_ALL_SQL = "SELECT * FROM dbo.HoaDon";
@@ -34,6 +34,7 @@ public class HoadonchitietDAO implements InterfaceHoadonchittiet {
             + "        WHERE HoaDon.TTThanhtoan = 0 \n"
             + "       AND dbo.HoaDonChiTiet.TTthanhtoan = 1  AND dbo.HoaDon.Trangthai = 1 AND dbo.Ban.Hoatdong = 0 AND dbo.Ban.ID_Ban = ?";
     String SELECT_BY_ID_SQL = "SELECT * FROM dbo.HoaDonChiTiet WHERE ID_HoaDon = ? AND ID_SanPham = ?";
+    String SELECT_BY_ID_SQL1 = "SELECT * FROM dbo.HoaDonChiTiet WHERE ID_HoaDon = ? AND ID_SanPham = ? and Idhoadon = ?";
     String SELECT_BY_ID_MaHD_TT1 = "SELECT * FROM dbo.HoaDonChiTiet JOIN dbo.HoaDon ON HoaDon.ID_Hoadon = HoaDonChiTiet.ID_HoaDon \n"
             + "WHERE dbo.HoaDonChiTiet.TTThanhtoan = 1 AND HoaDon.ID_Hoadon = ? AND ID_SanPham = ?";
     String SELECT_BY_ID_MaHD_TT0 = "SELECT * FROM dbo.HoaDonChiTiet JOIN dbo.HoaDon ON HoaDon.ID_Hoadon = HoaDonChiTiet.ID_HoaDon \n"
@@ -42,6 +43,7 @@ public class HoadonchitietDAO implements InterfaceHoadonchittiet {
     String UPDATE_Ghi_chu = "UPDATE dbo.HoaDonChiTiet SET ghichu = ? WHERE ID_HoaDon = ? AND ID_SanPham = ?";
     String selcecCountSPhuy = "SELECT COUNT(*) AS Soluongdonhuy FROM dbo.HoaDonChiTiet WHERE TTthanhtoan = 0 AND ID_HoaDon = ?";
     String SELECT_BY_ID_SQL_1 = "SELECT * FROM dbo.HoaDonChiTiet WHERE ID_HoaDon = ?";
+    String selectID = "SELECT * FROM dbo.HoaDonChiTiet where ID_Sanpham = ?";
 
     @Override
     public void insert(HoaDonChiTiet Entity) {
@@ -50,12 +52,20 @@ public class HoadonchitietDAO implements InterfaceHoadonchittiet {
 
     @Override
     public void delete(HoaDonChiTiet Entity) {
-        helper.JDBCHeper.update(UPDATE_SQL_TrangThai, Entity.getID_Hoadon(), Entity.getID_SanPHam(), Entity.getIdhoadon());
+        helper.JDBCHeper.update(UPDATE_SQL_TrangThai, Entity.isTrangThai(),Entity.getID_Hoadon(), Entity.getID_SanPHam(), Entity.getIdhoadon());
     }
 
     @Override
     public HoaDonChiTiet selectById(int id, String MaSP) {
         List<HoaDonChiTiet> list = this.selectBySql(SELECT_BY_ID_SQL, id, MaSP);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
+    }
+
+    public HoaDonChiTiet selectById1(int id, String MaSP, int idhd) {
+        List<HoaDonChiTiet> list = this.selectBySql(SELECT_BY_ID_SQL1, id, MaSP, idhd);
         if (list.isEmpty()) {
             return null;
         }
@@ -93,6 +103,14 @@ public class HoadonchitietDAO implements InterfaceHoadonchittiet {
         }
     }
 
+    public HoaDonChiTiet selectID(String id) {
+        List<HoaDonChiTiet> list = selectBySql(selectID, id);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
+    }
+
     public List<HoaDonChiTiet> selectByIDBan(int idBan) {
         return selectBySql(SELECT_ALL_BY_ID_Ban, idBan);
     }
@@ -114,7 +132,7 @@ public class HoadonchitietDAO implements InterfaceHoadonchittiet {
 
     @Override
     public void update_SL(HoaDonChiTiet Entity) {
-        helper.JDBCHeper.update(UPDATE_SQL_soluong, Entity.getSoluong(), Entity.getTongGia(), Entity.getGhiChu(), Entity.getGia(), Entity.getID_Hoadon(), Entity.getID_SanPHam());
+        helper.JDBCHeper.update(UPDATE_SQL_soluong, Entity.getSoluong(), Entity.getTongGia(), Entity.getGhiChu(), Entity.getGia(), Entity.getID_Hoadon(), Entity.getID_SanPHam(), Entity.getIdhoadon());
     }
 
     @Override

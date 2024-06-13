@@ -1,12 +1,12 @@
 package views;
 
+import Dao.HoadonchitietDAO;
 import dao1.BanChiTietDAO;
 import dao1.BanDao;
 import dao1.ChiTietGiamGiaDao;
 import dao1.DaoGiamGia;
 import dao1.DonViSanPhamDao;
 import dao1.HoaDonDAO;
-import dao1.HoadonchitietDAO;
 import dao1.LoaiSanPhamDao;
 import dao1.NhanVienDAO;
 import dao1.SanPhamDao;
@@ -74,23 +74,23 @@ public class QuanLyBanHangJPanel extends javax.swing.JPanel {
         txttienKhachTra.setEditable(false);
         btnHuydon.setEnabled(false);
         btnThanhToan.setEnabled(false);
-        setSizetblehoadon();
+//        setSizetblehoadon();
         setSizetblehoadonctt();
         if (Auth.isLogin() == true) {
             txthientennhanvien.setText(Auth.user.getTenNV());
         }
     }
 
-    public void setSizetblehoadon() {
-        tblHoadonchitiet.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-        tblHoadonchitiet.getColumnModel().getColumn(0).setPreferredWidth(20);
-        tblHoadonchitiet.getColumnModel().getColumn(1).setPreferredWidth(20);
-        tblHoadonchitiet.getColumnModel().getColumn(2).setPreferredWidth(120);
-        tblHoadonchitiet.getColumnModel().getColumn(3).setPreferredWidth(15);
-        tblHoadonchitiet.getColumnModel().getColumn(4).setPreferredWidth(100);
-        tblHoadonchitiet.getColumnModel().getColumn(5).setPreferredWidth(100);
-        tblHoadonchitiet.getColumnModel().getColumn(6).setPreferredWidth(160);
-    }
+//    public void setSizetblehoadon() {
+//        tblHoadonchitiet.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+//        tblHoadonchitiet.getColumnModel().getColumn(0).setPreferredWidth(20);
+//        tblHoadonchitiet.getColumnModel().getColumn(1).setPreferredWidth(20);
+//        tblHoadonchitiet.getColumnModel().getColumn(2).setPreferredWidth(120);
+//        tblHoadonchitiet.getColumnModel().getColumn(3).setPreferredWidth(15);
+//        tblHoadonchitiet.getColumnModel().getColumn(4).setPreferredWidth(100);
+//        tblHoadonchitiet.getColumnModel().getColumn(5).setPreferredWidth(100);
+//        tblHoadonchitiet.getColumnModel().getColumn(6).setPreferredWidth(160);
+//    }
 
     public void setSizetblehoadonctt() {
         tblHoadon.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
@@ -411,7 +411,7 @@ public class QuanLyBanHangJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã HD", "Mã SP", "Tên Sản  Phẩm", "SL", "Giá", "Size", "Tiền upsize", "Tổng giá", "Ghi chú"
+                "Id HD", "Mã HD", "Mã SP", "Tên Sản  Phẩm", "SL", "Giá", "Size", "Tiền upsize", "Tổng giá", "Ghi chú"
             }
         ));
         tblHoadonchitiet.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -421,10 +421,10 @@ public class QuanLyBanHangJPanel extends javax.swing.JPanel {
         });
         jScrollPane3.setViewportView(tblHoadonchitiet);
         if (tblHoadonchitiet.getColumnModel().getColumnCount() > 0) {
-            tblHoadonchitiet.getColumnModel().getColumn(0).setMinWidth(70);
             tblHoadonchitiet.getColumnModel().getColumn(1).setMinWidth(70);
-            tblHoadonchitiet.getColumnModel().getColumn(3).setMinWidth(70);
-            tblHoadonchitiet.getColumnModel().getColumn(5).setMinWidth(100);
+            tblHoadonchitiet.getColumnModel().getColumn(2).setMinWidth(70);
+            tblHoadonchitiet.getColumnModel().getColumn(4).setMinWidth(70);
+            tblHoadonchitiet.getColumnModel().getColumn(6).setMinWidth(100);
         }
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -1018,9 +1018,11 @@ public class QuanLyBanHangJPanel extends javax.swing.JPanel {
     private void mnSuaSlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnSuaSlActionPerformed
         // TODO add your handling code here:
         int row = tblHoadonchitiet.getSelectedRow();
-        String masp = tblHoadonchitiet.getValueAt(row, 1).toString();
-        int mahd = Integer.parseInt(tblHoadonchitiet.getValueAt(row, 0).toString());
-        suaSl(masp, mahd);
+        String masp = tblHoadonchitiet.getValueAt(row, 2).toString();
+        int mahd = Integer.parseInt(tblHoadonchitiet.getValueAt(row, 1).toString());
+        int mahd1 = Integer.parseInt(tblHoadonchitiet.getValueAt(row, 0).toString());
+
+        suaSl(masp, mahd, mahd1);
         filltoHoadonCTT();
         filltoTableHDCT();
     }//GEN-LAST:event_mnSuaSlActionPerformed
@@ -1642,6 +1644,7 @@ public class QuanLyBanHangJPanel extends javax.swing.JPanel {
                 hdct.setTongGia(giaTheoSize * hdct.getSoluong());
                 SanPham sp = DAOSP.selectID(hdct.getID_SanPHam());
                 model.addRow(new Object[]{
+                    hdct.getIdhoadon(),
                     hdct.getID_Hoadon(),
                     hdct.getID_SanPHam(),
                     DAOSP.selecteByIDSP(hdct.getID_SanPHam()).getTen_sp(),
@@ -1649,7 +1652,7 @@ public class QuanLyBanHangJPanel extends javax.swing.JPanel {
                     hdct.getGia(),
                     DAODVSP.selectid_DVDU(hdct.getID_DonviSP()).getTenDonvi(),
                     NumberFormat.getInstance().format(DAODVSP.selectid_DVDU(hdct.getID_DonviSP()).getThemTien()),
-                    NumberFormat.getInstance().format(hdct.getSoluong()*hdct.getGia()+DAODVSP.selectid_DVDU(hdct.getID_DonviSP()).getThemTien()*hdct.getSoluong()),
+                    NumberFormat.getInstance().format(hdct.getSoluong() * hdct.getGia() + DAODVSP.selectid_DVDU(hdct.getID_DonviSP()).getThemTien() * hdct.getSoluong()),
                     hdct.getGhiChu()
                 });
             }
@@ -1834,23 +1837,24 @@ public class QuanLyBanHangJPanel extends javax.swing.JPanel {
     
     public void huySP1() {
         int row = tblHoadonchitiet.getSelectedRow();
-        int maHD = (int) tblHoadonchitiet.getValueAt(row, 0);
-        String maSP = tblHoadonchitiet.getValueAt(row, 1).toString();
-        HoaDonChiTiet hdct = DAOHDCHITIET.selectById(maHD, maSP);
+        int mahd = (int) tblHoadonchitiet.getValueAt(row, 0);
+        int maHD = (int) tblHoadonchitiet.getValueAt(row, 1);
+        String maSP = tblHoadonchitiet.getValueAt(row, 2).toString();
+        HoaDonChiTiet hdct = DAOHDCHITIET.selectById1(maHD, maSP,mahd);
         hdct.setTrangThai(false);
-        System.out.println(hdct.getID_Hoadon());
         DAOHDCHITIET.delete(hdct);
         filltoTableHDCT();
         Hoadon hd = DAOHOADON.selectById(Integer.parseInt(lblMaHoaDon.getText()));
         hd.setThanhTien(Integer.parseInt(txtTongTien.getText()));
         hd.setSlSanPhamHuy(hdct.getSoluong() + hd.getSlSanPhamHuy());
+//        if(tblHoadon)huysp
         DAOHOADON.updateThanhtien(hd);
         DAOHOADON.updateSLSPHUY(hd);
         filltoHoadonCTT();
     }
 
-    public void suaSl(String masp, int mahd) {
-        SuaSoLuongSanPhamHDCTJDialog suaSL = new SuaSoLuongSanPhamHDCTJDialog(null, true, masp, mahd);
+    public void suaSl(String masp, int mahd, int MaHD) {
+        SuaSoLuongSanPhamHDCTJDialog suaSL = new SuaSoLuongSanPhamHDCTJDialog(null, true, masp, mahd,MaHD);
         suaSL.setVisible(true);
         filltoTableHDCT();
         Hoadon hd = DAOHOADON.selectById(mahd);

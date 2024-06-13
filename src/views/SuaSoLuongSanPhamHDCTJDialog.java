@@ -1,10 +1,10 @@
 package views;
 
+import Dao.HoadonchitietDAO;
 import dao1.BanDao;
 import dao1.ChiTietGiamGiaDao;
 import dao1.DaoGiamGia;
 import dao1.HoaDonDAO;
-import dao1.HoadonchitietDAO;
 import dao1.SanPhamDao;
 import model.GiamGiaChiTiet;
 import model.HoaDonChiTiet;
@@ -18,18 +18,21 @@ import javax.swing.JOptionPane;
 import java.util.List;
 
 public class SuaSoLuongSanPhamHDCTJDialog extends javax.swing.JDialog {
+
     static String MASP;
     static int MAHOADON;
-     BanDao DAOBAN = new BanDao();
-     HoaDonDAO hdd = new HoaDonDAO();
-    public SuaSoLuongSanPhamHDCTJDialog(java.awt.Frame parent, boolean modal, String masp, int MAHD) {
+    static int MAHOADON1;
+    BanDao DAOBAN = new BanDao();
+    HoaDonDAO hdd = new HoaDonDAO();
+
+    public SuaSoLuongSanPhamHDCTJDialog(java.awt.Frame parent, boolean modal, String masp, int MAHD, int mahd) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         MASP = masp;
         MAHOADON = MAHD;
-        
-        
+        MAHOADON1 = mahd;
+
     }
 //    public int soluong(){
 //        Hoadon hd = hdd.selectById(MAHOADON);
@@ -42,7 +45,7 @@ public class SuaSoLuongSanPhamHDCTJDialog extends javax.swing.JDialog {
 //       }
 //       return ;
 //    }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -166,15 +169,19 @@ SanPhamDao DAOSP = new SanPhamDao();
             JOptionPane.showMessageDialog(this, "Chưa nhập sô lượng!");
             return;
         }
-
-          HoaDonChiTiet hdct = HDCT.selectById(MAHOADON, MASP);
-           hdct.setID_Hoadon(MAHOADON);
+        
+        HoaDonChiTiet hdct = HDCT.selectById1(MAHOADON, MASP, MAHOADON1);
+        hdct.setIdhoadon(MAHOADON1);
+        hdct.setID_Hoadon(MAHOADON);
         hdct.setID_SanPHam(MASP);
         int slnew = Integer.parseInt(txtSoluongSP.getText());
+        if (slnew < 1) {
+            JOptionPane.showMessageDialog(this, "Số lượng không nhỏ hơn 1");
+            return;
+        }
         hdct.setSoluong(slnew);
-        System.out.println("slnew: "+slnew);
-        
-        
+        System.out.println("slnew: " + slnew);
+
 //        txtSoluongSP.setText(hdct.getSoluong()+"");
         SanPham sp = DAOSP.selectID(MASP);
         int gia = SanPhamGiamGia(sp.getId_sp(), sp.getGia_sp()) == 0 ? sp.getGia_sp() : SanPhamGiamGia(sp.getId_sp(), sp.getGia_sp());
@@ -183,6 +190,7 @@ SanPhamDao DAOSP = new SanPhamDao();
         int tongGia = gia * Integer.parseInt(txtSoluongSP.getText());
         hdct.setTongGia(tongGia);
         hdct.setTrangThai(true);
+        hdct.getIdhoadon();
         HDCT.update_SL(hdct);
         this.dispose();
     }//GEN-LAST:event_btnXacnhanActionPerformed
@@ -194,7 +202,7 @@ SanPhamDao DAOSP = new SanPhamDao();
 
     private void txtSoluongSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSoluongSPActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_txtSoluongSPActionPerformed
 
     /**
@@ -234,7 +242,7 @@ SanPhamDao DAOSP = new SanPhamDao();
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                SuaSoLuongSanPhamHDCTJDialog dialog = new SuaSoLuongSanPhamHDCTJDialog(new javax.swing.JFrame(), true, MASP, MAHOADON);
+                SuaSoLuongSanPhamHDCTJDialog dialog = new SuaSoLuongSanPhamHDCTJDialog(new javax.swing.JFrame(), true, MASP, MAHOADON, MAHOADON1);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

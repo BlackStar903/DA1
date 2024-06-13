@@ -5,6 +5,7 @@
  */
 package services;
 
+import Dao.HoadonchitietDAO;
 import dao1.DonViSanPhamDao;
 import dao1.ChiTietGiamGiaDao;
 import dao1.DaoGiamGia;
@@ -15,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import views.HoadonchitietJDialog;
-import dao1.HoadonchitietDAO;
 import model.DonViSanPham;
 import model.GiamGiaChiTiet;
 import model.Hoadon;

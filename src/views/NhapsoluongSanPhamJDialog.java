@@ -5,12 +5,12 @@
  */
 package views;
 
+import Dao.HoadonchitietDAO;
 import dao1.BanDao;
 import dao1.ChiTietGiamGiaDao;
 import dao1.DaoGiamGia;
 import dao1.DonViSanPhamDao;
 import dao1.HoaDonDAO;
-import dao1.HoadonchitietDAO;
 import dao1.SanPhamDao;
 import model.DonViSanPham;
 import model.GiamGiaChiTiet;

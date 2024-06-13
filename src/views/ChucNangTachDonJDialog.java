@@ -5,7 +5,7 @@
  */
 package views;
 
-import dao1.HoadonchitietDAO;
+import Dao.HoadonchitietDAO;
 import dao1.BanChiTietDAO;
 import dao1.BanDao;
 import dao1.HoaDonDAO;
